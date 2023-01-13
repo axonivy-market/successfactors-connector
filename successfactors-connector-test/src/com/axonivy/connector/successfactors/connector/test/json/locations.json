@@ -1,0 +1,46 @@
+{
+    "d": {
+        "results": [
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOLocation(externalCode='REPLCAM00006',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FOLocation"
+                },
+                "externalCode": "REPLCAM00006",
+                "name": "REPLC Amstelveen"
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOLocation(externalCode='REPLCHO00001',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FOLocation"
+                },
+                "externalCode": "REPLCHO00001",
+                "name": "REPLC Home"
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOLocation(externalCode='REPLCMR00011',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FOLocation"
+                },
+                "externalCode": "REPLCMR00011",
+                "name": "REPLC Merstham"
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOLocation(externalCode='REPLCPE00002',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FOLocation"
+                },
+                "externalCode": "REPLCPE00002",
+                "name": "REPLC Pensioner"
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOLocation(externalCode='REPLCST00007',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FOLocation"
+                },
+                "externalCode": "REPLCST00007",
+                "name": "REPLC Staines"
+            }
+        ]
+    }
+}

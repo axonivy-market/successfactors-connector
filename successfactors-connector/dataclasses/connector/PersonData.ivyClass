@@ -1,0 +1,5 @@
+PersonData #class
+connector #namespace
+persons List<com.axonivy.connector.successfactors.connector.rest.SFODataPerPerson> #field
+error ch.ivyteam.ivy.bpm.error.BpmError #field
+param connector.OdataParams #field

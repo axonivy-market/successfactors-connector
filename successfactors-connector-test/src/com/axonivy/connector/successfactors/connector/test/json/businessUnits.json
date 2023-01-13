@@ -1,0 +1,86 @@
+{
+    "d": {
+        "results": [
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOBusinessUnit(externalCode='RUKOP00000',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FOBusinessUnit"
+                },
+                "externalCode": "RUKOP00000",
+                "name": "Ricoh UK",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOBusinessUnit(externalCode='REPLCOP00000',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FOBusinessUnit"
+                },
+                "externalCode": "REPLCOP00000",
+                "name": "Parent Business Unit",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOBusinessUnit(externalCode='RCUKOP0000',startDate=datetime'2017-01-01T00:00:00')",
+                    "type": "SFOData.FOBusinessUnit"
+                },
+                "externalCode": "RCUKOP0000",
+                "name": "Ricoh Capital",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOBusinessUnit(externalCode='REPLCCE00000',startDate=datetime'2017-01-01T00:00:00')",
+                    "type": "SFOData.FOBusinessUnit"
+                },
+                "externalCode": "REPLCCE00000",
+                "name": "Ricoh Europe",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOBusinessUnit(externalCode='REPLCFI0000',startDate=datetime'2017-01-01T00:00:00')",
+                    "type": "SFOData.FOBusinessUnit"
+                },
+                "externalCode": "REPLCFI0000",
+                "name": "Group Finance",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            }
+        ]
+    }
+}

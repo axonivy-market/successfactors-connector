@@ -1,0 +1,496 @@
+{
+  "format" : "10.0.0",
+  "id" : "1849EC801526AD7D",
+  "config" : {
+    "data" : "com.axonivy.conncetor.successfactors.connector.demo.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "loadAndLogDepartments.ivp",
+      "config" : {
+        "callSignature" : "loadAndLogDepartments",
+        "outLink" : "loadAndLogDepartments.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : { "id" : "f4", "to" : "f3" }
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 512, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "SubProcessCall",
+      "name" : "connector/Department",
+      "config" : {
+        "call" : {
+          "params" : [
+            { "name" : "top", "type" : "Integer" },
+            { "name" : "skip", "type" : "Integer" },
+            { "name" : "filter", "type" : "String" },
+            { "name" : "count", "type" : "Boolean" },
+            { "name" : "orderby", "type" : "List<String>" },
+            { "name" : "select", "type" : "List<String>" },
+            { "name" : "expand", "type" : "List<String>" }
+          ],
+          "map" : {
+            "param.top" : "10",
+            "param.select" : "[\"externalCode\",\"statusNav/localized\",\"statusNav/value\"]",
+            "param.expand" : "[\"statusNav\"]"
+          },
+          "code" : "//[\"externalCode\",\"name\"]"
+        },
+        "processCall" : "connector/Department:getDepartments(Integer,Integer,String,Boolean,List<String>,List<String>,List<String>)",
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.departments" : "result.departments"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "connect" : { "id" : "f6", "to" : "f5" }
+    }, {
+      "id" : "f5",
+      "type" : "Script",
+      "name" : "print found departments to log",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.successfactors.connector.rest.SFODataFODepartment;",
+            "",
+            "for(SFODataFODepartment entity : in.departments) {",
+            "  ivy.log.info(\"Department: {0} ({1})\", entity.name, entity.externalCode);",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 384, "y" : 64 }
+      },
+      "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f7",
+      "type" : "RequestStart",
+      "name" : "loadAndLogBusinessUnits.ivp",
+      "config" : {
+        "callSignature" : "loadAndLogBusinessUnits",
+        "outLink" : "loadAndLogBusinessUnits.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 160 }
+      },
+      "connect" : { "id" : "f12", "to" : "f9" }
+    }, {
+      "id" : "f8",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 512, "y" : 160 }
+      }
+    }, {
+      "id" : "f9",
+      "type" : "SubProcessCall",
+      "name" : "connector/BusinessUnit",
+      "config" : {
+        "processCall" : "connector/BusinessUnit:getBusinessUnits(Integer,Integer,String,Boolean,List<String>,List<String>,List<String>)",
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.businessUnits" : "result.businessUnits"
+          }
+        },
+        "call" : {
+          "params" : [
+            { "name" : "top", "type" : "Integer" },
+            { "name" : "skip", "type" : "Integer" },
+            { "name" : "filter", "type" : "String" },
+            { "name" : "count", "type" : "Boolean" },
+            { "name" : "orderby", "type" : "List<String>" },
+            { "name" : "select", "type" : "List<String>" },
+            { "name" : "expand", "type" : "List<String>" }
+          ],
+          "map" : {
+            "param.top" : "10",
+            "param.select" : "[\"externalCode\",\"name\"]"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 160 }
+      },
+      "connect" : { "id" : "f13", "to" : "f10" }
+    }, {
+      "id" : "f10",
+      "type" : "Script",
+      "name" : "print found departments to log",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.successfactors.connector.rest.SFODataFOBusinessUnit;",
+            "",
+            "for(SFODataFOBusinessUnit entity : in.businessUnits) {",
+            "  ivy.log.info(\"BusinessUnit: {0} ({1})\", entity.name, entity.externalCode);",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 384, "y" : 160 }
+      },
+      "connect" : { "id" : "f11", "to" : "f8" }
+    }, {
+      "id" : "f14",
+      "type" : "RequestStart",
+      "name" : "loadAndLogDivisions.ivp",
+      "config" : {
+        "callSignature" : "loadAndLogDivisions",
+        "outLink" : "loadAndLogDivisions.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 256 }
+      },
+      "connect" : { "id" : "f20", "to" : "f16" }
+    }, {
+      "id" : "f15",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 512, "y" : 256 }
+      }
+    }, {
+      "id" : "f16",
+      "type" : "SubProcessCall",
+      "name" : "connector/Division",
+      "config" : {
+        "processCall" : "connector/Division:getDivisions(Integer,Integer,String,Boolean,List<String>,List<String>,List<String>)",
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.divisions" : "result.divisions"
+          }
+        },
+        "call" : {
+          "params" : [
+            { "name" : "top", "type" : "Integer" },
+            { "name" : "skip", "type" : "Integer" },
+            { "name" : "filter", "type" : "String" },
+            { "name" : "count", "type" : "Boolean" },
+            { "name" : "orderby", "type" : "List<String>" },
+            { "name" : "select", "type" : "List<String>" },
+            { "name" : "expand", "type" : "List<String>" }
+          ],
+          "map" : {
+            "param.top" : "10",
+            "param.select" : "[\"externalCode\",\"name\"]"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 256 }
+      },
+      "connect" : { "id" : "f19", "to" : "f17" }
+    }, {
+      "id" : "f17",
+      "type" : "Script",
+      "name" : "print found departments to log",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.successfactors.connector.rest.SFODataFODivision;",
+            "",
+            "for(SFODataFODivision entity : in.divisions) {",
+            "  ivy.log.info(\"Division: {0} ({1})\", entity.name, entity.externalCode);",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 384, "y" : 256 }
+      },
+      "connect" : { "id" : "f18", "to" : "f15" }
+    }, {
+      "id" : "f21",
+      "type" : "RequestStart",
+      "name" : "loadAndLogLocations.ivp",
+      "config" : {
+        "callSignature" : "loadAndLogLocations",
+        "outLink" : "loadAndLogLocations.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 352 }
+      },
+      "connect" : { "id" : "f25", "to" : "f23" }
+    }, {
+      "id" : "f22",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 512, "y" : 352 }
+      }
+    }, {
+      "id" : "f23",
+      "type" : "SubProcessCall",
+      "name" : "connector/Location",
+      "config" : {
+        "processCall" : "connector/Location:getDepartments(Integer,Integer,String,Boolean,List<String>,List<String>,List<String>)",
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.locations" : "result.locations"
+          }
+        },
+        "call" : {
+          "params" : [
+            { "name" : "top", "type" : "Integer" },
+            { "name" : "skip", "type" : "Integer" },
+            { "name" : "filter", "type" : "String" },
+            { "name" : "count", "type" : "Boolean" },
+            { "name" : "orderby", "type" : "List<String>" },
+            { "name" : "select", "type" : "List<String>" },
+            { "name" : "expand", "type" : "List<String>" }
+          ],
+          "map" : {
+            "param.top" : "10",
+            "param.select" : "[\"externalCode\",\"name\"]"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 352 }
+      },
+      "connect" : { "id" : "f26", "to" : "f24" }
+    }, {
+      "id" : "f24",
+      "type" : "Script",
+      "name" : "print found departments to log",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.successfactors.connector.rest.SFODataFOLocation;",
+            "",
+            "for(SFODataFOLocation entity : in.locations) {",
+            "  ivy.log.info(\"Location: {0} ({1})\", entity.name, entity.externalCode);",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 384, "y" : 352 }
+      },
+      "connect" : { "id" : "f27", "to" : "f22" }
+    }, {
+      "id" : "f28",
+      "type" : "RequestStart",
+      "name" : "loadAndLogCostCenters.ivp",
+      "config" : {
+        "callSignature" : "loadAndLogCostCenters",
+        "outLink" : "loadAndLogCostCenters.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 448 }
+      },
+      "connect" : { "id" : "f32", "to" : "f30" }
+    }, {
+      "id" : "f29",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 512, "y" : 448 }
+      }
+    }, {
+      "id" : "f30",
+      "type" : "SubProcessCall",
+      "name" : "connector/CostCenter",
+      "config" : {
+        "processCall" : "connector/CostCenter:getCostCenters(Integer,Integer,String,Boolean,List<String>,List<String>,List<String>)",
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.costCenters" : "result.costCenters"
+          }
+        },
+        "call" : {
+          "params" : [
+            { "name" : "top", "type" : "Integer" },
+            { "name" : "skip", "type" : "Integer" },
+            { "name" : "filter", "type" : "String" },
+            { "name" : "count", "type" : "Boolean" },
+            { "name" : "orderby", "type" : "List<String>" },
+            { "name" : "select", "type" : "List<String>" },
+            { "name" : "expand", "type" : "List<String>" }
+          ],
+          "map" : {
+            "param.top" : "10",
+            "param.select" : "[\"externalCode\",\"name\"]"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 448 }
+      },
+      "connect" : { "id" : "f34", "to" : "f31" }
+    }, {
+      "id" : "f31",
+      "type" : "Script",
+      "name" : "print found departments to log",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.successfactors.connector.rest.SFODataFOCostCenter;",
+            "",
+            "for(SFODataFOCostCenter entity : in.costCenters) {",
+            "  ivy.log.info(\"CostCenter: {0} ({1})\", entity.name, entity.externalCode);",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 384, "y" : 448 }
+      },
+      "connect" : { "id" : "f33", "to" : "f29" }
+    }, {
+      "id" : "f35",
+      "type" : "RequestStart",
+      "name" : "findAndLogJob.ivp",
+      "config" : {
+        "callSignature" : "findAndLogJob",
+        "outLink" : "findAndLogJob.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 544 }
+      },
+      "connect" : { "id" : "f41", "to" : "f37" }
+    }, {
+      "id" : "f36",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 512, "y" : 544 }
+      }
+    }, {
+      "id" : "f37",
+      "type" : "SubProcessCall",
+      "name" : "connector/Job",
+      "config" : {
+        "processCall" : "connector/Job:getJobs(Integer,Integer,String,Boolean,List<String>,List<String>,List<String>)",
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.jobs" : "result.jobs"
+          }
+        },
+        "call" : {
+          "params" : [
+            { "name" : "top", "type" : "Integer" },
+            { "name" : "skip", "type" : "Integer" },
+            { "name" : "filter", "type" : "String" },
+            { "name" : "count", "type" : "Boolean" },
+            { "name" : "orderby", "type" : "List<String>" },
+            { "name" : "select", "type" : "List<String>" },
+            { "name" : "expand", "type" : "List<String>" }
+          ],
+          "map" : {
+            "param.top" : "10",
+            "param.filter" : "\"userId eq 11001598\""
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 544 }
+      },
+      "connect" : { "id" : "f40", "to" : "f38" }
+    }, {
+      "id" : "f38",
+      "type" : "Script",
+      "name" : "print found departments to log",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.successfactors.connector.rest.SFODataEmpJob;",
+            "import SFODataEmpJob;",
+            "",
+            "for(SFODataEmpJob entity : in.jobs) {",
+            "  ivy.log.info(\"Job: {0})\", entity);",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 384, "y" : 544 }
+      },
+      "connect" : { "id" : "f39", "to" : "f36" }
+    }, {
+      "id" : "f42",
+      "type" : "RequestStart",
+      "name" : "findAndLogPersons.ivp",
+      "config" : {
+        "callSignature" : "findAndLogPersons",
+        "outLink" : "findAndLogPersons.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 640 }
+      },
+      "connect" : { "id" : "f47", "to" : "f44" }
+    }, {
+      "id" : "f43",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 512, "y" : 640 }
+      }
+    }, {
+      "id" : "f44",
+      "type" : "SubProcessCall",
+      "name" : "connector/Person",
+      "config" : {
+        "processCall" : "connector/Person:getPersons(Integer,Integer,String,Boolean,List<String>,List<String>,List<String>)",
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.persons" : "result.persons"
+          }
+        },
+        "call" : {
+          "params" : [
+            { "name" : "top", "type" : "Integer" },
+            { "name" : "skip", "type" : "Integer" },
+            { "name" : "filter", "type" : "String" },
+            { "name" : "count", "type" : "Boolean" },
+            { "name" : "orderby", "type" : "List<String>" },
+            { "name" : "select", "type" : "List<String>" },
+            { "name" : "expand", "type" : "List<String>" }
+          ],
+          "map" : {
+            "param.top" : "10",
+            "param.filter" : "\"personalInfoNav/formalName like '%25Beck%25'\"",
+            "param.select" : "[\"personalInfoNav/firstName\", \"personalInfoNav/lastName\", \"personalInfoNav/formalName\", \r\n\"emailNav/emailAddress\", \"emailNav/isPrimary\"]",
+            "param.expand" : "[\"personalInfoNav\",\"emailNav\"]"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 640 }
+      },
+      "connect" : { "id" : "f48", "to" : "f45" }
+    }, {
+      "id" : "f45",
+      "type" : "Script",
+      "name" : "print found departments to log",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.successfactors.connector.rest.SFODataPerPerson;",
+            "",
+            "for(SFODataPerPerson entity : in.persons) {",
+            "  ivy.log.info(\"Job: {0})\", entity);",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 384, "y" : 640 }
+      },
+      "connect" : { "id" : "f46", "to" : "f43" }
+    } ]
+}
