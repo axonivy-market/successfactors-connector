@@ -2,7 +2,7 @@
   "format" : "10.0.0",
   "id" : "1849EC801526AD7D",
   "config" : {
-    "data" : "com.axonivy.conncetor.successfactors.connector.demo.Data"
+    "data" : "com.axonivy.connector.successfactors.connector.demo.Data"
   },
   "elements" : [ {
       "id" : "f0",
