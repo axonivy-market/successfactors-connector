@@ -6,7 +6,7 @@
         "projects": [
           {
             "groupId": "com.axonivy.connector.successfactors",
-            "artifactId": "successfactors-connector-demo",
+            "artifactId": "successfactors-connector",
             "version": "${version}",
             "type": "iar"
           }
