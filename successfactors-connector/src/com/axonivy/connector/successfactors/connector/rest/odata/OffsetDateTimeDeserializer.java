@@ -15,7 +15,10 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 
 
-/*
+/**
+ * This class handles SuccessFactors' specific date format.
+ * <br/><br/>
+ * Format:<br/>
  * /Date(1503655540000+0000)/
  */
 public class OffsetDateTimeDeserializer extends JsonDeserializer<OffsetDateTime> {

@@ -14,6 +14,12 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
+/**
+ * Some values in the converted SuccessFactors ODATA spec are generated as empty interfaces without a matching impl.
+ * 
+ * @author jpl
+ *
+ */
 public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 	private static final long serialVersionUID = 4552540562745977391L;

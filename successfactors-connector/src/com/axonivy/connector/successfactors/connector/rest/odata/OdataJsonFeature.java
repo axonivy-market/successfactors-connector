@@ -32,14 +32,24 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.deser.std.StringDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 /**
- * Some values in the converted TripPin ODATA spec are generated as empty interfaces without a matching impl. 
+ * Custom Feature to handle ODATA specific JSON features
+ * 
+ * <ul>
+ * <li>Remove or rename root entity</li>
+ * <li>Load custom {@link SuccessFactorsTypeCustomizations}</li>
+ * <li>Load custom {@link InnerListResolveVisitor}</li> 
+ * <li>Load custom {@link OffsetDateTimeSerializer}</li>
+ * <li>Load custom {@link SucessFactorsQueryStringFilter}</li> 
+ * </ul>
  * 
  * So let's handle them to make object transformation possible.
  * 
- * @since 9.2
+ * @author jpl
+ * @since 10.0.2
  */
 public class OdataJsonFeature extends OpenApiJsonFeature {
 	
@@ -97,11 +107,9 @@ public class OdataJsonFeature extends OpenApiJsonFeature {
 				node = node.get(Field.VALUE);
 			}
 			if(node.has("results")) {
-				//node = node.get("results");
 				ObjectNode objectNode;
 				try {
 					if(node.isObject()) {
-						//				objectNode = (ObjectNode) ROOT_MAPPER.readTree(node.asText());
 						objectNode = (ObjectNode) node;
 						objectNode.set("value", objectNode.get("results"));
 						objectNode.remove("results");

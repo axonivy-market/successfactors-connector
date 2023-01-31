@@ -8,4 +8,5 @@ costCenters List<com.axonivy.connector.successfactors.connector.rest.SFODataFOCo
 jobs List<com.axonivy.connector.successfactors.connector.rest.SFODataEmpJob> #field
 persons List<com.axonivy.connector.successfactors.connector.rest.SFODataPerPerson> #field
 test String #field
-test PERSISTENT #fieldModifier
+companies List<com.axonivy.connector.successfactors.connector.rest.SFODataFOCompany> #field
+hyperionData List<com.axonivy.connector.successfactors.connector.rest.SFODataCustRoletypes> #field

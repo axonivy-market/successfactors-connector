@@ -9,6 +9,24 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import ch.ivyteam.text.json.JsonNodeVisitor;
 
+/**
+ * This helper class removes the unnecessary nested result attributes in arrays that
+ * is provided by Odata V2, so the resulting JSON can be parsed to OpenAPI classes.
+ * 
+ * <pre>{@code
+ * Example (the "results" attribute and its whole tier is removed and 
+ * the array moved to the parent attribute "emailNav"): 
+ * "emailNav": {
+ * 	"results": [
+ * 	  {
+ * 		"emailType": "127606",
+ * 		"emailAddress": "john.doe@test.com",
+ * 	  }]
+ * }
+ * }</pre>
+ * @author jpl
+ *
+ */
 public class InnerListResolveVisitor extends JsonNodeVisitor {
 	
 	private static final String RESULTS = "results";
