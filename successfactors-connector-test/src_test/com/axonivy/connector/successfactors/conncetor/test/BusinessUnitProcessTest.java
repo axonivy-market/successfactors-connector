@@ -24,11 +24,6 @@ public class BusinessUnitProcessTest extends AbstractFoObjectTest<SFODataFOBusin
   
 	private static final BpmElement getBusinessTestee = BpmProcess.path("connector/BusinessUnit").elementName("getBusinessUnits");
 
-//	@Override
-//	protected Class<SFODataFOBusinessUnit> getType() {
-//		return SFODataFOBusinessUnit.class;
-//	}
-
 	@Override
 	protected BpmElement getTestee() {
 		return getBusinessTestee;

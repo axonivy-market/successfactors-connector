@@ -6,13 +6,12 @@
 # '<project>/Config/_<environment>/variables.yaml
 #
 Variables:
-#  myVariable: value
 
   successfactors-connector:
   
-    host: '<myHost>'
+    host: ''
     
-    username: '<myUser>'
+    username: ''
     
     # [password]
-    password: '<myPassword>'
+    password: ''

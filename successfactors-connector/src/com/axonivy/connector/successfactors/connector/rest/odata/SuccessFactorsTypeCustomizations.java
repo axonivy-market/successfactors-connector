@@ -26,8 +26,6 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 	public SuccessFactorsTypeCustomizations()
 	{
-		//nullify(AnyOfMicrosoftODataSampleServiceModelsTripPinPersonConcurrency.class); // ignore 'Concurrency' field.
-		//    nullify(List.class);
 		addDeserializer(AnyOfSFODataEmpJobSeqNumber.class, new SquNumberDeserializer());
 		addDeserializer(AnyOfSFODataPerPersonPersonId.class, new PerPersonIdDeserializer());
 		addDeserializer(AnyOfSFODataPositionTargetFTE.class, new PositionTargetFTEDeserializer());

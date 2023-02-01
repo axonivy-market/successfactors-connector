@@ -24,11 +24,6 @@ public class CostCenterProcessTest  extends AbstractFoObjectTest<SFODataFOCostCe
 
 	private static final BpmElement getCostCenterTestee = BpmProcess.path("connector/CostCenter").elementName("getCostCenters");
 
-//	@Override
-//	protected Class<SFODataFOCostCenter> getType() {
-//		return SFODataFOCostCenter.class;
-//	}
-
 	@Override
 	protected BpmElement getTestee() {
 		return getCostCenterTestee;
@@ -53,6 +48,5 @@ public class CostCenterProcessTest  extends AbstractFoObjectTest<SFODataFOCostCe
 	protected String getStatusLocalized(SFODataFOCostCenter entity) {
 		return entity.getStatusNav().getLocalized();
 	}
-
 
 }

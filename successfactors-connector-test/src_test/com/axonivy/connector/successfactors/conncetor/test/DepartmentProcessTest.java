@@ -24,11 +24,6 @@ public class DepartmentProcessTest extends AbstractFoObjectTest<SFODataFODepartm
 
 	private static final BpmElement getDeparmentTestee = BpmProcess.path("connector/Department").elementName("getDepartments");
 
-//	@Override
-//	protected Class<SFODataFODepartment> getType() {
-//		return SFODataFODepartment.class;
-//	}
-	
 	@Override
 	protected BpmElement getTestee() {
 		return getDeparmentTestee;

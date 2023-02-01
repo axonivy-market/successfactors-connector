@@ -8,13 +8,7 @@ import java.util.regex.Pattern;
 
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
-
-import org.apache.commons.lang3.StringUtils;
-
-import ch.ivyteam.ivy.environment.Ivy;
 
 /**
  * Handle SuccessFactors query & path parameter specifics.

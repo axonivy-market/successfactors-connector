@@ -17,7 +17,7 @@ Before any interactions between the Axon Ivy Engine and Successfactors services 
 
 1. Get a Successfactors account `host-name`, `user-name` and `password` to use.
 
-1. Override the global variables for `host-name`, `user-name` and `password` in the demo project as shown in the example below.
+1. Override the variables for `host-name`, `user-name` and `password` in the demo project as shown in the example below.
 
 ```
 Variables:

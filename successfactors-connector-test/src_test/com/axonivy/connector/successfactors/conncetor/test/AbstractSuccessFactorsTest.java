@@ -9,7 +9,6 @@ public abstract class AbstractSuccessFactorsTest <T extends Object> {
 
 	private static final String REST_CLIENT_ID = "SuccessFactors";
 	
-//	protected abstract Class<T> getType();
 	protected abstract BpmElement getTestee();
 	
 	@BeforeAll

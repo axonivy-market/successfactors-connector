@@ -24,11 +24,6 @@ public class DivisionProcessTest extends AbstractFoObjectTest<SFODataFODivision>
 
 	private static final BpmElement getBusinessTestee = BpmProcess.path("connector/Division").elementName("getDivisions");
 
-//	@Override
-//	protected Class<SFODataFODivision> getType() {
-//		return SFODataFODivision.class;
-//	}
-
 	@Override
 	protected BpmElement getTestee() {
 		return getBusinessTestee;
