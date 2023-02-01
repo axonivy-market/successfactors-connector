@@ -1,0 +1,12 @@
+Data #class
+com.axonivy.connector.successfactors.connector.demo #namespace
+departments List<com.axonivy.connector.successfactors.connector.rest.SFODataFODepartment> #field
+businessUnits List<com.axonivy.connector.successfactors.connector.rest.SFODataFOBusinessUnit> #field
+divisions List<com.axonivy.connector.successfactors.connector.rest.SFODataFODivision> #field
+locations List<com.axonivy.connector.successfactors.connector.rest.SFODataFOLocation> #field
+costCenters List<com.axonivy.connector.successfactors.connector.rest.SFODataFOCostCenter> #field
+jobs List<com.axonivy.connector.successfactors.connector.rest.SFODataEmpJob> #field
+persons List<com.axonivy.connector.successfactors.connector.rest.SFODataPerPerson> #field
+test String #field
+companies List<com.axonivy.connector.successfactors.connector.rest.SFODataFOCompany> #field
+hyperionData List<com.axonivy.connector.successfactors.connector.rest.SFODataCustRoletypes> #field

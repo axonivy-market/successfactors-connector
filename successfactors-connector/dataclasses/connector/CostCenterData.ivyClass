@@ -1,0 +1,5 @@
+CostCenterData #class
+connector #namespace
+costCenters List<com.axonivy.connector.successfactors.connector.rest.SFODataFOCostCenter> #field
+error ch.ivyteam.ivy.bpm.error.BpmError #field
+param connector.OdataParams #field

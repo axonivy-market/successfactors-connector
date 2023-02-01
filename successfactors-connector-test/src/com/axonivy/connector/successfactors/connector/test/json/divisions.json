@@ -1,0 +1,86 @@
+{
+    "d": {
+        "results": [
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FODivision(externalCode='MIS   ',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FODivision"
+                },
+                "externalCode": "MIS   ",
+                "name": "ICT                           ",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FODivision(externalCode='ITS   ',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FODivision"
+                },
+                "externalCode": "ITS   ",
+                "name": "ITS                           ",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FODivision(externalCode='RE_EO ',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FODivision"
+                },
+                "externalCode": "RE_EO ",
+                "name": "Executive Office              ",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='I')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "I",
+                    "localized": "Inactive"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FODivision(externalCode='RE_HR ',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FODivision"
+                },
+                "externalCode": "RE_HR ",
+                "name": "Group HR                      ",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='I')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "I",
+                    "localized": "Inactive"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FODivision(externalCode='RE_TC ',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FODivision"
+                },
+                "externalCode": "RE_TC ",
+                "name": "Technology Centre             ",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='I')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "I",
+                    "localized": "Inactive"
+                }
+            }
+        ]
+    }
+}

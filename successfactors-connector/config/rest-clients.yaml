@@ -1,0 +1,16 @@
+RestClients:
+  #Service for namespace SFODataSet
+  #This service is located at [https://localhost/service-root/](https://localhost/service-root/)
+  SuccessFactors:
+    UUID: 4c029770-6b05-4cf7-9b23-b2434bb500d6
+    Url: https://{host}/odata/v2
+    Features:
+    - com.axonivy.connector.successfactors.connector.rest.odata.OdataJsonFeature
+    - ch.ivyteam.ivy.rest.client.authentication.HttpBasicAuthenticationFeature
+    Properties:
+      username: ${ivy.var.successfactors-connector.username}
+      password: ${ivy.var.successfactors-connector.password}
+      PATH.host: ${ivy.var.successfactors-connector.host}
+    OpenAPI:
+      SpecUrl: file:///C:/tmp/ricoh/odata_metadata_notags_v4.openapi3.json
+      Namespace: com.axonivy.connector.successfactors.connector.rest

@@ -1,0 +1,5 @@
+DivisionData #class
+connector #namespace
+divisions List<com.axonivy.connector.successfactors.connector.rest.SFODataFODivision> #field
+error ch.ivyteam.ivy.bpm.error.BpmError #field
+param connector.OdataParams #field

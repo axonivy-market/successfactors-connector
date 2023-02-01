@@ -1,0 +1,86 @@
+{
+    "d": {
+        "results": [
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FODepartment(externalCode='RAUDEPCR00001',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FODepartment"
+                },
+                "externalCode": "RAUDEPCR00001",
+                "name": "CRM",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FODepartment(externalCode='RAUDEPCX00001',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FODepartment"
+                },
+                "externalCode": "RAUDEPCX00001",
+                "name": "Corp Comm",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FODepartment(externalCode='RAUDEPCZ00001',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FODepartment"
+                },
+                "externalCode": "RAUDEPCZ00001",
+                "name": "Channel Development",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FODepartment(externalCode='RAUDEPDG00001',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FODepartment"
+                },
+                "externalCode": "RAUDEPDG00001",
+                "name": "Demand Generation",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FODepartment(externalCode='RAUDEPPI00001',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FODepartment"
+                },
+                "externalCode": "RAUDEPPI00001",
+                "name": "Product & Services Innovation",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            }
+        ]
+    }
+}

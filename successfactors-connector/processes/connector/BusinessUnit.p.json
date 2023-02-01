@@ -1,0 +1,99 @@
+{
+  "format" : "10.0.0",
+  "id" : "184A88F39AAD4E18",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "connector.BusinessUnitData"
+  },
+  "elements" : [ {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "RestClientCall",
+      "config" : {
+        "path" : "/FOBusinessUnit",
+        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "queryParams" : {
+          "$top" : "in.param.#top is initialized ? in.param.#top : null",
+          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+          "$count" : "in.param.#count is initialized ? in.param.#count : null",
+          "$orderby" : "in.param.#orderBy",
+          "$select" : "in.param.#select",
+          "$expand" : "in.param.#expand"
+        },
+        "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.businessUnits" : "result.value"
+        },
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfFOBusinessUnit"
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "boundaries" : [ {
+          "id" : "f4",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 256, "y" : 104 }
+          },
+          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 104 } ] }
+        } ],
+      "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f5",
+      "type" : "CallSubStart",
+      "name" : "getBusinessUnits",
+      "config" : {
+        "callSignature" : "getBusinessUnits",
+        "input" : {
+          "params" : [
+            { "name" : "top", "type" : "Integer" },
+            { "name" : "skip", "type" : "Integer" },
+            { "name" : "filter", "type" : "String" },
+            { "name" : "count", "type" : "Boolean" },
+            { "name" : "orderby", "type" : "List<String>" },
+            { "name" : "select", "type" : "List<String>" },
+            { "name" : "expand", "type" : "List<String>" }
+          ],
+          "map" : {
+            "out.param.count" : "param.#count",
+            "out.param.expand" : "param.#expand",
+            "out.param.filter" : "param.#filter",
+            "out.param.orderBy" : "param.#orderby",
+            "out.param.select" : "param.#select",
+            "out.param.skip" : "param.#skip",
+            "out.param.top" : "param.#top"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "businessUnits", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataFOBusinessUnit>" },
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
+          ],
+          "map" : {
+            "result.businessUnits" : "in.#businessUnits",
+            "result.error" : "in.#error"
+          }
+        },
+        "tags" : "connector"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : { "id" : "f0", "to" : "f3" }
+    } ]
+}

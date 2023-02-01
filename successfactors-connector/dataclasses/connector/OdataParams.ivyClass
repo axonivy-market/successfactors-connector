@@ -1,0 +1,9 @@
+OdataParams #class
+connector #namespace
+top Integer #field
+skip Integer #field
+filter String #field
+count Boolean #field
+orderBy List<String> #field
+select List<String> #field
+expand List<String> #field

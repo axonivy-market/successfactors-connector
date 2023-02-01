@@ -1,0 +1,5 @@
+BusinessUnitData #class
+connector #namespace
+businessUnits List<com.axonivy.connector.successfactors.connector.rest.SFODataFOBusinessUnit> #field
+error ch.ivyteam.ivy.bpm.error.BpmError #field
+param connector.OdataParams #field

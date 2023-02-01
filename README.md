@@ -1,7 +1,7 @@
-# MY-PRODUCT-NAME
+Successfactors connector
 
-[![CI Build](https://github.com/axonivy-market/REPO-NAME/actions/workflows/ci.yml/badge.svg)](https://github.com/axonivy-market/REPO-NAME/actions/workflows/ci.yml)
+[![CI Build](https://github.com/axonivy-market/successfactors-connector/actions/workflows/ci.yml/badge.svg)](https://github.com/axonivy-market/successfactors-connector/actions/workflows/ci.yml)
 
-"YOUR SHORT DESCRIPTION GOES HERE"
+"Get data from iPeople service"
 
-Read our [documentation](MY-PRODUCT-NAME-product/README.md).
+Read our [documentation](successfactors-connector-product/README.md).

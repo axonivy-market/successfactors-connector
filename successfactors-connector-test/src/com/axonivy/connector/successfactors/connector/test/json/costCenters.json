@@ -1,0 +1,86 @@
+{
+    "d": {
+        "results": [
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOCostCenter(externalCode='1310',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FOCostCenter"
+                },
+                "externalCode": "1310",
+                "name": "Vaal Major & Global Accounts",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOCostCenter(externalCode='1270',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FOCostCenter"
+                },
+                "externalCode": "1270",
+                "name": "Technical Process Owner",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOCostCenter(externalCode='3020',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FOCostCenter"
+                },
+                "externalCode": "3020",
+                "name": "Accounts Payable",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOCostCenter(externalCode='3310',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FOCostCenter"
+                },
+                "externalCode": "3310",
+                "name": "Lease Management",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://api2preview.sapsf.eu/odata/v2/FOCostCenter(externalCode='2160',startDate=datetime'1900-01-01T00:00:00')",
+                    "type": "SFOData.FOCostCenter"
+                },
+                "externalCode": "2160",
+                "name": "Selling Expenses RGS",
+                "statusNav": {
+                    "__metadata": {
+                        "uri": "https://api2preview.sapsf.eu/odata/v2/MDFEnumValue(key='com.successfactors.genericobject.api.StatusEnum',value='A')",
+                        "type": "SFOData.MDFEnumValue"
+                    },
+                    "value": "A",
+                    "localized": "Active"
+                }
+            }
+        ]
+    }
+}
