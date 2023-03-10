@@ -21,7 +21,7 @@
             { "name" : "filter", "type" : "String" },
             { "name" : "select", "type" : "List<String>" },
             { "name" : "orderby", "type" : "List<String>" },
-            { "type" : "String" }
+            { "name" : "id2", "type" : "com.axonivy.connector.successfactors.connector.rest.Id2" }
           ],
           "map" : {
             "out.param.count" : "param.#count",

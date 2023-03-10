@@ -8,3 +8,4 @@ orderBy List<String> #field
 select List<String> #field
 expand List<String> #field
 id String #field
+id2 com.axonivy.connector.successfactors.connector.rest.Id2 #field
