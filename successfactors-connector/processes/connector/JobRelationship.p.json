@@ -1,16 +1,16 @@
 {
   "format" : "10.0.0",
-  "id" : "186C5F41B303F46F",
+  "id" : "186C982A17921D28",
   "kind" : "CALLABLE_SUB",
   "config" : {
-    "data" : "connector.PicklistOptionData"
+    "data" : "connector.JobRelationshipData"
   },
   "elements" : [ {
       "id" : "f0",
       "type" : "CallSubStart",
-      "name" : "getPicklistOption",
+      "name" : "getJobRelationship",
       "config" : {
-        "callSignature" : "getPicklistOption",
+        "callSignature" : "getJobRelationship",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -18,7 +18,7 @@
             { "name" : "filter", "type" : "String" },
             { "name" : "count", "type" : "Boolean" },
             { "name" : "orderby", "type" : "List<String>" },
-            { "name" : "select", "type" : "List<String>" },
+            { "name" : "select", "type" : "java.util.List<String>" },
             { "name" : "expand", "type" : "List<String>" },
             { "name" : "id", "type" : "String" },
             { "name" : "id2", "type" : "com.axonivy.connector.successfactors.connector.rest.Id2" }
@@ -38,11 +38,11 @@
         "result" : {
           "params" : [
             { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" },
-            { "name" : "picklistOption", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPicklistOption" }
+            { "name" : "jobRelationship", "type" : "java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataEmpJobRelationships>" }
           ],
           "map" : {
             "result.error" : "in.#error",
-            "result.picklistOption" : "in.#result"
+            "result.jobRelationship" : "in.#result"
           }
         }
       },
@@ -54,31 +54,33 @@
       "id" : "f1",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 352, "y" : 64 }
+        "at" : { "x" : 368, "y" : 64 }
       }
     }, {
       "id" : "f3",
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/PicklistOption({id})",
+        "path" : "/EmpJobRelationships",
         "headers" : {
           "Accept" : "application/json;charset=UTF-8"
         },
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
         "queryParams" : {
+          "$top" : "in.param.#top is initialized ? in.param.#top : null",
+          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+          "$count" : "in.param.#count is initialized ? in.param.#count : null",
+          "$orderby" : "in.param.#orderby is initialized ? in.param.#orderby : null",
           "$select" : "in.param.#select is initialized ? in.param.#select : null",
           "$expand" : "in.param.#expand is initialized ? in.param.#expand : null"
         },
         "statusErrorCode" : "ivy:error:rest:client",
         "responseMapping" : {
-          "out.result" : "result"
+          "out.result" : "result.value"
         },
-        "templateParams" : {
-          "id" : "in.param.#id2 is initialized ? in.param.#id2 : null"
-        },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPicklistOption"
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfEmpJobRelationships"
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 }
@@ -97,7 +99,7 @@
           "visual" : {
             "at" : { "x" : 256, "y" : 104 }
           },
-          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 104 } ] }
+          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 368, "y" : 104 } ] }
         } ],
       "connect" : { "id" : "f2", "to" : "f1" }
     } ]

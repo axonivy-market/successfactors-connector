@@ -33,6 +33,16 @@
             "out.param.skip" : "param.#skip",
             "out.param.top" : "param.#top"
           }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "picklistLabel", "type" : "java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataPicklistLabel>" },
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
+          ],
+          "map" : {
+            "result.picklistLabel" : "in.#result",
+            "result.error" : "in.#error"
+          }
         }
       },
       "visual" : {
@@ -77,6 +87,14 @@
       "boundaries" : [ {
           "id" : "f5",
           "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "error"
+              }
+            }
+          },
           "visual" : {
             "at" : { "x" : 256, "y" : 104 }
           },
