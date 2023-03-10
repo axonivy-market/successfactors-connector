@@ -1,0 +1,32 @@
+{
+  "format" : "10.0.0",
+  "id" : "186C93DC52A74648",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "connector.PicklistLabelData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "getPicklistLabel",
+      "config" : {
+        "callSignature" : "getPicklistLabel",
+        "input" : {
+          "params" : [
+            { "name" : "id", "type" : "String" },
+            { "type" : "String" }
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    } ]
+}
