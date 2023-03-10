@@ -2,4 +2,4 @@ PicklistLabelData #class
 connector #namespace
 error ch.ivyteam.ivy.bpm.error.BpmError #field
 param connector.OdataParams #field
-result java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataPicklistLabel> #field
+result List<com.axonivy.connector.successfactors.connector.rest.SFODataPicklistLabel> #field
