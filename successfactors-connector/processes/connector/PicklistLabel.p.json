@@ -61,9 +61,6 @@
       "name" : "call rest",
       "config" : {
         "path" : "/PicklistLabel",
-        "headers" : {
-          "Accept" : "application/json;charset=UTF-8"
-        },
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
         "queryParams" : {

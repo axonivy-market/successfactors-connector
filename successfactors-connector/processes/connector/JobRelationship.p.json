@@ -20,15 +20,13 @@
             { "name" : "orderby", "type" : "List<String>" },
             { "name" : "select", "type" : "java.util.List<String>" },
             { "name" : "expand", "type" : "List<String>" },
-            { "name" : "id", "type" : "String" },
-            { "name" : "id2", "type" : "com.axonivy.connector.successfactors.connector.rest.Id2" }
+            { "name" : "id", "type" : "String" }
           ],
           "map" : {
             "out.param.count" : "param.#count",
             "out.param.expand" : "param.#expand",
             "out.param.filter" : "param.#filter",
             "out.param.id" : "param.#id",
-            "out.param.id2" : "param.#id2",
             "out.param.orderBy" : "param.#orderby",
             "out.param.select" : "param.#select",
             "out.param.skip" : "param.#skip",
@@ -38,7 +36,7 @@
         "result" : {
           "params" : [
             { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" },
-            { "name" : "jobRelationship", "type" : "java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataEmpJobRelationships>" }
+            { "name" : "jobRelationship", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataEmpJobRelationships>" }
           ],
           "map" : {
             "result.error" : "in.#error",
@@ -62,9 +60,6 @@
       "name" : "call rest",
       "config" : {
         "path" : "/EmpJobRelationships",
-        "headers" : {
-          "Accept" : "application/json;charset=UTF-8"
-        },
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
         "queryParams" : {

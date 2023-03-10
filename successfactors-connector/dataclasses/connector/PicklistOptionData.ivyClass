@@ -2,4 +2,4 @@ PicklistOptionData #class
 connector #namespace
 error ch.ivyteam.ivy.bpm.error.BpmError #field
 param connector.OdataParams #field
-result com.axonivy.connector.successfactors.connector.rest.SFODataPicklistOption #field
+result List<com.axonivy.connector.successfactors.connector.rest.SFODataPicklistOption> #field
