@@ -1,16 +1,16 @@
 {
   "format" : "10.0.0",
-  "id" : "186C5AA7CDBE365F",
+  "id" : "186CAC8B3CCB85C6",
   "kind" : "CALLABLE_SUB",
   "config" : {
-    "data" : "connector.PicklistData"
+    "data" : "connector.MDFEnumValueData"
   },
   "elements" : [ {
       "id" : "f0",
       "type" : "CallSubStart",
-      "name" : "getPicklist",
+      "name" : "getMDFEnumValue",
       "config" : {
-        "callSignature" : "getPicklist",
+        "callSignature" : "getMDFEnumValue",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -35,20 +35,15 @@
         },
         "result" : {
           "params" : [
-            { "name" : "picklist", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPicklist" },
-            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
-          ],
-          "map" : {
-            "result.picklist" : "in.#result",
-            "result.error" : "in.#error"
-          }
-        },
-        "tags" : "connector"
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" },
+            { "name" : "result", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataMDFEnumValue>" }
+          ]
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
       },
-      "connect" : { "id" : "f9", "to" : "f3" }
+      "connect" : { "id" : "f4", "to" : "f3" }
     }, {
       "id" : "f1",
       "type" : "CallSubEnd",
@@ -60,7 +55,7 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/Picklist('{picklistId}')",
+        "path" : "/MDFEnumValue",
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
         "queryParams" : {
@@ -68,18 +63,14 @@
           "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
           "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
           "$count" : "in.param.#count is initialized ? in.param.#count : null",
-          "$orderby" : "in.param.#orderBy",
-          "$select" : "in.param.#select",
-          "$expand" : "in.param.#expand"
+          "$orderby" : "in.param.#orderby is initialized ? in.param.#orderby : null",
+          "$select" : "in.param.#select is initialized ? in.param.#select : null"
         },
         "statusErrorCode" : "ivy:error:rest:client",
         "responseMapping" : {
-          "out.result" : "result"
+          "out.result" : "result.value"
         },
-        "templateParams" : {
-          "picklistId" : "in.param.#id is initialized ? in.param.#id : null"
-        },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPicklist"
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfMDFEnumValue"
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 }
@@ -87,18 +78,10 @@
       "boundaries" : [ {
           "id" : "f5",
           "type" : "ErrorBoundaryEvent",
-          "config" : {
-            "output" : {
-              "map" : {
-                "out" : "in",
-                "out.error" : "error"
-              }
-            }
-          },
           "visual" : {
-            "at" : { "x" : 256, "y" : 106 }
+            "at" : { "x" : 256, "y" : 104 }
           },
-          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 104 } ] }
         } ],
       "connect" : { "id" : "f2", "to" : "f1" }
     } ]
