@@ -37,7 +37,10 @@
           "params" : [
             { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" },
             { "name" : "result", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataMDFEnumValue>" }
-          ]
+          ],
+          "map" : {
+            "result.result" : "in.result"
+          }
         }
       },
       "visual" : {
