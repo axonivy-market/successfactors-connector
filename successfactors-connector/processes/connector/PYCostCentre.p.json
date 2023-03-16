@@ -1,16 +1,16 @@
 {
   "format" : "10.0.0",
-  "id" : "186021CAD87EA070",
+  "id" : "186DDF8A9A68778F",
   "kind" : "CALLABLE_SUB",
   "config" : {
-    "data" : "connector.CustomHyperionData"
+    "data" : "connector.PYCostCentreData"
   },
   "elements" : [ {
       "id" : "f0",
       "type" : "CallSubStart",
-      "name" : "getHyperionRecords",
+      "name" : "getGlobalCostCenters()",
       "config" : {
-        "callSignature" : "getHyperionRecords",
+        "callSignature" : "getGlobalCostCenters",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -33,20 +33,19 @@
         },
         "result" : {
           "params" : [
-            { "name" : "customRoleTypes", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataCustRoletypes>" },
+            { "name" : "globalCostCenters", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataCustGOPYCostCentre>" },
             { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
           ],
           "map" : {
-            "result.customRoleTypes" : "in.#customRoleTypes",
+            "result.globalCostCenters" : "in.#globalCostCenters",
             "result.error" : "in.#error"
           }
-        },
-        "tags" : "connector"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
       },
-      "connect" : { "id" : "f9", "to" : "f3" }
+      "connect" : { "id" : "f4", "to" : "f3" }
     }, {
       "id" : "f1",
       "type" : "CallSubEnd",
@@ -58,23 +57,23 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/cust_roletypes",
+        "path" : "/cust_GO_PYCostCentre",
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
         "queryParams" : {
-          "$select" : "",
-          "$expand" : "in.param.#expand is initialized ? in.param.#expand : null",
           "$top" : "in.param.#top is initialized ? in.param.#top : null",
-          "$skip" : "",
+          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
           "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
-          "$count" : "",
-          "$orderby" : ""
+          "$count" : "in.param.#count is initialized ? in.param.#count : null",
+          "$orderby" : "in.param.#orderBy",
+          "$select" : "in.param.#select",
+          "$expand" : "in.param.#expand"
         },
         "statusErrorCode" : "ivy:error:rest:client",
         "responseMapping" : {
-          "out.customRoleTypes" : "result.value"
+          "out.globalCostCenters" : "result.value"
         },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustRoletypes"
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustGOPYCostCentre"
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 }
@@ -91,9 +90,9 @@
             }
           },
           "visual" : {
-            "at" : { "x" : 256, "y" : 106 }
+            "at" : { "x" : 256, "y" : 104 }
           },
-          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 104 } ] }
         } ],
       "connect" : { "id" : "f2", "to" : "f1" }
     } ]
