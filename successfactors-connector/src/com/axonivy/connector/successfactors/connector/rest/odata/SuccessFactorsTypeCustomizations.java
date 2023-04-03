@@ -8,9 +8,12 @@ import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataEmpJobSeq
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPerPersonPersonId;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPickListValueV2LegacyStatus;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPickListValueV2OptionId;
+import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistLabelId;
+import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistLabelOptionId;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistOptionId;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPositionTargetFTE;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPositionTransactionSequence;
+import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataUserTotalTeamSize;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -39,6 +42,9 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		addDeserializer(AnyOfSFODataCustRoletypesCustUtilisation.class, new CustRoletypesCustUtilisationDeserializer());
 		addDeserializer(AnyOfSFODataPickListValueV2LegacyStatus.class, new PickListValueV2LegacyStatusDeserializer());
 		addDeserializer(AnyOfSFODataPickListValueV2OptionId.class, new PickListValueV2OptionIdDeserializer());
+		addDeserializer(AnyOfSFODataUserTotalTeamSize.class, new UserTotalTeamSizeDeserializer());
+		addDeserializer(AnyOfSFODataPicklistLabelOptionId.class, new PicklistLabelOptionIdDeserializer());
+		addDeserializer(AnyOfSFODataPicklistLabelId.class, new PicklistLabelIdDeserializer());
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
@@ -116,6 +122,20 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		}
 	}
 
+	private static class UserTotalTeamSizeDeserializer extends StdDeserializer<AnyOfSFODataUserTotalTeamSize>	{
+		private static final long serialVersionUID = 1l;
+
+		public UserTotalTeamSizeDeserializer() {
+			super(AnyOfSFODataUserTotalTeamSize.class);
+		}
+
+		@Override
+		public AnyOfSFODataUserTotalTeamSize deserialize(JsonParser p, DeserializationContext ctxt)
+				throws IOException, JsonProcessingException	{
+			return new StringWrapper(p.getText());
+		}
+	}
+
 	private static class PerPersonIdDeserializer extends StdDeserializer<AnyOfSFODataPerPersonPersonId> {
 		private static final long serialVersionUID = 8173333520337377195L;
 
@@ -176,6 +196,33 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 	}
 
+	private static class PicklistLabelOptionIdDeserializer extends StdDeserializer<AnyOfSFODataPicklistLabelOptionId> {
+		private static final long serialVersionUID = 1l;
+
+		public PicklistLabelOptionIdDeserializer() {
+			super(AnyOfSFODataPicklistLabelOptionId.class);
+		}
+
+		@Override
+		public AnyOfSFODataPicklistLabelOptionId deserialize(JsonParser p, DeserializationContext ctxt)
+				throws IOException, JacksonException {
+			return new StringWrapper(p.getText());
+		}
+	}
+	private static class PicklistLabelIdDeserializer extends StdDeserializer<AnyOfSFODataPicklistLabelId> {
+		private static final long serialVersionUID = 1l;
+
+		public PicklistLabelIdDeserializer() {
+			super(AnyOfSFODataPicklistLabelId.class);
+		}
+
+		@Override
+		public AnyOfSFODataPicklistLabelId deserialize(JsonParser p, DeserializationContext ctxt)
+				throws IOException, JacksonException {
+			return new StringWrapper(p.getText());
+		}
+	}
+
 	private static class StringWrapper implements AnyOfSFODataPositionTargetFTE, 
 		AnyOfSFODataPositionTransactionSequence,
 		AnyOfSFODataPerPersonPersonId,
@@ -184,7 +231,10 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		AnyOfSFODataCustRoletypesExternalCode,
 		AnyOfSFODataCustRoletypesCustUtilisation,
 		AnyOfSFODataPickListValueV2LegacyStatus,
-		AnyOfSFODataPickListValueV2OptionId
+		AnyOfSFODataPickListValueV2OptionId,
+		AnyOfSFODataUserTotalTeamSize,
+		AnyOfSFODataPicklistLabelOptionId,
+		AnyOfSFODataPicklistLabelId
 		{
 
 		private final String value;

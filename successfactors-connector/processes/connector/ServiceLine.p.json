@@ -1,16 +1,16 @@
 {
   "format" : "10.0.0",
-  "id" : "184A8A7534F6E1F1",
+  "id" : "1871303A1C962043",
   "kind" : "CALLABLE_SUB",
   "config" : {
-    "data" : "connector.LocationData"
+    "data" : "connector.ServiceLine"
   },
   "elements" : [ {
       "id" : "f0",
       "type" : "CallSubStart",
-      "name" : "getLocations",
+      "name" : "getServiceLines()",
       "config" : {
-        "callSignature" : "getLocations",
+        "callSignature" : "getServiceLines",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -33,20 +33,19 @@
         },
         "result" : {
           "params" : [
-            { "name" : "locations", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataFOLocation>" },
+            { "name" : "serviceLines", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataCustServiceLine>" },
             { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
           ],
           "map" : {
-            "result.locations" : "in.#locations",
+            "result.serviceLines" : "in.#serviceLines",
             "result.error" : "in.#error"
           }
-        },
-        "tags" : "connector"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
       },
-      "connect" : { "id" : "f9", "to" : "f3" }
+      "connect" : { "id" : "f4", "to" : "f3" }
     }, {
       "id" : "f1",
       "type" : "CallSubEnd",
@@ -58,7 +57,7 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/FOLocation",
+        "path" : "/cust_ServiceLine",
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
         "queryParams" : {
@@ -72,9 +71,9 @@
         },
         "statusErrorCode" : "ivy:error:rest:client",
         "responseMapping" : {
-          "out.locations" : "result.value"
+          "out.serviceLines" : "result.value"
         },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfFOLocation"
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustServiceLine"
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 }
@@ -91,9 +90,9 @@
             }
           },
           "visual" : {
-            "at" : { "x" : 256, "y" : 106 }
+            "at" : { "x" : 256, "y" : 104 }
           },
-          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 104 } ] }
         } ],
       "connect" : { "id" : "f2", "to" : "f1" }
     } ]
