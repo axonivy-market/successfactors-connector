@@ -1,5 +1,5 @@
 PYCostCentreData #class
 connector #namespace
-globalCostCenters List<com.axonivy.connector.successfactors.connector.rest.SFODataCustGOPYCostCentre> #field
+globalCostCentres List<com.axonivy.connector.successfactors.connector.rest.SFODataCustGOPYCostCentre> #field
 error ch.ivyteam.ivy.bpm.error.BpmError #field
 param connector.OdataParams #field
