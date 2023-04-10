@@ -8,9 +8,9 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "CallSubStart",
-      "name" : "getGlobalCostCenters()",
+      "name" : "getGlobalCostCentres()",
       "config" : {
-        "callSignature" : "getGlobalCostCenters",
+        "callSignature" : "getGlobalCostCentres",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -33,17 +33,18 @@
         },
         "result" : {
           "params" : [
-            { "name" : "globalCostCenters", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataCustGOPYCostCentre>" },
+            { "name" : "globalCostCentres", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataCustGOPYCostCentre>" },
             { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
           ],
           "map" : {
-            "result.globalCostCenters" : "in.#globalCostCenters",
+            "result.globalCostCentres" : "in.#globalCostCentres",
             "result.error" : "in.#error"
           }
         }
       },
       "visual" : {
-        "at" : { "x" : 96, "y" : 64 }
+        "at" : { "x" : 96, "y" : 64 },
+        "labelOffset" : { "x" : 17, "y" : 33 }
       },
       "connect" : { "id" : "f4", "to" : "f3" }
     }, {
@@ -71,7 +72,7 @@
         },
         "statusErrorCode" : "ivy:error:rest:client",
         "responseMapping" : {
-          "out.globalCostCenters" : "result.value"
+          "out.globalCostCentres" : "result.value"
         },
         "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustGOPYCostCentre"
       },
