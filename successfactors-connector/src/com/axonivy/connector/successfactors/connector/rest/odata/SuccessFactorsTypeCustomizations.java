@@ -11,6 +11,7 @@ import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPickListV
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistLabelId;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistLabelOptionId;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistOptionId;
+import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPositionStandardHours;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPositionTargetFTE;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPositionTransactionSequence;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataUserTotalTeamSize;
@@ -45,6 +46,7 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		addDeserializer(AnyOfSFODataUserTotalTeamSize.class, new UserTotalTeamSizeDeserializer());
 		addDeserializer(AnyOfSFODataPicklistLabelOptionId.class, new PicklistLabelOptionIdDeserializer());
 		addDeserializer(AnyOfSFODataPicklistLabelId.class, new PicklistLabelIdDeserializer());
+		addDeserializer(AnyOfSFODataPositionStandardHours.class, new PositionStandardHoursDeserializer());
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
@@ -196,6 +198,20 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 	}
 
+	private static class PositionStandardHoursDeserializer extends StdDeserializer<AnyOfSFODataPositionStandardHours> {
+		private static final long serialVersionUID = 5111700727479172703L;
+
+		public PositionStandardHoursDeserializer() {
+			super(AnyOfSFODataPositionStandardHours.class);
+		}
+
+		@Override
+		public AnyOfSFODataPositionStandardHours deserialize(JsonParser p, DeserializationContext ctxt)
+				throws IOException, JacksonException {
+			return new StringWrapper(p.getText());
+		}
+	}
+
 	private static class PicklistLabelOptionIdDeserializer extends StdDeserializer<AnyOfSFODataPicklistLabelOptionId> {
 		private static final long serialVersionUID = 1l;
 
@@ -234,7 +250,8 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		AnyOfSFODataPickListValueV2OptionId,
 		AnyOfSFODataUserTotalTeamSize,
 		AnyOfSFODataPicklistLabelOptionId,
-		AnyOfSFODataPicklistLabelId
+		AnyOfSFODataPicklistLabelId,
+		AnyOfSFODataPositionStandardHours
 		{
 
 		private final String value;
