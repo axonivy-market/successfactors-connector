@@ -72,6 +72,9 @@
           "$orderby" : "in.param.#orderBy"
         },
         "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.emeaHRDatas" : "result.value"
+        },
         "templateParams" : {
           "externalCode" : "",
           "effectiveStartDate" : ""
