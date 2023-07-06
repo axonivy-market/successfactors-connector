@@ -2,6 +2,7 @@ package com.axonivy.connector.successfactors.connector.rest.odata;
 
 import java.io.IOException;
 
+import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataCustEMEAHRdataCustMperc;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataCustRoletypesCustUtilisation;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataCustRoletypesExternalCode;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataEmpJobSeqNumber;
@@ -47,6 +48,7 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		addDeserializer(AnyOfSFODataPicklistLabelOptionId.class, new PicklistLabelOptionIdDeserializer());
 		addDeserializer(AnyOfSFODataPicklistLabelId.class, new PicklistLabelIdDeserializer());
 		addDeserializer(AnyOfSFODataPositionStandardHours.class, new PositionStandardHoursDeserializer());
+		addDeserializer(AnyOfSFODataCustEMEAHRdataCustMperc.class, new BonusMaxPercentageDeserializer());
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
@@ -120,6 +122,20 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		@Override
 		public AnyOfSFODataEmpJobSeqNumber deserialize(JsonParser p, DeserializationContext ctxt)
 				throws IOException, JsonProcessingException	{
+			return new StringWrapper(p.getText());
+		}
+	}
+
+	private static class BonusMaxPercentageDeserializer extends StdDeserializer<AnyOfSFODataCustEMEAHRdataCustMperc> {
+		private static final long serialVersionUID = 8173333520337377195L;
+
+		public BonusMaxPercentageDeserializer() {
+			super(AnyOfSFODataCustEMEAHRdataCustMperc.class);
+		}
+
+		@Override
+		public AnyOfSFODataCustEMEAHRdataCustMperc deserialize(JsonParser p, DeserializationContext ctxt)
+				throws IOException, JsonProcessingException {
 			return new StringWrapper(p.getText());
 		}
 	}
@@ -251,7 +267,8 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		AnyOfSFODataUserTotalTeamSize,
 		AnyOfSFODataPicklistLabelOptionId,
 		AnyOfSFODataPicklistLabelId,
-		AnyOfSFODataPositionStandardHours
+		AnyOfSFODataPositionStandardHours,
+		AnyOfSFODataCustEMEAHRdataCustMperc
 		{
 
 		private final String value;

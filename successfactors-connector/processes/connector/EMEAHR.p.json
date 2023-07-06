@@ -1,0 +1,106 @@
+{
+  "format" : "10.0.0",
+  "id" : "188BD429AB5C2F0F",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "connector.EMEAHRData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "getEMEAHRdata",
+      "config" : {
+        "callSignature" : "getEMEAHRdata",
+        "input" : {
+          "params" : [
+            { "name" : "top", "type" : "Integer" },
+            { "name" : "skip", "type" : "Integer" },
+            { "name" : "filter", "type" : "String" },
+            { "name" : "count", "type" : "Boolean" },
+            { "name" : "orderby", "type" : "java.util.List<String>" },
+            { "name" : "select", "type" : "java.util.List<String>" },
+            { "name" : "expand", "type" : "java.util.List<String>" }
+          ],
+          "map" : {
+            "out.param.count" : "param.#count",
+            "out.param.expand" : "param.#expand",
+            "out.param.filter" : "param.#filter",
+            "out.param.orderBy" : "param.#orderby",
+            "out.param.select" : "param.#select",
+            "out.param.skip" : "param.#skip",
+            "out.param.top" : "param.#top"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "emeaHRDatas", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataCustEMEAHRdata>" },
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
+          ],
+          "map" : {
+            "result.emeaHRDatas" : "in.#emeaHRDatas",
+            "result.error" : "in.#error"
+          }
+        },
+        "tags" : "connector"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : { "id" : "f9", "to" : "f3" }
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "RestClientCall",
+      "name" : "call rest",
+      "config" : {
+        "path" : "/cust_EMEAHRdata",
+        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "method" : "GET",
+        "queryParams" : {
+          "$select" : "in.param.#select",
+          "$expand" : "in.param.#expand",
+          "$top" : "in.param.#top is initialized ? in.param.#top : null",
+          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+          "$count" : "in.param.#count is initialized ? in.param.#count : null",
+          "$orderby" : "in.param.#orderBy"
+        },
+        "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.emeaHRDatas" : "result.value"
+        },
+        "templateParams" : {
+          "externalCode" : "",
+          "effectiveStartDate" : ""
+        },
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustEMEAHRdata",
+        "bodyInputType" : "ENTITY"
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "boundaries" : [ {
+          "id" : "f5",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 256, "y" : 106 }
+          },
+          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+        } ],
+      "connect" : { "id" : "f2", "to" : "f1" }
+    } ]
+}
