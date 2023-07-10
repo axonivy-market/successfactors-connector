@@ -1,0 +1,5 @@
+UserData #class
+connector #namespace
+users java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataUser> #field
+error ch.ivyteam.ivy.bpm.error.BpmError #field
+param connector.OdataParams #field
