@@ -106,6 +106,14 @@
       "name" : "postPosition",
       "config" : {
         "callSignature" : "postPosition",
+        "input" : {
+          "params" : [
+            { "name" : "requestBody", "type" : "String" }
+          ],
+          "map" : {
+            "out.requestBody" : "param.requestBody"
+          }
+        },
         "result" : {
           "params" : [
             { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
@@ -113,11 +121,6 @@
           "map" : {
             "result.error" : "in.#error"
           }
-        },
-        "input" : {
-          "params" : [
-            { "name" : "position", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate" }
-          ]
         }
       },
       "visual" : {
@@ -135,44 +138,7 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "bodyRaw" : [
-          "{",
-          "\"__metadata\": {",
-          "\"uri\": \"Position\",",
-          "\"type\": \"SFOData.Position\"",
-          "},",
-          "\"effectiveStartDate\": \"<%=in.position.effectiveStartDate%>\",",
-          "\"externalName_defaultValue\": \"<%=in.position.positionTitle%>\",",
-          "\"payGrade\": \"<%=in.position.payGrade%>\",",
-          "\"targetFTE\": <%=in.position.targetFTE%>,",
-          "\"parentPosition\":{",
-          "    \"__metadata\": {",
-          "        \"uri\": \"Position(code='',effectiveStartDate=datetime'2022-07-01T00:00:00')\"",
-          "    }",
-          "  },",
-          "// Can get from position if the code job code is exist",
-          "\"jobTitle\": \"Senior Recruiter\",",
-          "\"company\": \"0801\",",
-          "\"standardHours\": 8,",
-          "\"businessUnit\": \"RUKHR00000\",",
-          "\"location\": \"RUKLC00054\",",
-          "\"division\": \"RUKHR00000\",",
-          "\"cust_PayrollCostCenterNav\": {",
-          "    \"__metadata\": {",
-          "        \"uri\": \"cust_GO_PYCostCentre(effectiveStartDate=datetime'2018-05-01T00:00:00',externalCode='0011101241')\"",
-          "    }",
-          "},",
-          "\"department\": \"RUKHR00003\",",
-          "//",
-          "\"jobCode\": \"dnosJob\",",
-          "//default is yes base on requirement",
-          "\"vacant\": true,",
-          "\"code\": \"dnosPosition2\",",
-          "//need to check with Amber",
-          "\"positionControlled\": true,",
-          "\"effectiveStatus\": \"A\"",
-          "}"
-        ],
+        "bodyRaw" : "<%=in.requestBody%>",
         "path" : "/Position",
         "bodyObjectMapping" : {
           "param.businessUnit" : "in.position.businessUnit",

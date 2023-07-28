@@ -3,5 +3,5 @@ connector #namespace
 error ch.ivyteam.ivy.bpm.error.BpmError #field
 param connector.OdataParams #field
 result List<com.axonivy.connector.successfactors.connector.rest.SFODataPosition> #field
-position com.axonivy.connector.successfactors.connector.rest.SFODataPosition #field
+requestBody String #field
 statusCode Integer #field
