@@ -100,5 +100,114 @@
           "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 1088, "y" : 184 } ] }
         } ],
       "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f7",
+      "type" : "CallSubStart",
+      "name" : "postPosition",
+      "config" : {
+        "callSignature" : "postPosition",
+        "result" : {
+          "params" : [
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
+          ],
+          "map" : {
+            "result.error" : "in.#error"
+          }
+        },
+        "input" : {
+          "params" : [
+            { "name" : "position", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate" }
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 840, "y" : 328 }
+      },
+      "connect" : { "id" : "f13", "to" : "f9" }
+    }, {
+      "id" : "f8",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 1096, "y" : 328 }
+      }
+    }, {
+      "id" : "f9",
+      "type" : "RestClientCall",
+      "name" : "call rest",
+      "config" : {
+        "bodyRaw" : [
+          "{",
+          "\"__metadata\": {",
+          "\"uri\": \"Position\",",
+          "\"type\": \"SFOData.Position\"",
+          "},",
+          "\"effectiveStartDate\": \"<%=in.position.effectiveStartDate%>\",",
+          "\"externalName_defaultValue\": \"<%=in.position.positionTitle%>\",",
+          "\"payGrade\": \"<%=in.position.payGrade%>\",",
+          "\"targetFTE\": <%=in.position.targetFTE%>,",
+          "\"parentPosition\":{",
+          "    \"__metadata\": {",
+          "        \"uri\": \"Position(code='',effectiveStartDate=datetime'2022-07-01T00:00:00')\"",
+          "    }",
+          "  },",
+          "// Can get from position if the code job code is exist",
+          "\"jobTitle\": \"Senior Recruiter\",",
+          "\"company\": \"0801\",",
+          "\"standardHours\": 8,",
+          "\"businessUnit\": \"RUKHR00000\",",
+          "\"location\": \"RUKLC00054\",",
+          "\"division\": \"RUKHR00000\",",
+          "\"cust_PayrollCostCenterNav\": {",
+          "    \"__metadata\": {",
+          "        \"uri\": \"cust_GO_PYCostCentre(effectiveStartDate=datetime'2018-05-01T00:00:00',externalCode='0011101241')\"",
+          "    }",
+          "},",
+          "\"department\": \"RUKHR00003\",",
+          "//",
+          "\"jobCode\": \"dnosJob\",",
+          "//default is yes base on requirement",
+          "\"vacant\": true,",
+          "\"code\": \"dnosPosition2\",",
+          "//need to check with Amber",
+          "\"positionControlled\": true,",
+          "\"effectiveStatus\": \"A\"",
+          "}"
+        ],
+        "path" : "/Position",
+        "bodyObjectMapping" : {
+          "param.businessUnit" : "in.position.businessUnit",
+          "param.code" : "in.position.code"
+        },
+        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "method" : "POST",
+        "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.statusCode" : "response.getStatus()"
+        },
+        "bodyObjectType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate",
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPosition",
+        "bodyInputType" : "RAW"
+      },
+      "visual" : {
+        "at" : { "x" : 968, "y" : 328 }
+      },
+      "boundaries" : [ {
+          "id" : "f10",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 1000, "y" : 368 }
+          },
+          "connect" : { "id" : "f11", "to" : "f8", "via" : [ { "x" : 1096, "y" : 368 } ] }
+        } ],
+      "connect" : { "id" : "f12", "to" : "f8" }
     } ]
 }
