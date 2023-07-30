@@ -95,9 +95,9 @@
             }
           },
           "visual" : {
-            "at" : { "x" : 992, "y" : 184 }
+            "at" : { "x" : 992, "y" : 186 }
           },
-          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 1088, "y" : 184 } ] }
+          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 1088, "y" : 186 } ] }
         } ],
       "connect" : { "id" : "f2", "to" : "f1" }
     }, {
@@ -111,15 +111,23 @@
             { "name" : "requestBody", "type" : "String" }
           ],
           "map" : {
-            "out.requestBody" : "param.requestBody"
-          }
+            "out.requestBody" : "param.#requestBody"
+          },
+          "code" : [
+            "ivy.log.warn(\"body\");",
+            "ivy.log.warn(param.#requestBody);"
+          ]
         },
         "result" : {
           "params" : [
-            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" },
+            { "name" : "statusCode", "type" : "Integer" },
+            { "name" : "positions", "type" : "java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataPosition>" }
           ],
           "map" : {
-            "result.error" : "in.#error"
+            "result.error" : "in.#error",
+            "result.statusCode" : "in.#statusCode",
+            "result.positions" : "in.#result"
           }
         }
       },
@@ -140,10 +148,6 @@
       "config" : {
         "bodyRaw" : "<%=in.requestBody%>",
         "path" : "/Position",
-        "bodyObjectMapping" : {
-          "param.businessUnit" : "in.position.businessUnit",
-          "param.code" : "in.position.code"
-        },
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
         "method" : "POST",
