@@ -179,5 +179,84 @@
           "connect" : { "id" : "f11", "to" : "f8", "via" : [ { "x" : 1096, "y" : 368 } ] }
         } ],
       "connect" : { "id" : "f12", "to" : "f8" }
+    }, {
+      "id" : "f14",
+      "type" : "CallSubStart",
+      "name" : "putPosition",
+      "config" : {
+        "callSignature" : "call",
+        "input" : {
+          "params" : [
+            { "name" : "requestBody", "type" : "String" }
+          ],
+          "map" : {
+            "out.requestBody" : "param.#requestBody"
+          },
+          "code" : [
+            "ivy.log.warn(\"body\");",
+            "ivy.log.warn(param.#requestBody);"
+          ]
+        },
+        "result" : {
+          "params" : [
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" },
+            { "name" : "statusCode", "type" : "Integer" },
+            { "name" : "positions", "type" : "java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataPosition>" }
+          ],
+          "map" : {
+            "result.error" : "in.#error",
+            "result.statusCode" : "in.#statusCode",
+            "result.positions" : "in.#result"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 856, "y" : 496 }
+      },
+      "connect" : { "id" : "f19", "to" : "f16" }
+    }, {
+      "id" : "f15",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 1112, "y" : 496 }
+      }
+    }, {
+      "id" : "f16",
+      "type" : "RestClientCall",
+      "name" : "call rest",
+      "config" : {
+        "bodyRaw" : "<%=in.requestBody%>",
+        "path" : "/Position",
+        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "method" : "POST",
+        "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.statusCode" : "response.getStatus()"
+        },
+        "bodyObjectType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate",
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPosition",
+        "bodyInputType" : "RAW"
+      },
+      "visual" : {
+        "at" : { "x" : 984, "y" : 496 }
+      },
+      "boundaries" : [ {
+          "id" : "f17",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 1016, "y" : 536 }
+          },
+          "connect" : { "id" : "f20", "to" : "f15", "via" : [ { "x" : 1112, "y" : 536 } ] }
+        } ],
+      "connect" : { "id" : "f18", "to" : "f15" }
     } ]
 }
