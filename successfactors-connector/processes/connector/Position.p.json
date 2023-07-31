@@ -103,9 +103,9 @@
     }, {
       "id" : "f7",
       "type" : "CallSubStart",
-      "name" : "postPosition",
+      "name" : "createPosition",
       "config" : {
-        "callSignature" : "postPosition",
+        "callSignature" : "createPosition",
         "input" : {
           "params" : [
             { "name" : "requestBody", "type" : "String" }
@@ -121,13 +121,11 @@
         "result" : {
           "params" : [
             { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" },
-            { "name" : "statusCode", "type" : "Integer" },
-            { "name" : "positions", "type" : "java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataPosition>" }
+            { "name" : "statusCode", "type" : "Integer" }
           ],
           "map" : {
             "result.error" : "in.#error",
-            "result.statusCode" : "in.#statusCode",
-            "result.positions" : "in.#result"
+            "result.statusCode" : "in.#statusCode"
           }
         }
       },
@@ -151,7 +149,7 @@
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
         "method" : "POST",
-        "statusErrorCode" : "ivy:error:rest:client",
+        "statusErrorCode" : ">> Ignore status",
         "responseMapping" : {
           "out.statusCode" : "response.getStatus()"
         },
@@ -162,22 +160,6 @@
       "visual" : {
         "at" : { "x" : 968, "y" : 328 }
       },
-      "boundaries" : [ {
-          "id" : "f10",
-          "type" : "ErrorBoundaryEvent",
-          "config" : {
-            "output" : {
-              "map" : {
-                "out" : "in",
-                "out.error" : "error"
-              }
-            }
-          },
-          "visual" : {
-            "at" : { "x" : 1000, "y" : 368 }
-          },
-          "connect" : { "id" : "f11", "to" : "f8", "via" : [ { "x" : 1096, "y" : 368 } ] }
-        } ],
       "connect" : { "id" : "f12", "to" : "f8" }
     }, {
       "id" : "f14",
