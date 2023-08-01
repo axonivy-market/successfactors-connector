@@ -1,0 +1,104 @@
+{
+  "format" : "10.0.0",
+  "id" : "1899B56621CBF7E9",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "connector.PickListValueV2Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "getPickListValueV2",
+      "config" : {
+        "callSignature" : "getPickListValueV2",
+        "input" : {
+          "params" : [
+            { "name" : "top", "type" : "Integer" },
+            { "name" : "skip", "type" : "Integer" },
+            { "name" : "filter", "type" : "String" },
+            { "name" : "count", "type" : "Boolean" },
+            { "name" : "orderby", "type" : "List<String>" },
+            { "name" : "select", "type" : "List<String>" },
+            { "name" : "expand", "type" : "List<String>" },
+            { "name" : "id", "type" : "String" }
+          ],
+          "map" : {
+            "out.param.count" : "param.#count",
+            "out.param.expand" : "param.#expand",
+            "out.param.filter" : "param.#filter",
+            "out.param.id" : "param.#id",
+            "out.param.orderBy" : "param.#orderby",
+            "out.param.select" : "param.#select",
+            "out.param.skip" : "param.#skip",
+            "out.param.top" : "param.#top"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" },
+            { "name" : "pickListValueV2", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataPickListValueV2>" }
+          ],
+          "map" : {
+            "result.error" : "in.#error",
+            "result.pickListValueV2" : "in.#result"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : { "id" : "f4", "to" : "f3" }
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "RestClientCall",
+      "name" : "call rest",
+      "config" : {
+        "path" : "/PickListValueV2",
+        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "queryParams" : {
+          "$select" : "in.param.#select is initialized ? in.param.#select : null",
+          "$expand" : "in.param.#expand is initialized ? in.param.#expand : null",
+          "$top" : "in.param.#top is initialized ? in.param.#top : null",
+          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+          "$count" : "in.param.#count is initialized ? in.param.#count : null",
+          "$orderby" : "in.param.#orderBy is initialized ? in.param.#orderBy : null"
+        },
+        "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.result" : "result.value"
+        },
+        "templateParams" : {
+          "id" : ""
+        },
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfPickListValueV2"
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "boundaries" : [ {
+          "id" : "f5",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 256, "y" : 104 }
+          },
+          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 104 } ] }
+        } ],
+      "connect" : { "id" : "f2", "to" : "f1" }
+    } ]
+}
