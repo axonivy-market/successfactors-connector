@@ -112,11 +112,7 @@
           ],
           "map" : {
             "out.requestBody" : "param.#requestBody"
-          },
-          "code" : [
-            "ivy.log.warn(\"body\");",
-            "ivy.log.warn(param.#requestBody);"
-          ]
+          }
         },
         "result" : {
           "params" : [
@@ -162,48 +158,42 @@
       },
       "connect" : { "id" : "f12", "to" : "f8" }
     }, {
-      "id" : "f14",
+      "id" : "f10",
       "type" : "CallSubStart",
-      "name" : "putPosition",
+      "name" : "updatePosition",
       "config" : {
-        "callSignature" : "call",
+        "callSignature" : "updatePosition",
         "input" : {
           "params" : [
             { "name" : "requestBody", "type" : "String" }
           ],
           "map" : {
             "out.requestBody" : "param.#requestBody"
-          },
-          "code" : [
-            "ivy.log.warn(\"body\");",
-            "ivy.log.warn(param.#requestBody);"
-          ]
+          }
         },
         "result" : {
           "params" : [
             { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" },
-            { "name" : "statusCode", "type" : "Integer" },
-            { "name" : "positions", "type" : "java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataPosition>" }
+            { "name" : "statusCode", "type" : "Integer" }
           ],
           "map" : {
             "result.error" : "in.#error",
-            "result.statusCode" : "in.#statusCode",
-            "result.positions" : "in.#result"
+            "result.statusCode" : "in.#statusCode"
           }
         }
       },
       "visual" : {
-        "at" : { "x" : 856, "y" : 496 }
+        "at" : { "x" : 816, "y" : 536 }
       },
-      "connect" : { "id" : "f19", "to" : "f16" }
+      "connect" : { "id" : "f15", "to" : "f14" }
     }, {
-      "id" : "f15",
+      "id" : "f11",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 1112, "y" : 496 }
+        "at" : { "x" : 1072, "y" : 536 }
       }
     }, {
-      "id" : "f16",
+      "id" : "f14",
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
@@ -212,7 +202,7 @@
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
         "method" : "POST",
-        "statusErrorCode" : "ivy:error:rest:client",
+        "statusErrorCode" : ">> Ignore status",
         "responseMapping" : {
           "out.statusCode" : "response.getStatus()"
         },
@@ -221,24 +211,8 @@
         "bodyInputType" : "RAW"
       },
       "visual" : {
-        "at" : { "x" : 984, "y" : 496 }
+        "at" : { "x" : 944, "y" : 536 }
       },
-      "boundaries" : [ {
-          "id" : "f17",
-          "type" : "ErrorBoundaryEvent",
-          "config" : {
-            "output" : {
-              "map" : {
-                "out" : "in",
-                "out.error" : "error"
-              }
-            }
-          },
-          "visual" : {
-            "at" : { "x" : 1016, "y" : 536 }
-          },
-          "connect" : { "id" : "f20", "to" : "f15", "via" : [ { "x" : 1112, "y" : 536 } ] }
-        } ],
-      "connect" : { "id" : "f18", "to" : "f15" }
+      "connect" : { "id" : "f16", "to" : "f11" }
     } ]
 }
