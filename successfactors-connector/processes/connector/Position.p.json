@@ -108,7 +108,7 @@
         "callSignature" : "createPosition",
         "input" : {
           "params" : [
-            { "name" : "requestBody", "type" : "String" }
+            { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate" }
           ],
           "map" : {
             "out.requestBody" : "param.#requestBody"
@@ -142,6 +142,9 @@
       "config" : {
         "bodyRaw" : "<%=in.requestBody%>",
         "path" : "/Position",
+        "bodyObjectMapping" : {
+          "param" : "in.requestBody"
+        },
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
         "method" : "POST",
@@ -151,7 +154,7 @@
         },
         "bodyObjectType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate",
         "resultType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPosition",
-        "bodyInputType" : "RAW"
+        "bodyInputType" : "ENTITY"
       },
       "visual" : {
         "at" : { "x" : 968, "y" : 328 }
@@ -165,7 +168,7 @@
         "callSignature" : "updatePosition",
         "input" : {
           "params" : [
-            { "name" : "requestBody", "type" : "String" }
+            { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate" }
           ],
           "map" : {
             "out.requestBody" : "param.#requestBody"

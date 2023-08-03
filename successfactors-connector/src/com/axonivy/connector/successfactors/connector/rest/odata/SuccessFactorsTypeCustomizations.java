@@ -12,7 +12,6 @@ import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPickListV
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistLabelId;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistLabelOptionId;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistOptionId;
-import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPositionTransactionSequence;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -35,8 +34,8 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		addDeserializer(AnyOfSFODataEmpJobSeqNumber.class, new SquNumberDeserializer());
 		addDeserializer(AnyOfSFODataPerPersonPersonId.class, new PerPersonIdDeserializer());
 //		addDeserializer(AnyOfSFODataPositionTargetFTE.class, new PositionTargetFTEDeserializer());
-		addDeserializer(AnyOfSFODataPositionTransactionSequence.class,
-				new AnyOfSFODataPositionTransactionSequenceDeserializer());
+//		addDeserializer(AnyOfSFODataPositionTransactionSequence.class,
+//				new AnyOfSFODataPositionTransactionSequenceDeserializer());
 		addDeserializer(AnyOfSFODataPicklistOptionId.class, new PicklistOptionIdDeserializer());
 		addDeserializer(AnyOfSFODataCustRoletypesExternalCode.class, new CustRoletypesExternalCodeDeserializer());
 		addDeserializer(AnyOfSFODataCustRoletypesCustUtilisation.class, new CustRoletypesCustUtilisationDeserializer());
@@ -184,22 +183,22 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		}
 	}
 
-	private static class AnyOfSFODataPositionTransactionSequenceDeserializer
-			extends StdDeserializer<AnyOfSFODataPositionTransactionSequence> {
-
-		private static final long serialVersionUID = -5347020617311028513L;
-
-		public AnyOfSFODataPositionTransactionSequenceDeserializer() {
-			super(AnyOfSFODataPositionTransactionSequence.class);
-		}
-
-		@Override
-		public AnyOfSFODataPositionTransactionSequence deserialize(JsonParser p, DeserializationContext ctxt)
-				throws IOException, JacksonException {
-			return new StringWrapper(p.getText());
-		}
-
-	}
+//	private static class AnyOfSFODataPositionTransactionSequenceDeserializer
+//			extends StdDeserializer<AnyOfSFODataPositionTransactionSequence> {
+//
+//		private static final long serialVersionUID = -5347020617311028513L;
+//
+//		public AnyOfSFODataPositionTransactionSequenceDeserializer() {
+//			super(AnyOfSFODataPositionTransactionSequence.class);
+//		}
+//
+//		@Override
+//		public AnyOfSFODataPositionTransactionSequence deserialize(JsonParser p, DeserializationContext ctxt)
+//				throws IOException, JacksonException {
+//			return new StringWrapper(p.getText());
+//		}
+//
+//	}
 
 //	private static class PositionTargetFTEDeserializer extends StdDeserializer<AnyOfSFODataPositionTargetFTE> {
 //
@@ -260,11 +259,11 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 	}
 
 	private static class StringWrapper implements
-//	AnyOfSFODataPositionTargetFTE, 
-			AnyOfSFODataPositionTransactionSequence, AnyOfSFODataPerPersonPersonId, AnyOfSFODataEmpJobSeqNumber,
-			AnyOfSFODataPicklistOptionId, AnyOfSFODataCustRoletypesExternalCode,
-			AnyOfSFODataCustRoletypesCustUtilisation, AnyOfSFODataPickListValueV2LegacyStatus,
-			AnyOfSFODataPickListValueV2OptionId,
+//	AnyOfSFODataPositionTargetFTE,
+//			AnyOfSFODataPositionTransactionSequence,
+			AnyOfSFODataPerPersonPersonId, AnyOfSFODataEmpJobSeqNumber, AnyOfSFODataPicklistOptionId,
+			AnyOfSFODataCustRoletypesExternalCode, AnyOfSFODataCustRoletypesCustUtilisation,
+			AnyOfSFODataPickListValueV2LegacyStatus, AnyOfSFODataPickListValueV2OptionId,
 //		AnyOfSFODataUserTotalTeamSize,
 			AnyOfSFODataPicklistLabelOptionId, AnyOfSFODataPicklistLabelId,
 //		AnyOfSFODataPositionStandardHours,
