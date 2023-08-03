@@ -5,5 +5,5 @@ param connector.OdataParams #field
 result List<com.axonivy.connector.successfactors.connector.rest.SFODataPosition> #field
 requestBody com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate #field
 statusCode Integer #field
-effectiveDatePathVariable java.time.OffsetDateTime #field
+effectiveDatePathVariable String #field
 positionCodePathVariable String #field

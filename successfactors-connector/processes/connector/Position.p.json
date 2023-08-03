@@ -170,7 +170,7 @@
           "params" : [
             { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate" },
             { "name" : "positionCodePathVariable", "type" : "String" },
-            { "name" : "effectiveDatePathVariable", "type" : "java.time.OffsetDateTime" }
+            { "name" : "effectiveDatePathVariable", "type" : "String" }
           ],
           "map" : {
             "out.effectiveDatePathVariable" : "param.effectiveDatePathVariable",
