@@ -37,18 +37,13 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 	public SuccessFactorsTypeCustomizations() {
 		addDeserializer(AnyOfSFODataEmpJobSeqNumber.class, new SquNumberDeserializer());
 		addDeserializer(AnyOfSFODataPerPersonPersonId.class, new PerPersonIdDeserializer());
-//		addDeserializer(AnyOfSFODataPositionTargetFTE.class, new PositionTargetFTEDeserializer());
-//		addDeserializer(AnyOfSFODataPositionTransactionSequence.class,
-//				new AnyOfSFODataPositionTransactionSequenceDeserializer());
 		addDeserializer(AnyOfSFODataPicklistOptionId.class, new PicklistOptionIdDeserializer());
 		addDeserializer(AnyOfSFODataCustRoletypesExternalCode.class, new CustRoletypesExternalCodeDeserializer());
 		addDeserializer(AnyOfSFODataCustRoletypesCustUtilisation.class, new CustRoletypesCustUtilisationDeserializer());
 		addDeserializer(AnyOfSFODataPickListValueV2LegacyStatus.class, new PickListValueV2LegacyStatusDeserializer());
 		addDeserializer(AnyOfSFODataPickListValueV2OptionId.class, new PickListValueV2OptionIdDeserializer());
-//		addDeserializer(AnyOfSFODataUserTotalTeamSize.class, new UserTotalTeamSizeDeserializer());
 		addDeserializer(AnyOfSFODataPicklistLabelOptionId.class, new PicklistLabelOptionIdDeserializer());
 		addDeserializer(AnyOfSFODataPicklistLabelId.class, new PicklistLabelIdDeserializer());
-//		addDeserializer(AnyOfSFODataPositionStandardHours.class, new PositionStandardHoursDeserializer());
 		addDeserializer(AnyOfSFODataCustEMEAHRdataCustMperc.class, new BonusMaxPercentageDeserializer());
 		addSerializer(SFODataCustomNavigationCreate.class, new CustomNavigationCreateSerializer());
 	}
@@ -166,20 +161,6 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		}
 	}
 
-//	private static class UserTotalTeamSizeDeserializer extends StdDeserializer<AnyOfSFODataUserTotalTeamSize>	{
-//		private static final long serialVersionUID = 1l;
-//
-//		public UserTotalTeamSizeDeserializer() {
-//			super(AnyOfSFODataUserTotalTeamSize.class);
-//		}
-//
-//		@Override
-//		public AnyOfSFODataUserTotalTeamSize deserialize(JsonParser p, DeserializationContext ctxt)
-//				throws IOException, JsonProcessingException	{
-//			return new StringWrapper(p.getText());
-//		}
-//	}
-
 	private static class PerPersonIdDeserializer extends StdDeserializer<AnyOfSFODataPerPersonPersonId> {
 		private static final long serialVersionUID = 8173333520337377195L;
 
@@ -207,53 +188,6 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 			return new StringWrapper(p.getText());
 		}
 	}
-
-//	private static class AnyOfSFODataPositionTransactionSequenceDeserializer
-//			extends StdDeserializer<AnyOfSFODataPositionTransactionSequence> {
-//
-//		private static final long serialVersionUID = -5347020617311028513L;
-//
-//		public AnyOfSFODataPositionTransactionSequenceDeserializer() {
-//			super(AnyOfSFODataPositionTransactionSequence.class);
-//		}
-//
-//		@Override
-//		public AnyOfSFODataPositionTransactionSequence deserialize(JsonParser p, DeserializationContext ctxt)
-//				throws IOException, JacksonException {
-//			return new StringWrapper(p.getText());
-//		}
-//
-//	}
-
-//	private static class PositionTargetFTEDeserializer extends StdDeserializer<AnyOfSFODataPositionTargetFTE> {
-//
-//		private static final long serialVersionUID = -5347020617311028513L;
-//
-//		public PositionTargetFTEDeserializer() {
-//			super(AnyOfSFODataPositionTargetFTE.class);
-//		}
-//
-//		@Override
-//		public AnyOfSFODataPositionTargetFTE deserialize(JsonParser p, DeserializationContext ctxt)
-//				throws IOException, JacksonException {
-//			return new StringWrapper(p.getText());
-//		}
-//
-//	}
-//
-//	private static class PositionStandardHoursDeserializer extends StdDeserializer<AnyOfSFODataPositionStandardHours> {
-//		private static final long serialVersionUID = 5111700727479172703L;
-//
-//		public PositionStandardHoursDeserializer() {
-//			super(AnyOfSFODataPositionStandardHours.class);
-//		}
-//
-//		@Override
-//		public AnyOfSFODataPositionStandardHours deserialize(JsonParser p, DeserializationContext ctxt)
-//				throws IOException, JacksonException {
-//			return new StringWrapper(p.getText());
-//		}
-//	}
 
 	private static class PicklistLabelOptionIdDeserializer extends StdDeserializer<AnyOfSFODataPicklistLabelOptionId> {
 		private static final long serialVersionUID = 1L;
@@ -283,15 +217,11 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		}
 	}
 
-	private static class StringWrapper implements
-//	AnyOfSFODataPositionTargetFTE,
-//			AnyOfSFODataPositionTransactionSequence,
-			AnyOfSFODataPerPersonPersonId, AnyOfSFODataEmpJobSeqNumber, AnyOfSFODataPicklistOptionId,
+	private static class StringWrapper implements AnyOfSFODataPerPersonPersonId,
+			AnyOfSFODataEmpJobSeqNumber, AnyOfSFODataPicklistOptionId,
 			AnyOfSFODataCustRoletypesExternalCode, AnyOfSFODataCustRoletypesCustUtilisation,
 			AnyOfSFODataPickListValueV2LegacyStatus, AnyOfSFODataPickListValueV2OptionId,
-//		AnyOfSFODataUserTotalTeamSize,
 			AnyOfSFODataPicklistLabelOptionId, AnyOfSFODataPicklistLabelId,
-//		AnyOfSFODataPositionStandardHours,
 			AnyOfSFODataCustEMEAHRdataCustMperc {
 
 		private final String value;
