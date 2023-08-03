@@ -168,9 +168,13 @@
         "callSignature" : "updatePosition",
         "input" : {
           "params" : [
-            { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate" }
+            { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate" },
+            { "name" : "positionCodePathVariable", "type" : "String" },
+            { "name" : "effectiveDatePathVariable", "type" : "java.time.OffsetDateTime" }
           ],
           "map" : {
+            "out.effectiveDatePathVariable" : "param.effectiveDatePathVariable",
+            "out.positionCodePathVariable" : "param.positionCodePathVariable",
             "out.requestBody" : "param.#requestBody"
           }
         },
@@ -186,7 +190,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 816, "y" : 536 }
+        "at" : { "x" : 808, "y" : 536 }
       },
       "connect" : { "id" : "f15", "to" : "f14" }
     }, {
@@ -201,17 +205,23 @@
       "name" : "call rest",
       "config" : {
         "bodyRaw" : "<%=in.requestBody%>",
-        "path" : "/Position",
+        "path" : "/Position(code='{code}',effectiveStartDate={effectiveStartDate})",
+        "bodyObjectMapping" : {
+          "param" : "in.requestBody"
+        },
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
-        "method" : "POST",
+        "method" : "PUT",
         "statusErrorCode" : ">> Ignore status",
         "responseMapping" : {
           "out.statusCode" : "response.getStatus()"
         },
         "bodyObjectType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate",
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPosition",
-        "bodyInputType" : "RAW"
+        "templateParams" : {
+          "code" : "in.positionCodePathVariable",
+          "effectiveStartDate" : "in.effectiveDatePathVariable"
+        },
+        "bodyInputType" : "ENTITY"
       },
       "visual" : {
         "at" : { "x" : 944, "y" : 536 }
