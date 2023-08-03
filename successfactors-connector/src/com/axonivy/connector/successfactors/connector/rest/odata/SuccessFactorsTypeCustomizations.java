@@ -12,12 +12,16 @@ import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPickListV
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistLabelId;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistLabelOptionId;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistOptionId;
+import com.axonivy.connector.successfactors.connector.rest.SFODataCustomNavigationCreate;
 import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 /**
  * Some values in the converted SuccessFactors ODATA spec are generated as empty
@@ -46,11 +50,32 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		addDeserializer(AnyOfSFODataPicklistLabelId.class, new PicklistLabelIdDeserializer());
 //		addDeserializer(AnyOfSFODataPositionStandardHours.class, new PositionStandardHoursDeserializer());
 		addDeserializer(AnyOfSFODataCustEMEAHRdataCustMperc.class, new BonusMaxPercentageDeserializer());
+		addSerializer(SFODataCustomNavigationCreate.class, new CustomNavigationCreateSerializer());
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void nullify(Class<?> raw) {
 		addDeserializer(raw, new Nullifier(raw));
+	}
+
+	private static class CustomNavigationCreateSerializer extends StdSerializer<SFODataCustomNavigationCreate> {
+
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public void serialize(SFODataCustomNavigationCreate value, JsonGenerator generator, SerializerProvider provider)
+				throws IOException {
+			generator.writeStartObject();
+			generator.writeFieldName("__metadata");
+			generator.writeStartObject();
+			generator.writeStringField("uri", value.getMetadata().getUri());
+			generator.writeEndObject();
+			generator.writeEndObject();
+		}
+
+		public CustomNavigationCreateSerializer() {
+			super(SFODataCustomNavigationCreate.class);
+		}
 	}
 
 	private static class PickListValueV2OptionIdDeserializer
