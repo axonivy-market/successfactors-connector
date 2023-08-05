@@ -96,5 +96,79 @@
           "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
         } ],
       "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f4",
+      "type" : "CallSubStart",
+      "name" : "createJobCode",
+      "config" : {
+        "callSignature" : "createJobCode",
+        "input" : {
+          "params" : [
+            { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCodeCreate" }
+          ],
+          "map" : {
+            "out.requestBody" : "param.requestBody"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "statusCode", "type" : "Integer" }
+          ],
+          "map" : {
+            "result.statusCode" : "in.statusCode"
+          }
+        },
+        "tags" : "connector"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 304 }
+      },
+      "connect" : { "id" : "f13", "to" : "f8" }
+    }, {
+      "id" : "f7",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 304 }
+      }
+    }, {
+      "id" : "f8",
+      "type" : "RestClientCall",
+      "name" : "call rest",
+      "config" : {
+        "path" : "/FOJobCode",
+        "bodyObjectMapping" : {
+          "param" : "in.requestBody"
+        },
+        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "method" : "POST",
+        "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.statusCode" : "response.getStatus()"
+        },
+        "bodyObjectType" : "com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCodeCreate",
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCode",
+        "bodyInputType" : "ENTITY"
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 304 }
+      },
+      "boundaries" : [ {
+          "id" : "f10",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 256, "y" : 346 }
+          },
+          "connect" : { "id" : "f12", "to" : "f7", "via" : [ { "x" : 352, "y" : 346 } ] }
+        } ],
+      "connect" : { "id" : "f11", "to" : "f7" }
     } ]
 }

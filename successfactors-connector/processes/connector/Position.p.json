@@ -108,7 +108,7 @@
         "callSignature" : "createPosition",
         "input" : {
           "params" : [
-            { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate" }
+            { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionUpsert" }
           ],
           "map" : {
             "out.requestBody" : "param.#requestBody"
@@ -141,7 +141,7 @@
       "name" : "call rest",
       "config" : {
         "bodyRaw" : "<%=in.requestBody%>",
-        "path" : "/Position",
+        "path" : "/upsert",
         "bodyObjectMapping" : {
           "param" : "in.requestBody"
         },
@@ -152,8 +152,7 @@
         "responseMapping" : {
           "out.statusCode" : "response.getStatus()"
         },
-        "bodyObjectType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate",
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPosition",
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfUpsertResult",
         "bodyInputType" : "ENTITY"
       },
       "visual" : {
@@ -168,14 +167,12 @@
         "callSignature" : "updatePosition",
         "input" : {
           "params" : [
-            { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate" },
+            { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionUpsert" },
             { "name" : "positionCodePathVariable", "type" : "String" },
             { "name" : "effectiveDatePathVariable", "type" : "String" }
           ],
           "map" : {
-            "out.effectiveDatePathVariable" : "param.effectiveDatePathVariable",
-            "out.positionCodePathVariable" : "param.positionCodePathVariable",
-            "out.requestBody" : "param.#requestBody"
+            "out.effectiveDatePathVariable" : "param.effectiveDatePathVariable"
           }
         },
         "result" : {
@@ -205,22 +202,22 @@
       "name" : "call rest",
       "config" : {
         "bodyRaw" : "<%=in.requestBody%>",
-        "path" : "/Position(code='{code}',effectiveStartDate={effectiveStartDate})",
+        "path" : "/upsert",
         "bodyObjectMapping" : {
           "param" : "in.requestBody"
         },
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
-        "method" : "PUT",
+        "method" : "POST",
         "statusErrorCode" : ">> Ignore status",
         "responseMapping" : {
           "out.statusCode" : "response.getStatus()"
         },
-        "bodyObjectType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionCreate",
         "templateParams" : {
           "code" : "in.positionCodePathVariable",
           "effectiveStartDate" : "in.effectiveDatePathVariable"
         },
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfUpsertResult",
         "bodyInputType" : "ENTITY"
       },
       "visual" : {

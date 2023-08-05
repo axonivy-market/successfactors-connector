@@ -13,14 +13,19 @@ import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistL
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistLabelOptionId;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistOptionId;
 import com.axonivy.connector.successfactors.connector.rest.SFODataCustomNavigationCreate;
+import com.axonivy.connector.successfactors.connector.rest.SFODataPositionUpsert;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.BeanSerializerFactory;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 /**
@@ -46,6 +51,7 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		addDeserializer(AnyOfSFODataPicklistLabelId.class, new PicklistLabelIdDeserializer());
 		addDeserializer(AnyOfSFODataCustEMEAHRdataCustMperc.class, new BonusMaxPercentageDeserializer());
 		addSerializer(SFODataCustomNavigationCreate.class, new CustomNavigationCreateSerializer());
+		addSerializer(SFODataPositionUpsert.class, new PositionUpsertSerializer());
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -70,6 +76,33 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 		public CustomNavigationCreateSerializer() {
 			super(SFODataCustomNavigationCreate.class);
+		}
+	}
+
+	private static class PositionUpsertSerializer extends StdSerializer<SFODataPositionUpsert> {
+
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("deprecation")
+		@Override
+		public void serialize(SFODataPositionUpsert value, JsonGenerator generator, SerializerProvider provider)
+				throws IOException {
+			JavaType javaType = provider.constructType(SFODataPositionUpsert.class);
+			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
+			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
+					beanDesc);
+			generator.writeStartObject();
+			generator.writeFieldName("__metadata");
+			generator.writeStartObject();
+			generator.writeStringField("uri", value.getMetadataUri());
+			generator.writeEndObject();
+			value.setMetadataUri(null);
+			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
+			generator.writeEndObject();
+		}
+
+		public PositionUpsertSerializer() {
+			super(SFODataPositionUpsert.class);
 		}
 	}
 
