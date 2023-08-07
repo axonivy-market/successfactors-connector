@@ -13,6 +13,7 @@ import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistL
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistLabelOptionId;
 import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistOptionId;
 import com.axonivy.connector.successfactors.connector.rest.SFODataCustomNavigationCreate;
+import com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCodeUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPositionUpsert;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -52,6 +53,7 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		addDeserializer(AnyOfSFODataCustEMEAHRdataCustMperc.class, new BonusMaxPercentageDeserializer());
 		addSerializer(SFODataCustomNavigationCreate.class, new CustomNavigationCreateSerializer());
 		addSerializer(SFODataPositionUpsert.class, new PositionUpsertSerializer());
+		addSerializer(SFODataFOJobCodeUpsert.class, new FOJobCodeUpsertSerializer());
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -103,6 +105,33 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 		public PositionUpsertSerializer() {
 			super(SFODataPositionUpsert.class);
+		}
+	}
+
+	private static class FOJobCodeUpsertSerializer extends StdSerializer<SFODataFOJobCodeUpsert> {
+
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("deprecation")
+		@Override
+		public void serialize(SFODataFOJobCodeUpsert value, JsonGenerator generator, SerializerProvider provider)
+				throws IOException {
+			JavaType javaType = provider.constructType(SFODataFOJobCodeUpsert.class);
+			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
+			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
+					beanDesc);
+			generator.writeStartObject();
+			generator.writeFieldName("__metadata");
+			generator.writeStartObject();
+			generator.writeStringField("uri", value.getMetadataUri());
+			generator.writeEndObject();
+			value.setMetadataUri(null);
+			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
+			generator.writeEndObject();
+		}
+
+		public FOJobCodeUpsertSerializer() {
+			super(SFODataFOJobCodeUpsert.class);
 		}
 	}
 
@@ -250,12 +279,11 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		}
 	}
 
-	private static class StringWrapper implements AnyOfSFODataPerPersonPersonId,
-			AnyOfSFODataEmpJobSeqNumber, AnyOfSFODataPicklistOptionId,
+	private static class StringWrapper
+			implements AnyOfSFODataPerPersonPersonId, AnyOfSFODataEmpJobSeqNumber, AnyOfSFODataPicklistOptionId,
 			AnyOfSFODataCustRoletypesExternalCode, AnyOfSFODataCustRoletypesCustUtilisation,
 			AnyOfSFODataPickListValueV2LegacyStatus, AnyOfSFODataPickListValueV2OptionId,
-			AnyOfSFODataPicklistLabelOptionId, AnyOfSFODataPicklistLabelId,
-			AnyOfSFODataCustEMEAHRdataCustMperc {
+			AnyOfSFODataPicklistLabelOptionId, AnyOfSFODataPicklistLabelId, AnyOfSFODataCustEMEAHRdataCustMperc {
 
 		private final String value;
 
