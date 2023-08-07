@@ -96,15 +96,16 @@ public class OdataJsonFeature extends OpenApiJsonFeature {
 		 */
 		protected JsonNode manipulateJson(JsonNode node) {
 			if (node.has(Field.VALUE)) {
-				node = node.get(Field.VALUE);
+				if (node.get(Field.VALUE).has(Field.RESULT)) {
+					node = node.get(Field.VALUE);
+				}
 			}
-			if(node.has("results")) {
+			if(node.has("results") || node.has(Field.VALUE)) {
 				ObjectNode objectNode;
 				try {
 					if(node.isObject()) {
 						objectNode = (ObjectNode) node;
-						objectNode.set("value", objectNode.get("results"));
-						objectNode.remove("results");
+						mapValueForObjectNode(objectNode);
 						node = (JsonNode) ROOT_MAPPER.readTree(objectNode.toString());
 					}
 				} catch (JsonProcessingException e) {
@@ -120,6 +121,20 @@ public class OdataJsonFeature extends OpenApiJsonFeature {
 		private interface Field {
 			String VALUE = "d";
 			String CONTEXT = "@odata.context";
+			String RESULT = "results";
+		}
+		
+		private  void mapValueForObjectNode (ObjectNode node) {
+			if (node.has(Field.RESULT)) {
+				updateValueForObjectNode(node, Field.RESULT);
+			}
+			if (node.has(Field.VALUE)) {
+				updateValueForObjectNode(node, Field.VALUE);
+			}
+		}
+		private static void updateValueForObjectNode(ObjectNode node, String resultField) {
+			node.set("value", node.get(resultField));
+			node.remove(resultField);
 		}
 	}
 

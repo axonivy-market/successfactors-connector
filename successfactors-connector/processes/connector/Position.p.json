@@ -117,11 +117,11 @@
         "result" : {
           "params" : [
             { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" },
-            { "name" : "statusCode", "type" : "Integer" }
+            { "name" : "upsertResult", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataUpsertResult" }
           ],
           "map" : {
             "result.error" : "in.#error",
-            "result.statusCode" : "in.#statusCode"
+            "result.upsertResult" : "in.upsertResult"
           }
         }
       },
@@ -150,7 +150,7 @@
         "method" : "POST",
         "statusErrorCode" : ">> Ignore status",
         "responseMapping" : {
-          "out.statusCode" : "response.getStatus()"
+          "out.upsertResult" : "result.value.get(0)"
         },
         "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfUpsertResult",
         "bodyInputType" : "ENTITY"
@@ -177,12 +177,10 @@
         },
         "result" : {
           "params" : [
-            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" },
-            { "name" : "statusCode", "type" : "Integer" }
+            { "name" : "upserResult", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataUpsertResult" }
           ],
           "map" : {
-            "result.error" : "in.#error",
-            "result.statusCode" : "in.#statusCode"
+            "result.upserResult" : "in.upsertResult"
           }
         }
       },
@@ -211,7 +209,7 @@
         "method" : "POST",
         "statusErrorCode" : ">> Ignore status",
         "responseMapping" : {
-          "out.statusCode" : "response.getStatus()"
+          "out.upsertResult" : "result.value.get(0)"
         },
         "templateParams" : {
           "code" : "in.positionCodePathVariable",
