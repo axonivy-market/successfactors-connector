@@ -99,12 +99,12 @@
     }, {
       "id" : "f4",
       "type" : "CallSubStart",
-      "name" : "createJobCode",
+      "name" : "upsertJobCode",
       "config" : {
-        "callSignature" : "createJobCode",
+        "callSignature" : "upsert",
         "input" : {
           "params" : [
-            { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCodeCreate" }
+            { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCodeUpsert" }
           ],
           "map" : {
             "out.requestBody" : "param.requestBody"
@@ -112,16 +112,16 @@
         },
         "result" : {
           "params" : [
-            { "name" : "statusCode", "type" : "Integer" }
+            { "name" : "upsertResult", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataUpsertResult" }
           ],
           "map" : {
-            "result.statusCode" : "in.statusCode"
+            "result.upsertResult" : "in.upsertResult"
           }
         },
         "tags" : "connector"
       },
       "visual" : {
-        "at" : { "x" : 96, "y" : 304 }
+        "at" : { "x" : 88, "y" : 304 }
       },
       "connect" : { "id" : "f13", "to" : "f8" }
     }, {
@@ -135,40 +135,23 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/FOJobCode",
+        "path" : "/upsert",
         "bodyObjectMapping" : {
           "param" : "in.requestBody"
         },
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
         "method" : "POST",
-        "statusErrorCode" : "ivy:error:rest:client",
+        "statusErrorCode" : ">> Ignore status",
         "responseMapping" : {
-          "out.statusCode" : "response.getStatus()"
+          "out.upsertResult" : "result.value.get(0)"
         },
-        "bodyObjectType" : "com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCodeCreate",
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCode",
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfUpsertResult",
         "bodyInputType" : "ENTITY"
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 304 }
       },
-      "boundaries" : [ {
-          "id" : "f10",
-          "type" : "ErrorBoundaryEvent",
-          "config" : {
-            "output" : {
-              "map" : {
-                "out" : "in",
-                "out.error" : "error"
-              }
-            }
-          },
-          "visual" : {
-            "at" : { "x" : 256, "y" : 346 }
-          },
-          "connect" : { "id" : "f12", "to" : "f7", "via" : [ { "x" : 352, "y" : 346 } ] }
-        } ],
       "connect" : { "id" : "f11", "to" : "f7" }
     } ]
 }

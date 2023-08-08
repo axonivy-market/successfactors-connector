@@ -56,11 +56,6 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		addSerializer(SFODataFOJobCodeUpsert.class, new FOJobCodeUpsertSerializer());
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void nullify(Class<?> raw) {
-		addDeserializer(raw, new Nullifier(raw));
-	}
-
 	private static class CustomNavigationCreateSerializer extends StdSerializer<SFODataCustomNavigationCreate> {
 
 		private static final long serialVersionUID = 1L;

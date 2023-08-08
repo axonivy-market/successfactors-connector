@@ -103,9 +103,9 @@
     }, {
       "id" : "f7",
       "type" : "CallSubStart",
-      "name" : "createPosition",
+      "name" : "upsertPosition",
       "config" : {
-        "callSignature" : "createPosition",
+        "callSignature" : "upsert",
         "input" : {
           "params" : [
             { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionUpsert" }
@@ -116,11 +116,9 @@
         },
         "result" : {
           "params" : [
-            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" },
             { "name" : "upsertResult", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataUpsertResult" }
           ],
           "map" : {
-            "result.error" : "in.#error",
             "result.upsertResult" : "in.upsertResult"
           }
         }
@@ -159,68 +157,5 @@
         "at" : { "x" : 968, "y" : 328 }
       },
       "connect" : { "id" : "f12", "to" : "f8" }
-    }, {
-      "id" : "f10",
-      "type" : "CallSubStart",
-      "name" : "updatePosition",
-      "config" : {
-        "callSignature" : "updatePosition",
-        "input" : {
-          "params" : [
-            { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionUpsert" },
-            { "name" : "positionCodePathVariable", "type" : "String" },
-            { "name" : "effectiveDatePathVariable", "type" : "String" }
-          ],
-          "map" : {
-            "out.effectiveDatePathVariable" : "param.effectiveDatePathVariable"
-          }
-        },
-        "result" : {
-          "params" : [
-            { "name" : "upserResult", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataUpsertResult" }
-          ],
-          "map" : {
-            "result.upserResult" : "in.upsertResult"
-          }
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 808, "y" : 536 }
-      },
-      "connect" : { "id" : "f15", "to" : "f14" }
-    }, {
-      "id" : "f11",
-      "type" : "CallSubEnd",
-      "visual" : {
-        "at" : { "x" : 1072, "y" : 536 }
-      }
-    }, {
-      "id" : "f14",
-      "type" : "RestClientCall",
-      "name" : "call rest",
-      "config" : {
-        "bodyRaw" : "<%=in.requestBody%>",
-        "path" : "/upsert",
-        "bodyObjectMapping" : {
-          "param" : "in.requestBody"
-        },
-        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
-        "clientErrorCode" : "ivy:error:rest:client",
-        "method" : "POST",
-        "statusErrorCode" : ">> Ignore status",
-        "responseMapping" : {
-          "out.upsertResult" : "result.value.get(0)"
-        },
-        "templateParams" : {
-          "code" : "in.positionCodePathVariable",
-          "effectiveStartDate" : "in.effectiveDatePathVariable"
-        },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfUpsertResult",
-        "bodyInputType" : "ENTITY"
-      },
-      "visual" : {
-        "at" : { "x" : 944, "y" : 536 }
-      },
-      "connect" : { "id" : "f16", "to" : "f11" }
     } ]
 }
