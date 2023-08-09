@@ -7,10 +7,11 @@ RestClients:
     Features:
     - com.axonivy.connector.successfactors.connector.rest.odata.OdataJsonFeature
     - ch.ivyteam.ivy.rest.client.authentication.HttpBasicAuthenticationFeature
+    - ch.ivyteam.ivy.rest.client.mapper.JsonFeature
     Properties:
       username: ${ivy.var.successfactors-connector.username}
       password: ${ivy.var.successfactors-connector.password}
       PATH.host: ${ivy.var.successfactors-connector.host}
     OpenAPI:
-      SpecUrl: file:///D:/work/wawa/RICOH/OpenApi/HR_Connect/Octopus-IPeople-OpenApi.json
+      SpecUrl: file:///D:/Ricoh/connector/successfactors-connector/successfactors-connector/lib/Octopus-IPeople-OpenApi.json
       Namespace: com.axonivy.connector.successfactors.connector.rest
