@@ -106,7 +106,7 @@ public class OdataJsonFeature extends OpenApiJsonFeature {
 					if(node.isObject()) {
 						objectNode = (ObjectNode) node;
 						mapValueForObjectNode(objectNode);
-						node = (JsonNode) ROOT_MAPPER.readTree(objectNode.toString());
+						node = ROOT_MAPPER.readTree(objectNode.toString());
 					}
 				} catch (JsonProcessingException e) {
 					// TODO Auto-generated catch block
@@ -120,7 +120,6 @@ public class OdataJsonFeature extends OpenApiJsonFeature {
 		/** Well known OData fields */
 		private interface Field {
 			String VALUE = "d";
-			String CONTEXT = "@odata.context";
 			String RESULT = "results";
 		}
 		
