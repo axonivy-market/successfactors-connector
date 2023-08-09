@@ -1,7 +1,7 @@
 RestClients:
   #Service for namespace SFODataSet
   #This service is located at [https://localhost/service-root/](https://localhost/service-root/)
-  SuccessFactors (Service for namespace SFODataSet):
+  SuccessFactors:
     UUID: 4c029770-6b05-4cf7-9b23-b2434bb500d6
     Url: https://{host}/odata/v2
     Features:
