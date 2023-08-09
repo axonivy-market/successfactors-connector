@@ -13,5 +13,5 @@ RestClients:
       password: ${ivy.var.successfactors-connector.password}
       PATH.host: ${ivy.var.successfactors-connector.host}
     OpenAPI:
-      SpecUrl: file:///D:/Ricoh/connector/successfactors-connector/successfactors-connector/lib/Octopus-IPeople-OpenApi.json
+      SpecUrl: file:///C:/tmp/ricoh/odata_metadata_notags_v4.openapi3.json
       Namespace: com.axonivy.connector.successfactors.connector.rest
