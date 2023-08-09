@@ -7,7 +7,6 @@ RestClients:
     Features:
     - com.axonivy.connector.successfactors.connector.rest.odata.OdataJsonFeature
     - ch.ivyteam.ivy.rest.client.authentication.HttpBasicAuthenticationFeature
-    - ch.ivyteam.ivy.rest.client.mapper.JsonFeature
     Properties:
       username: ${ivy.var.successfactors-connector.username}
       password: ${ivy.var.successfactors-connector.password}
