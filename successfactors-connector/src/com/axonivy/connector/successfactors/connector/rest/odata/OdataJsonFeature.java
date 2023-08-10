@@ -33,9 +33,9 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
  * <ul>
  * <li>Remove or rename root entity</li>
  * <li>Load custom {@link SuccessFactorsTypeCustomizations}</li>
- * <li>Load custom {@link InnerListResolveVisitor}</li> 
+ * <li>Load custom {@link InnerListResolveVisitor}</li>
  * <li>Load custom {@link OffsetDateTimeSerializer}</li>
- * <li>Load custom {@link SucessFactorsQueryStringFilter}</li> 
+ * <li>Load custom {@link SucessFactorsQueryStringFilter}</li>
  * </ul>
  * 
  * So let's handle them to make object transformation possible.
@@ -44,7 +44,7 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
  * @since 10.0.2
  */
 public class OdataJsonFeature extends OpenApiJsonFeature {
-	
+
 	private static final ObjectMapper ROOT_MAPPER = new ObjectMapper();
 
 	@Override
@@ -57,18 +57,15 @@ public class OdataJsonFeature extends OpenApiJsonFeature {
 	}
 
 	public static class ODataMapperProvider extends JaxRsClientJson {
-		
+
 		@Override
-		public Object readFrom(Class<Object> type, Type genericType,
-				Annotation[] annotations, MediaType mediaType,
-				MultivaluedMap<String, String> httpHeaders,
-				InputStream entityStream) throws IOException {
+		public Object readFrom(Class<Object> type, Type genericType, Annotation[] annotations, MediaType mediaType,
+				MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException {
 			InputStream inputStream = unwrapValueRoot(entityStream);
 			return super.readFrom(type, genericType, annotations, mediaType, httpHeaders, inputStream);
 		}
 
-		protected InputStream unwrapValueRoot(InputStream entityStream)
-				throws IOException, JsonProcessingException	{
+		protected InputStream unwrapValueRoot(InputStream entityStream) throws IOException, JsonProcessingException {
 			JsonNode node = ROOT_MAPPER.readTree(entityStream);
 			node = manipulateJson(node);
 			String json = ROOT_MAPPER.writeValueAsString(node);
@@ -76,6 +73,7 @@ public class OdataJsonFeature extends OpenApiJsonFeature {
 			return inputStream;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		public ObjectMapper locateMapper(Class<?> type, MediaType mediaType) {
 			ObjectMapper mapper = super.locateMapper(type, mediaType);
@@ -100,10 +98,10 @@ public class OdataJsonFeature extends OpenApiJsonFeature {
 					node = node.get(Field.VALUE);
 				}
 			}
-			if(node.has("results") || node.has(Field.VALUE)) {
+			if (node.has("results") || node.has(Field.VALUE)) {
 				ObjectNode objectNode;
 				try {
-					if(node.isObject()) {
+					if (node.isObject()) {
 						objectNode = (ObjectNode) node;
 						mapValueForObjectNode(objectNode);
 						node = ROOT_MAPPER.readTree(objectNode.toString());
@@ -122,8 +120,8 @@ public class OdataJsonFeature extends OpenApiJsonFeature {
 			String VALUE = "d";
 			String RESULT = "results";
 		}
-		
-		private  void mapValueForObjectNode (ObjectNode node) {
+
+		private void mapValueForObjectNode(ObjectNode node) {
 			if (node.has(Field.RESULT)) {
 				updateValueForObjectNode(node, Field.RESULT);
 			}
@@ -131,6 +129,7 @@ public class OdataJsonFeature extends OpenApiJsonFeature {
 				updateValueForObjectNode(node, Field.VALUE);
 			}
 		}
+
 		private static void updateValueForObjectNode(ObjectNode node, String resultField) {
 			node.set("value", node.get(resultField));
 			node.remove(resultField);
