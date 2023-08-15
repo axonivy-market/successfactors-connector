@@ -56,5 +56,4 @@ public class InnerListResolveVisitor extends JsonNodeVisitor {
 		}
 		super.visitObjectNode(containerObject);
 	}
-	
 }
