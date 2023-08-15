@@ -98,7 +98,7 @@ public class OdataJsonFeature extends OpenApiJsonFeature {
 					node = node.get(Field.VALUE);
 				}
 			}
-			if (node.has("results") || node.has(Field.VALUE)) {
+			if (node.has(Field.RESULT) || node.has(Field.VALUE)) {
 				ObjectNode objectNode;
 				try {
 					if (node.isObject()) {
