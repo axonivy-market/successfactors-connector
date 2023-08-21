@@ -1,0 +1,5 @@
+UpsertData #class
+connector #namespace
+requestBody Object #field
+upsertResult com.axonivy.connector.successfactors.connector.rest.SFODataUpsertResult #field
+error ch.ivyteam.ivy.bpm.error.BpmError #field
