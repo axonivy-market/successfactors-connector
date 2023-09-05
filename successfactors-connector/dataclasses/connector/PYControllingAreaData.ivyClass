@@ -1,0 +1,5 @@
+PYControllingAreaData #class
+connector #namespace
+payrollControllingAreas java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataCustGOPYControllingArea> #field
+error ch.ivyteam.ivy.bpm.error.BpmError #field
+param connector.OdataParams #field
