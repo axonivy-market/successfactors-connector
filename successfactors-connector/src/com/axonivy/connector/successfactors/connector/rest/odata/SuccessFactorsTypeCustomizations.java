@@ -7,6 +7,7 @@ import com.axonivy.connector.successfactors.connector.rest.SFODataEmpEmploymentU
 import com.axonivy.connector.successfactors.connector.rest.SFODataEmpJobUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCodeUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPaymentInformationDetailV3Upsert;
+import com.axonivy.connector.successfactors.connector.rest.SFODataPaymentInformationV3Upsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerAddressDEFLTUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerEmailUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerEmergencyContactsUpsert;
@@ -53,6 +54,7 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		addSerializer(SFODataPerPhoneUpsert.class, new PhoneUpsertSerializer());
 		addSerializer(SFODataPhotoUpsert.class, new PhotoUpsertSerializer());
 		addSerializer(SFODataPerAddressDEFLTUpsert.class, new AddressUpsertSerializer());
+		addSerializer(SFODataPaymentInformationV3Upsert.class, new PaymentInformationV3Serializer());
 
 	}
 
@@ -440,6 +442,32 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 		public AddressUpsertSerializer() {
 			super(SFODataPerAddressDEFLTUpsert.class);
+		}
+	}
+
+	private static class PaymentInformationV3Serializer extends StdSerializer<SFODataPaymentInformationV3Upsert> {
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("deprecation")
+		@Override
+		public void serialize(SFODataPaymentInformationV3Upsert value, JsonGenerator generator,
+				SerializerProvider provider) throws IOException {
+			JavaType javaType = provider.constructType(SFODataPaymentInformationV3Upsert.class);
+			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
+			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
+					beanDesc);
+			generator.writeStartObject();
+			generator.writeFieldName("__metadata");
+			generator.writeStartObject();
+			generator.writeStringField("uri", value.getMetadataUri());
+			generator.writeEndObject();
+			value.setMetadataUri(null);
+			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
+			generator.writeEndObject();
+		}
+
+		public PaymentInformationV3Serializer() {
+			super(SFODataPaymentInformationV3Upsert.class);
 		}
 	}
 }
