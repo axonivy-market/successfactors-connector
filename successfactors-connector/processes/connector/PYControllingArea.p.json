@@ -8,9 +8,9 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "CallSubStart",
-      "name" : "getPayrollControllingArea()",
+      "name" : "getPayrollControllingAreas()",
       "config" : {
-        "callSignature" : "getPayrollControllingArea",
+        "callSignature" : "getPayrollControllingAreas",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
