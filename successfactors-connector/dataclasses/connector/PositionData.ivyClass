@@ -1,0 +1,9 @@
+PositionData #class
+connector #namespace
+error ch.ivyteam.ivy.bpm.error.BpmError #field
+param connector.OdataParams #field
+result List<com.axonivy.connector.successfactors.connector.rest.SFODataPosition> #field
+requestBody com.axonivy.connector.successfactors.connector.rest.SFODataPositionUpsert #field
+upsertResult com.axonivy.connector.successfactors.connector.rest.SFODataUpsertResult #field
+effectiveDatePathVariable String #field
+positionCodePathVariable String #field

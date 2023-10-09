@@ -1,0 +1,5 @@
+EmpWorkPermitData #class
+connector #namespace
+empWorkPermits List<com.axonivy.connector.successfactors.connector.rest.SFODataEmpWorkPermit> #field
+error ch.ivyteam.ivy.bpm.error.BpmError #field
+param connector.OdataParams #field

@@ -236,7 +236,7 @@
       "type" : "SubProcessCall",
       "name" : "connector/Location",
       "config" : {
-        "processCall" : "connector/Location:getDepartments(Integer,Integer,String,Boolean,List<String>,List<String>,List<String>)",
+        "processCall" : "connector/Location:getLocations(Integer,Integer,String,Boolean,List<String>,List<String>,List<String>)",
         "output" : {
           "map" : {
             "out" : "in",
@@ -594,22 +594,21 @@
             { "name" : "count", "type" : "Boolean" },
             { "name" : "orderby", "type" : "List<String>" },
             { "name" : "select", "type" : "List<String>" },
-            { "name" : "expand", "type" : "List<String>" },
-            { "name" : "externalCode", "type" : "String" }
+            { "name" : "expand", "type" : "List<String>" }
           ],
           "map" : {
             "param.top" : "10",
-            "param.select" : "[\"externalCode\",\"statusNav/localized\",\"statusNav/value\"]",
-            "param.expand" : "[\"statusNav\"]",
-            "param.externalCode" : "\"2010852\""
+            "param.filter" : "\"cust_HYPERION_externalCode eq 2010852\"",
+            "param.select" : "[\"cust_hyperioncodeNav/externalCode\",\"cust_hyperioncodeNav/statusNav/localized\",\"cust_hyperioncodeNav/statusNav/value\"]",
+            "param.expand" : "[\"cust_hyperioncodeNav/statusNav\"]"
           },
           "code" : "//[\"externalCode\",\"name\"]"
         },
-        "processCall" : "connector/CustomHyperion:getCompanies(Integer,Integer,String,Boolean,List<String>,List<String>,List<String>,String)",
+        "processCall" : "connector/CustomHyperion:getHyperionRecords(Integer,Integer,String,Boolean,List<String>,List<String>,List<String>)",
         "output" : {
           "map" : {
             "out" : "in",
-            "out.hyperionData" : "result.records"
+            "out.hyperionData" : "result.customRoleTypes"
           }
         }
       },

@@ -10,7 +10,7 @@
       "type" : "CallSubStart",
       "name" : "getLocations",
       "config" : {
-        "callSignature" : "getDepartments",
+        "callSignature" : "getLocations",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },

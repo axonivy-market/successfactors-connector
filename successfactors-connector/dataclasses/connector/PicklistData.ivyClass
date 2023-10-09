@@ -1,0 +1,5 @@
+PicklistData #class
+connector #namespace
+error ch.ivyteam.ivy.bpm.error.BpmError #field
+param connector.OdataParams #field
+result com.axonivy.connector.successfactors.connector.rest.SFODataPicklist #field

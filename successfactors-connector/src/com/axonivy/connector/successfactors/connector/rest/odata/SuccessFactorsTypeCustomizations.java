@@ -2,21 +2,22 @@ package com.axonivy.connector.successfactors.connector.rest.odata;
 
 import java.io.IOException;
 
-import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataEmpJobSeqNumber;
-import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPerPersonPersonId;
-import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPicklistOptionId;
-import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPositionTargetFTE;
-import com.axonivy.connector.successfactors.connector.rest.AnyOfSFODataPositionTransactionSequence;
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.axonivy.connector.successfactors.connector.rest.SFODataCustomNavigationCreate;
+import com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCodeUpsert;
+import com.axonivy.connector.successfactors.connector.rest.SFODataPositionUpsert;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.BeanDescription;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.BeanSerializerFactory;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 /**
- * Some values in the converted SuccessFactors ODATA spec are generated as empty interfaces without a matching impl.
- * 
+ * Some values in the converted SuccessFactors ODATA spec are generated as empty
+ * interfaces without a matching impl.
+ *
  * @author jpl
  *
  */
@@ -24,112 +25,83 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 	private static final long serialVersionUID = 4552540562745977391L;
 
-	public SuccessFactorsTypeCustomizations()
-	{
-		addDeserializer(AnyOfSFODataEmpJobSeqNumber.class, new SquNumberDeserializer());
-		addDeserializer(AnyOfSFODataPerPersonPersonId.class, new PerPersonIdDeserializer());
-		addDeserializer(AnyOfSFODataPositionTargetFTE.class, new PositionTargetFTEDeserializer());
-		addDeserializer(AnyOfSFODataPositionTransactionSequence.class, new AnyOfSFODataPositionTransactionSequenceDeserializer());
-		addDeserializer(AnyOfSFODataPicklistOptionId.class, new PicklistOptionIdDeserializer());
+	public SuccessFactorsTypeCustomizations() {
+		addSerializer(SFODataCustomNavigationCreate.class, new CustomNavigationCreateSerializer());
+		addSerializer(SFODataPositionUpsert.class, new PositionUpsertSerializer());
+		addSerializer(SFODataFOJobCodeUpsert.class, new FOJobCodeUpsertSerializer());
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	private void nullify(Class<?> raw) {
-		addDeserializer(raw, new Nullifier(raw));
-	}
+	private static class CustomNavigationCreateSerializer extends StdSerializer<SFODataCustomNavigationCreate> {
 
-	private static class SquNumberDeserializer extends StdDeserializer<AnyOfSFODataEmpJobSeqNumber>	{
-		private static final long serialVersionUID = 8173333520337377195L;
-
-		public SquNumberDeserializer() {
-			super(AnyOfSFODataEmpJobSeqNumber.class);
-		}
+		private static final long serialVersionUID = 1L;
 
 		@Override
-		public AnyOfSFODataEmpJobSeqNumber deserialize(JsonParser p, DeserializationContext ctxt)
-				throws IOException, JsonProcessingException	{
-			return new StringWrapper(p.getText());
+		public void serialize(SFODataCustomNavigationCreate value, JsonGenerator generator, SerializerProvider provider)
+				throws IOException {
+			generator.writeStartObject();
+			generator.writeFieldName("__metadata");
+			generator.writeStartObject();
+			generator.writeStringField("uri", value.getMetadata().getUri());
+			generator.writeEndObject();
+			generator.writeEndObject();
+		}
+
+		public CustomNavigationCreateSerializer() {
+			super(SFODataCustomNavigationCreate.class);
 		}
 	}
 
-	private static class PerPersonIdDeserializer extends StdDeserializer<AnyOfSFODataPerPersonPersonId> {
-		private static final long serialVersionUID = 8173333520337377195L;
+	private static class PositionUpsertSerializer extends StdSerializer<SFODataPositionUpsert> {
 
-		public PerPersonIdDeserializer() {
-			super(AnyOfSFODataPerPersonPersonId.class);
-		}
+		private static final long serialVersionUID = 1L;
 
+		@SuppressWarnings("deprecation")
 		@Override
-		public AnyOfSFODataPerPersonPersonId deserialize(JsonParser p, DeserializationContext ctxt)
-				throws IOException, JsonProcessingException {
-			return new StringWrapper(p.getText());
+		public void serialize(SFODataPositionUpsert value, JsonGenerator generator, SerializerProvider provider)
+				throws IOException {
+			JavaType javaType = provider.constructType(SFODataPositionUpsert.class);
+			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
+			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
+					beanDesc);
+			generator.writeStartObject();
+			generator.writeFieldName("__metadata");
+			generator.writeStartObject();
+			generator.writeStringField("uri", value.getMetadataUri());
+			generator.writeEndObject();
+			value.setMetadataUri(null);
+			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
+			generator.writeEndObject();
+		}
+
+		public PositionUpsertSerializer() {
+			super(SFODataPositionUpsert.class);
 		}
 	}
-	
-	private static class PicklistOptionIdDeserializer extends StdDeserializer<AnyOfSFODataPicklistOptionId> {
-		private static final long serialVersionUID = 8173333520337377195L;
 
-		public PicklistOptionIdDeserializer() {
-			super(AnyOfSFODataPicklistOptionId.class);
-		}
+	private static class FOJobCodeUpsertSerializer extends StdSerializer<SFODataFOJobCodeUpsert> {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("deprecation")
 		@Override
-		public AnyOfSFODataPicklistOptionId deserialize(JsonParser p, DeserializationContext ctxt)
-				throws IOException, JsonProcessingException {
-			return new StringWrapper(p.getText());
+		public void serialize(SFODataFOJobCodeUpsert value, JsonGenerator generator, SerializerProvider provider)
+				throws IOException {
+			JavaType javaType = provider.constructType(SFODataFOJobCodeUpsert.class);
+			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
+			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
+					beanDesc);
+			generator.writeStartObject();
+			generator.writeFieldName("__metadata");
+			generator.writeStartObject();
+			generator.writeStringField("uri", value.getMetadataUri());
+			generator.writeEndObject();
+			value.setMetadataUri(null);
+			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
+			generator.writeEndObject();
+		}
+
+		public FOJobCodeUpsertSerializer() {
+			super(SFODataFOJobCodeUpsert.class);
 		}
 	}
-
-	private static class AnyOfSFODataPositionTransactionSequenceDeserializer extends StdDeserializer<AnyOfSFODataPositionTransactionSequence> {
-
-		private static final long serialVersionUID = -5347020617311028513L;
-
-		public AnyOfSFODataPositionTransactionSequenceDeserializer() {
-			super(AnyOfSFODataPositionTransactionSequence.class);
-		}
-
-		@Override
-		public AnyOfSFODataPositionTransactionSequence deserialize(JsonParser p, DeserializationContext ctxt)
-				throws IOException, JacksonException {
-			return new StringWrapper(p.getText());
-		}
-
-	}
-
-	private static class PositionTargetFTEDeserializer extends StdDeserializer<AnyOfSFODataPositionTargetFTE> {
-
-		private static final long serialVersionUID = -5347020617311028513L;
-
-		public PositionTargetFTEDeserializer() {
-			super(AnyOfSFODataPositionTargetFTE.class);
-		}
-
-		@Override
-		public AnyOfSFODataPositionTargetFTE deserialize(JsonParser p, DeserializationContext ctxt)
-				throws IOException, JacksonException {
-			return new StringWrapper(p.getText());
-		}
-
-	}
-
-	private static class StringWrapper implements AnyOfSFODataPositionTargetFTE, 
-		AnyOfSFODataPositionTransactionSequence,
-		AnyOfSFODataPerPersonPersonId,
-		AnyOfSFODataEmpJobSeqNumber,
-		AnyOfSFODataPicklistOptionId
-		{
-
-		private final String value;
-
-		public StringWrapper(String value) {
-			this.value = value;
-		}
-
-		@Override
-		public String toString() {
-			return value;
-		}
-
-	}
-	
 }

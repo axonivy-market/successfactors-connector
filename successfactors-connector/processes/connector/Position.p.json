@@ -1,0 +1,161 @@
+{
+  "format" : "10.0.0",
+  "id" : "1874AFA12A7346D4",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "connector.PositionData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "getPosition",
+      "config" : {
+        "callSignature" : "getPosition",
+        "input" : {
+          "params" : [
+            { "name" : "top", "type" : "Integer" },
+            { "name" : "skip", "type" : "Integer" },
+            { "name" : "filter", "type" : "String" },
+            { "name" : "count", "type" : "Boolean" },
+            { "name" : "orderby", "type" : "List<String>" },
+            { "name" : "select", "type" : "List<String>" },
+            { "name" : "expand", "type" : "List<String>" },
+            { "name" : "id", "type" : "String" }
+          ],
+          "map" : {
+            "out.param.count" : "param.#count",
+            "out.param.expand" : "param.#expand",
+            "out.param.filter" : "param.#filter",
+            "out.param.id" : "param.#id",
+            "out.param.orderBy" : "param.#orderby",
+            "out.param.select" : "param.#select",
+            "out.param.skip" : "param.#skip",
+            "out.param.top" : "param.#top"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" },
+            { "name" : "positions", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataPosition>" }
+          ],
+          "map" : {
+            "result.error" : "in.#error",
+            "result.positions" : "in.#result"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 832, "y" : 144 }
+      },
+      "connect" : { "id" : "f4", "to" : "f3" }
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 1088, "y" : 144 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "RestClientCall",
+      "name" : "call rest",
+      "config" : {
+        "path" : "/Position",
+        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "queryParams" : {
+          "$select" : "in.param.#select is initialized ? in.param.#select : null",
+          "$expand" : "in.param.#expand is initialized ? in.param.#expand : null",
+          "$top" : "in.param.#top is initialized ? in.param.#top : null",
+          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+          "$count" : "in.param.#count is initialized ? in.param.#count : null",
+          "$orderby" : "in.param.#orderBy is initialized ? in.param.#orderBy : null"
+        },
+        "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.result" : "result.value"
+        },
+        "templateParams" : {
+          "id" : ""
+        },
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfPosition"
+      },
+      "visual" : {
+        "at" : { "x" : 960, "y" : 144 }
+      },
+      "boundaries" : [ {
+          "id" : "f5",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 992, "y" : 186 }
+          },
+          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 1088, "y" : 186 } ] }
+        } ],
+      "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f7",
+      "type" : "CallSubStart",
+      "name" : "upsertPosition",
+      "config" : {
+        "callSignature" : "upsert",
+        "input" : {
+          "params" : [
+            { "name" : "requestBody", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPositionUpsert" }
+          ],
+          "map" : {
+            "out.requestBody" : "param.#requestBody"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "upsertResult", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataUpsertResult" }
+          ],
+          "map" : {
+            "result.upsertResult" : "in.upsertResult"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 840, "y" : 328 }
+      },
+      "connect" : { "id" : "f13", "to" : "f9" }
+    }, {
+      "id" : "f8",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 1096, "y" : 328 }
+      }
+    }, {
+      "id" : "f9",
+      "type" : "RestClientCall",
+      "name" : "call rest",
+      "config" : {
+        "bodyRaw" : "<%=in.requestBody%>",
+        "path" : "/upsert",
+        "bodyObjectMapping" : {
+          "param" : "in.requestBody"
+        },
+        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "method" : "POST",
+        "statusErrorCode" : ">> Ignore status",
+        "responseMapping" : {
+          "out.upsertResult" : "result.value.get(0)"
+        },
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfUpsertResult",
+        "bodyInputType" : "ENTITY"
+      },
+      "visual" : {
+        "at" : { "x" : 968, "y" : 328 }
+      },
+      "connect" : { "id" : "f12", "to" : "f8" }
+    } ]
+}

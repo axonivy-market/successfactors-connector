@@ -1,0 +1,6 @@
+TerminationData #class
+result #classComment
+connector #namespace
+error ch.ivyteam.ivy.bpm.error.BpmError #field
+param connector.OdataParams #field
+terminations java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataEmpEmploymentTermination> #field

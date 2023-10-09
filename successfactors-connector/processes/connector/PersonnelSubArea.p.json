@@ -1,0 +1,96 @@
+{
+  "format" : "10.0.0",
+  "id" : "0189876395572F69",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "connector.PersonnelSubAreaData"
+  },
+  "elements" : [ {
+      "id" : "f3",
+      "type" : "CallSubStart",
+      "name" : "getPersonnelSubAreas",
+      "config" : {
+        "callSignature" : "getPersonnelSubAreas",
+        "input" : {
+          "params" : [
+            { "name" : "filter", "type" : "String" },
+            { "name" : "count", "type" : "Boolean" },
+            { "name" : "top", "type" : "Integer" },
+            { "name" : "skip", "type" : "Integer" },
+            { "name" : "orderby", "type" : "List<String>" },
+            { "name" : "select", "type" : "List<String>" },
+            { "name" : "expand", "type" : "List<String>" }
+          ],
+          "map" : {
+            "out.param.count" : "param.#count",
+            "out.param.expand" : "param.#expand",
+            "out.param.filter" : "param.#filter",
+            "out.param.orderBy" : "param.#orderby",
+            "out.param.select" : "param.#select",
+            "out.param.skip" : "param.#skip",
+            "out.param.top" : "param.#top"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "personnelSubAreas", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataCustGOPersonnelSubarea>" }
+          ],
+          "map" : {
+            "result.personnelSubAreas" : "in.personnelSubAreas"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 512, "y" : 200 }
+      },
+      "connect" : { "id" : "f7", "to" : "f5" }
+    }, {
+      "id" : "f4",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 864, "y" : 200 }
+      }
+    }, {
+      "id" : "f5",
+      "type" : "RestClientCall",
+      "config" : {
+        "path" : "/cust_GO_PersonnelSubarea",
+        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "queryParams" : {
+          "$top" : "",
+          "$skip" : "",
+          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+          "$count" : "",
+          "$orderby" : "",
+          "$select" : "",
+          "$expand" : ""
+        },
+        "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.personnelSubAreas" : "result.value"
+        },
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustGOPersonnelSubarea"
+      },
+      "visual" : {
+        "at" : { "x" : 640, "y" : 200 }
+      },
+      "boundaries" : [ {
+          "id" : "f6",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "in.error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 672, "y" : 240 }
+          },
+          "connect" : { "id" : "f8", "to" : "f4", "via" : [ { "x" : 864, "y" : 240 } ] }
+        } ],
+      "connect" : { "id" : "f9", "to" : "f4" }
+    } ]
+}

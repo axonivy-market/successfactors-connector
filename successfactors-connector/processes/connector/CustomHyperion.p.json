@@ -10,7 +10,7 @@
       "type" : "CallSubStart",
       "name" : "getHyperionRecords",
       "config" : {
-        "callSignature" : "getCompanies",
+        "callSignature" : "getHyperionRecords",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -19,11 +19,9 @@
             { "name" : "count", "type" : "Boolean" },
             { "name" : "orderby", "type" : "List<String>" },
             { "name" : "select", "type" : "List<String>" },
-            { "name" : "expand", "type" : "List<String>" },
-            { "name" : "externalCode", "type" : "String" }
+            { "name" : "expand", "type" : "List<String>" }
           ],
           "map" : {
-            "out.externalCode" : "param.#externalCode",
             "out.param.count" : "param.#count",
             "out.param.expand" : "param.#expand",
             "out.param.filter" : "param.#filter",
@@ -35,11 +33,11 @@
         },
         "result" : {
           "params" : [
-            { "name" : "records", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataCustRoletypes>" },
+            { "name" : "customRoleTypes", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataCustRoletypes>" },
             { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
           ],
           "map" : {
-            "result.records" : "in.#customRoleTypes",
+            "result.customRoleTypes" : "in.#customRoleTypes",
             "result.error" : "in.#error"
           }
         },
@@ -60,25 +58,21 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/cust_HYPERION(effectiveStartDate={effectiveStartDate},externalCode='{externalCode}')/cust_tocust_roletypes",
+        "path" : "/cust_roletypes",
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
         "queryParams" : {
+          "$select" : "",
+          "$expand" : "in.param.#expand is initialized ? in.param.#expand : null",
           "$top" : "in.param.#top is initialized ? in.param.#top : null",
-          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+          "$skip" : "",
           "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
-          "$count" : "in.param.#count is initialized ? in.param.#count : null",
-          "$orderby" : "in.param.#orderBy",
-          "$select" : "in.param.#select",
-          "$expand" : "in.param.#expand"
+          "$count" : "",
+          "$orderby" : ""
         },
         "statusErrorCode" : "ivy:error:rest:client",
         "responseMapping" : {
           "out.customRoleTypes" : "result.value"
-        },
-        "templateParams" : {
-          "externalCode" : "in.#externalCode is initialized ? in.#externalCode : null",
-          "effectiveStartDate" : "java.time.OffsetDateTime.now()"
         },
         "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustRoletypes"
       },

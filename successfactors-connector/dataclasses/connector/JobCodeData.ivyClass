@@ -1,0 +1,7 @@
+JobCodeData #class
+connector #namespace
+error ch.ivyteam.ivy.bpm.error.BpmError #field
+param connector.OdataParams #field
+jobCodes java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCode> #field
+requestBody com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCodeUpsert #field
+upsertResult com.axonivy.connector.successfactors.connector.rest.SFODataUpsertResult #field
