@@ -14,3 +14,8 @@ RestClients:
     OpenAPI:
       SpecUrl: file:///D:/Ricoh/connector/successfactors-connector/successfactors-connector/lib/Octopus-IPeople-OpenApi.json
       Namespace: com.axonivy.connector.successfactors.connector.rest
+  cust_NonRicohLocation:
+    UUID: f9850e46-12cf-4784-83aa-5e98a3bc8875
+    Url: http://localhost/
+    Features:
+    - ch.ivyteam.ivy.rest.client.mapper.JsonFeature
