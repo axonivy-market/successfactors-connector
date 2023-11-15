@@ -1,0 +1,96 @@
+{
+  "format" : "10.0.0",
+  "id" : "18BCCC14D7243ECF",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "connector.Section3Data"
+  },
+  "elements" : [ {
+      "id" : "f3",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 848, "y" : 304 }
+      }
+    }, {
+      "id" : "f4",
+      "type" : "CallSubStart",
+      "name" : "getSections",
+      "config" : {
+        "callSignature" : "getSections",
+        "input" : {
+          "params" : [
+            { "name" : "filter", "type" : "String" },
+            { "name" : "count", "type" : "Boolean" },
+            { "name" : "top", "type" : "Integer" },
+            { "name" : "skip", "type" : "Integer" },
+            { "name" : "orderby", "type" : "List<String>" },
+            { "name" : "select", "type" : "List<String>" },
+            { "name" : "expand", "type" : "List<String>" }
+          ],
+          "map" : {
+            "out.param.count" : "param.#count",
+            "out.param.expand" : "param.#expand",
+            "out.param.filter" : "param.#filter",
+            "out.param.orderBy" : "param.#orderby",
+            "out.param.select" : "param.#select",
+            "out.param.skip" : "param.#skip",
+            "out.param.top" : "param.#top"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "sections", "type" : "java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataCustSection3>" }
+          ],
+          "map" : {
+            "result.sections" : "in.sections"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 552, "y" : 304 }
+      },
+      "connect" : { "id" : "f8", "to" : "f5" }
+    }, {
+      "id" : "f5",
+      "type" : "RestClientCall",
+      "config" : {
+        "path" : "/cust_Section_3",
+        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "queryParams" : {
+          "$top" : "in.param.#top is initialized ? in.param.#top : null",
+          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+          "$count" : "in.param.#count is initialized ? in.param.#count : null",
+          "$orderby" : "in.param.#orderBy",
+          "$select" : "in.param.#select",
+          "$expand" : "in.param.#expand"
+        },
+        "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.sections" : "result.value"
+        },
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustSection3"
+      },
+      "visual" : {
+        "at" : { "x" : 712, "y" : 304 }
+      },
+      "boundaries" : [ {
+          "id" : "f6",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "in.error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 736, "y" : 338 }
+          },
+          "connect" : { "id" : "f9", "to" : "f3", "via" : [ { "x" : 848, "y" : 338 } ] }
+        } ],
+      "connect" : { "id" : "f7", "to" : "f3" }
+    } ]
+}
