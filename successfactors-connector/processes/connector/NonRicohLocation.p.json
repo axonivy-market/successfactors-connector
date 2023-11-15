@@ -8,9 +8,9 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "CallSubStart",
-      "name" : "getNonRicohLocation",
+      "name" : "getNonRicohLocations",
       "config" : {
-        "callSignature" : "getNonRicohLocation",
+        "callSignature" : "getNonRicohLocations",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -62,6 +62,15 @@
         "path" : "/cust_NonRicohLocation",
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
         "clientErrorCode" : "ivy:error:rest:client",
+        "queryParams" : {
+          "$top" : "in.param.#top is initialized ? in.param.#top : null",
+          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+          "$count" : "in.param.#count is initialized ? in.param.#count : null",
+          "$orderby" : "in.param.#orderBy",
+          "$select" : "in.param.#select",
+          "$expand" : "in.param.#expand"
+        },
         "statusErrorCode" : "ivy:error:rest:client",
         "responseMapping" : {
           "out.result" : "result.value"
