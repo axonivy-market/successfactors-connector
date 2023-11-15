@@ -53,6 +53,7 @@
     }, {
       "id" : "f5",
       "type" : "RestClientCall",
+      "name" : "call rest",
       "config" : {
         "path" : "/cust_Section_2",
         "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
@@ -82,7 +83,7 @@
             "output" : {
               "map" : {
                 "out" : "in",
-                "out.error" : "in.error"
+                "out.error" : "error"
               }
             }
           },

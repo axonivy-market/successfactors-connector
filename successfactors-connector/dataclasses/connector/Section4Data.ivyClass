@@ -1,5 +1,5 @@
 Section4Data #class
 connector #namespace
-error String #field
+error ch.ivyteam.ivy.bpm.error.BpmError #field
 param connector.OdataParams #field
 sections List<com.axonivy.connector.successfactors.connector.rest.SFODataCustSection4> #field
