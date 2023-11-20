@@ -1,0 +1,5 @@
+Section3Data #class
+connector #namespace
+error String #field
+param connector.OdataParams #field
+sections List<com.axonivy.connector.successfactors.connector.rest.SFODataCustSection3> #field
