@@ -21,7 +21,7 @@
         },
         "result" : {
           "params" : [
-            { "name" : "upsertResult", "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataUpsertResult" }
+            { "name" : "upsertResult", "type" : "java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataUpsertResult>" }
           ],
           "map" : {
             "result.upsertResult" : "in.upsertResult"
@@ -53,7 +53,7 @@
         "method" : "POST",
         "statusErrorCode" : ">> Ignore status",
         "responseMapping" : {
-          "out.upsertResult" : "result.value.get(0)"
+          "out.upsertResult" : "result.value"
         },
         "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfUpsertResult",
         "bodyInputType" : "ENTITY"
