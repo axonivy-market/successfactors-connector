@@ -1,0 +1,82 @@
+{
+  "format" : "10.0.0",
+  "id" : "18A16CBA00AA0A81",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "connector.UpsertData"
+  },
+  "elements" : [ {
+      "id" : "f7",
+      "type" : "CallSubStart",
+      "name" : "upsert",
+      "config" : {
+        "callSignature" : "upsert",
+        "input" : {
+          "params" : [
+            { "name" : "requestBody", "type" : "Object" }
+          ],
+          "map" : {
+            "out.requestBody" : "param.#requestBody"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "upsertResult", "type" : "java.util.List<com.axonivy.connector.successfactors.connector.rest.SFODataUpsertResult>" }
+          ],
+          "map" : {
+            "result.upsertResult" : "in.upsertResult"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 192, "y" : 96 }
+      },
+      "connect" : { "id" : "f13", "to" : "f9" }
+    }, {
+      "id" : "f8",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 448, "y" : 96 }
+      }
+    }, {
+      "id" : "f9",
+      "type" : "RestClientCall",
+      "name" : "call rest",
+      "config" : {
+        "bodyRaw" : "<%=in.requestBody%>",
+        "path" : "/upsert",
+        "bodyObjectMapping" : {
+          "param" : "in.requestBody"
+        },
+        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "method" : "POST",
+        "statusErrorCode" : ">> Ignore status",
+        "responseMapping" : {
+          "out.upsertResult" : "result.value"
+        },
+        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfUpsertResult",
+        "bodyInputType" : "ENTITY"
+      },
+      "visual" : {
+        "at" : { "x" : 320, "y" : 96 }
+      },
+      "boundaries" : [ {
+          "id" : "f0",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 352, "y" : 136 }
+          },
+          "connect" : { "id" : "f1", "to" : "f8", "via" : [ { "x" : 448, "y" : 136 } ] }
+        } ],
+      "connect" : { "id" : "f12", "to" : "f8" }
+    } ]
+}
