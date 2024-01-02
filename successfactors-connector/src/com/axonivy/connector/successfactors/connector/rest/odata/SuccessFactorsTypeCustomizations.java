@@ -13,6 +13,7 @@ import com.axonivy.connector.successfactors.connector.rest.SFODataPaymentInforma
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerAddressDEFLTUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerEmailUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerEmergencyContactsUpsert;
+import com.axonivy.connector.successfactors.connector.rest.SFODataPerGlobalInfoUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerNationalIdUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerPersonUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerPersonalUpsert;
@@ -59,7 +60,7 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		addSerializer(SFODataPaymentInformationV3Upsert.class, new PaymentInformationV3Serializer());
 		addSerializer(SFODataEmpJobRelationshipsUpsert.class, new JobRelationshipSerializer());
 		addSerializer(SFODataCustEMEAHRdataUpsert.class, new CustAMEAHRDataSerializer());
-
+		addSerializer(SFODataPerGlobalInfoUpsert.class, new GlobalInformationSerializer());
 	}
 
 	private static class CustomNavigationCreateSerializer extends StdSerializer<SFODataCustomNavigationCreate> {
@@ -524,6 +525,32 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 		public JobRelationshipSerializer() {
 			super(SFODataEmpJobRelationshipsUpsert.class);
+		}
+	}
+
+	private static class GlobalInformationSerializer extends StdSerializer<SFODataPerGlobalInfoUpsert> {
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("deprecation")
+		@Override
+		public void serialize(SFODataPerGlobalInfoUpsert value, JsonGenerator generator, SerializerProvider provider)
+				throws IOException {
+			JavaType javaType = provider.constructType(SFODataPaymentInformationV3Upsert.class);
+			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
+			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
+					beanDesc);
+			generator.writeStartObject();
+			generator.writeFieldName("__metadata");
+			generator.writeStartObject();
+			generator.writeStringField("uri", value.getMetadataUri());
+			generator.writeEndObject();
+			value.setMetadataUri(null);
+			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
+			generator.writeEndObject();
+		}
+
+		public GlobalInformationSerializer() {
+			super(SFODataPerGlobalInfoUpsert.class);
 		}
 	}
 }
