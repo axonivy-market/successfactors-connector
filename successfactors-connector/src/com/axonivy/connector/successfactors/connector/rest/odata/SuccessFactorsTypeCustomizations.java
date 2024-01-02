@@ -2,8 +2,10 @@ package com.axonivy.connector.successfactors.connector.rest.odata;
 
 import java.io.IOException;
 
+import com.axonivy.connector.successfactors.connector.rest.SFODataCustEMEAHRdataUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataCustomNavigationCreate;
 import com.axonivy.connector.successfactors.connector.rest.SFODataEmpEmploymentUpsert;
+import com.axonivy.connector.successfactors.connector.rest.SFODataEmpJobRelationshipsUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataEmpJobUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCodeUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPaymentInformationDetailV3Upsert;
@@ -55,6 +57,8 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		addSerializer(SFODataPhotoUpsert.class, new PhotoUpsertSerializer());
 		addSerializer(SFODataPerAddressDEFLTUpsert.class, new AddressUpsertSerializer());
 		addSerializer(SFODataPaymentInformationV3Upsert.class, new PaymentInformationV3Serializer());
+		addSerializer(SFODataEmpJobRelationshipsUpsert.class, new JobRelationshipSerializer());
+		addSerializer(SFODataCustEMEAHRdataUpsert.class, new CustAMEAHRDataSerializer());
 
 	}
 
@@ -468,6 +472,58 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 		public PaymentInformationV3Serializer() {
 			super(SFODataPaymentInformationV3Upsert.class);
+		}
+	}
+
+	private static class CustAMEAHRDataSerializer extends StdSerializer<SFODataCustEMEAHRdataUpsert> {
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("deprecation")
+		@Override
+		public void serialize(SFODataCustEMEAHRdataUpsert value, JsonGenerator generator,
+				SerializerProvider provider) throws IOException {
+			JavaType javaType = provider.constructType(SFODataPaymentInformationV3Upsert.class);
+			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
+			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
+					beanDesc);
+			generator.writeStartObject();
+			generator.writeFieldName("__metadata");
+			generator.writeStartObject();
+			generator.writeStringField("uri", value.getMetadataUri());
+			generator.writeEndObject();
+			value.setMetadataUri(null);
+			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
+			generator.writeEndObject();
+		}
+
+		public CustAMEAHRDataSerializer() {
+			super(SFODataCustEMEAHRdataUpsert.class);
+		}
+	}
+
+	private static class JobRelationshipSerializer extends StdSerializer<SFODataEmpJobRelationshipsUpsert> {
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("deprecation")
+		@Override
+		public void serialize(SFODataEmpJobRelationshipsUpsert value, JsonGenerator generator,
+				SerializerProvider provider) throws IOException {
+			JavaType javaType = provider.constructType(SFODataPaymentInformationV3Upsert.class);
+			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
+			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
+					beanDesc);
+			generator.writeStartObject();
+			generator.writeFieldName("__metadata");
+			generator.writeStartObject();
+			generator.writeStringField("uri", value.getMetadataUri());
+			generator.writeEndObject();
+			value.setMetadataUri(null);
+			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
+			generator.writeEndObject();
+		}
+
+		public JobRelationshipSerializer() {
+			super(SFODataEmpJobRelationshipsUpsert.class);
 		}
 	}
 }
