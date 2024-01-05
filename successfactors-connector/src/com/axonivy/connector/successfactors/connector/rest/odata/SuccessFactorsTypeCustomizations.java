@@ -483,7 +483,7 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		@Override
 		public void serialize(SFODataCustEMEAHRdataUpsert value, JsonGenerator generator,
 				SerializerProvider provider) throws IOException {
-			JavaType javaType = provider.constructType(SFODataPaymentInformationV3Upsert.class);
+			JavaType javaType = provider.constructType(SFODataCustEMEAHRdataUpsert.class);
 			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
 			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
 					beanDesc);
@@ -509,7 +509,7 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		@Override
 		public void serialize(SFODataEmpJobRelationshipsUpsert value, JsonGenerator generator,
 				SerializerProvider provider) throws IOException {
-			JavaType javaType = provider.constructType(SFODataPaymentInformationV3Upsert.class);
+			JavaType javaType = provider.constructType(SFODataEmpJobRelationshipsUpsert.class);
 			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
 			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
 					beanDesc);
@@ -535,7 +535,7 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		@Override
 		public void serialize(SFODataPerGlobalInfoUpsert value, JsonGenerator generator, SerializerProvider provider)
 				throws IOException {
-			JavaType javaType = provider.constructType(SFODataPaymentInformationV3Upsert.class);
+			JavaType javaType = provider.constructType(SFODataEmpJobRelationshipsUpsert.class);
 			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
 			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
 					beanDesc);
