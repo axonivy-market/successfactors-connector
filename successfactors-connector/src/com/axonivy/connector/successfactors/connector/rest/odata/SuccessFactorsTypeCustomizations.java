@@ -50,8 +50,7 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 	public SuccessFactorsTypeCustomizations() {
 		addSerializer(SFODataCustomNavigationCreate.class, new CustomNavigationCreateSerializer());
 		setUpCustomSerializer(
-				List.of(SFODataCustomNavigationCreate.class,
-						SFODataCustEMEAHRdataUpsert.class,
+				List.of(SFODataCustEMEAHRdataUpsert.class,
 						SFODataEmpEmploymentUpsert.class,
 						SFODataEmpJobUpsert.class,
 						SFODataEmpJobRelationshipsUpsert.class,
