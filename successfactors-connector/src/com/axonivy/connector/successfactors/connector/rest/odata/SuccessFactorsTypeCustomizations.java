@@ -48,6 +48,7 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 	private static final long serialVersionUID = 4552540562745977391L;
 
 	public SuccessFactorsTypeCustomizations() {
+		addSerializer(SFODataCustomNavigationCreate.class, new CustomNavigationCreateSerializer());
 		setUpCustomSerializer(
 				List.of(SFODataCustomNavigationCreate.class,
 						SFODataCustEMEAHRdataUpsert.class,
@@ -70,7 +71,25 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 						SFODataUserUpsert.class));
 	}
 
+	private static class CustomNavigationCreateSerializer extends StdSerializer<SFODataCustomNavigationCreate> {
 
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public void serialize(SFODataCustomNavigationCreate value, JsonGenerator generator, SerializerProvider provider)
+				throws IOException {
+			generator.writeStartObject();
+			generator.writeFieldName("__metadata");
+			generator.writeStartObject();
+			generator.writeStringField("uri", value.getMetadata().getUri());
+			generator.writeEndObject();
+			generator.writeEndObject();
+		}
+
+		public CustomNavigationCreateSerializer() {
+			super(SFODataCustomNavigationCreate.class);
+		}
+	}
 
 	private static class UpsertEntitySerializer<T> extends StdSerializer<T> {
 		private static final long serialVersionUID = 1L;
