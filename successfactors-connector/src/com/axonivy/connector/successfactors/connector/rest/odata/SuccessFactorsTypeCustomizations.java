@@ -46,6 +46,9 @@ import ch.ivyteam.ivy.environment.Ivy;
 public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 	private static final long serialVersionUID = 4552540562745977391L;
+	private static final String METADATA_JSON_PROPERTY = "__metadata";
+	private static final String METADATA_PROPERTY = "metadataUri";
+	private static final String URI_JSON_PROPERTY = "uri";
 
 	public SuccessFactorsTypeCustomizations() {
 		addSerializer(SFODataCustomNavigationCreate.class, new CustomNavigationCreateSerializer());
@@ -78,9 +81,9 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		public void serialize(SFODataCustomNavigationCreate value, JsonGenerator generator, SerializerProvider provider)
 				throws IOException {
 			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
+			generator.writeFieldName(METADATA_JSON_PROPERTY);
 			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadata().getUri());
+			generator.writeStringField(URI_JSON_PROPERTY, value.getMetadata().getUri());
 			generator.writeEndObject();
 			generator.writeEndObject();
 		}
@@ -101,9 +104,9 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanOrAddOnSerializer(provider,
 					javaType, beanDesc, true);
 			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
+			generator.writeFieldName(METADATA_JSON_PROPERTY);
 			generator.writeStartObject();
-			generator.writeStringField("uri", getMetadataUriFromEntity(entity));
+			generator.writeStringField(URI_JSON_PROPERTY, getMetadataUriFromEntity(entity));
 			generator.writeEndObject();
 			resetMetadataURIValue(entity);
 			serializer.unwrappingSerializer(null).serialize(entity, generator, provider);
@@ -117,7 +120,7 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 	private static void resetMetadataURIValue(Object object) {
 		try {
-			BeanUtils.setProperty(object, "metadataUri", null);
+			BeanUtils.setProperty(object, METADATA_PROPERTY, null);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			Ivy.log().error(e.getMessage());
 		}
@@ -126,7 +129,7 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 	private static String getMetadataUriFromEntity(Object object) {
 		try {
-			return BeanUtils.getSimpleProperty(object, "metadataUri");
+			return BeanUtils.getSimpleProperty(object, METADATA_PROPERTY);
 		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 			Ivy.log().error(e.getMessage());
 		}
