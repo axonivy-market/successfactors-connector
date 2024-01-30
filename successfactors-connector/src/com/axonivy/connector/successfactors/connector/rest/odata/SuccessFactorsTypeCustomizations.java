@@ -1,9 +1,15 @@
 package com.axonivy.connector.successfactors.connector.rest.odata;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
+
+import com.axonivy.connector.successfactors.connector.rest.SFODataCustEMEAHRdataUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataCustomNavigationCreate;
 import com.axonivy.connector.successfactors.connector.rest.SFODataEmpEmploymentUpsert;
+import com.axonivy.connector.successfactors.connector.rest.SFODataEmpJobRelationshipsUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataEmpJobUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataFOJobCodeUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPaymentInformationDetailV3Upsert;
@@ -11,6 +17,7 @@ import com.axonivy.connector.successfactors.connector.rest.SFODataPaymentInforma
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerAddressDEFLTUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerEmailUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerEmergencyContactsUpsert;
+import com.axonivy.connector.successfactors.connector.rest.SFODataPerGlobalInfoUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerNationalIdUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerPersonUpsert;
 import com.axonivy.connector.successfactors.connector.rest.SFODataPerPersonalUpsert;
@@ -27,6 +34,8 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.BeanSerializerFactory;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
+import ch.ivyteam.ivy.environment.Ivy;
+
 /**
  * Some values in the converted SuccessFactors ODATA spec are generated as empty
  * interfaces without a matching impl.
@@ -37,25 +46,31 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 public class SuccessFactorsTypeCustomizations extends SimpleModule {
 
 	private static final long serialVersionUID = 4552540562745977391L;
+	private static final String METADATA_JSON_PROPERTY = "__metadata";
+	private static final String METADATA_PROPERTY = "metadataUri";
+	private static final String URI_JSON_PROPERTY = "uri";
 
 	public SuccessFactorsTypeCustomizations() {
 		addSerializer(SFODataCustomNavigationCreate.class, new CustomNavigationCreateSerializer());
-		addSerializer(SFODataPositionUpsert.class, new PositionUpsertSerializer());
-		addSerializer(SFODataFOJobCodeUpsert.class, new FOJobCodeUpsertSerializer());
-		addSerializer(SFODataUserUpsert.class, new UserUpsertSerializer());
-		addSerializer(SFODataPerEmailUpsert.class, new EmailUpsertSerializer());
-		addSerializer(SFODataPerEmergencyContactsUpsert.class, new EmergencyContactsUpsertSerializer());
-		addSerializer(SFODataEmpEmploymentUpsert.class, new EmploymentUpsertSerializer());
-		addSerializer(SFODataEmpJobUpsert.class, new JobUpsertSerializer());
-		addSerializer(SFODataPerNationalIdUpsert.class, new NationalIdUpsertSerializer());
-		addSerializer(SFODataPaymentInformationDetailV3Upsert.class, new PaymentInformationDetailV3UpsertSerializer());
-		addSerializer(SFODataPerPersonalUpsert.class, new PersonalUpsertSerializer());
-		addSerializer(SFODataPerPersonUpsert.class, new PersonUpsertSerializer());
-		addSerializer(SFODataPerPhoneUpsert.class, new PhoneUpsertSerializer());
-		addSerializer(SFODataPhotoUpsert.class, new PhotoUpsertSerializer());
-		addSerializer(SFODataPerAddressDEFLTUpsert.class, new AddressUpsertSerializer());
-		addSerializer(SFODataPaymentInformationV3Upsert.class, new PaymentInformationV3Serializer());
-
+		setUpCustomSerializer(
+				List.of(SFODataCustEMEAHRdataUpsert.class,
+						SFODataEmpEmploymentUpsert.class,
+						SFODataEmpJobUpsert.class,
+						SFODataEmpJobRelationshipsUpsert.class,
+						SFODataFOJobCodeUpsert.class,
+						SFODataPaymentInformationV3Upsert.class,
+						SFODataPaymentInformationDetailV3Upsert.class,
+						SFODataPerAddressDEFLTUpsert.class,
+						SFODataPerEmailUpsert.class,
+						SFODataPerEmergencyContactsUpsert.class,
+						SFODataPerGlobalInfoUpsert.class,
+						SFODataPerNationalIdUpsert.class,
+						SFODataPerPersonUpsert.class,
+						SFODataPerPersonalUpsert.class,
+						SFODataPerPhoneUpsert.class,
+						SFODataPhotoUpsert.class,
+						SFODataPositionUpsert.class,
+						SFODataUserUpsert.class));
 	}
 
 	private static class CustomNavigationCreateSerializer extends StdSerializer<SFODataCustomNavigationCreate> {
@@ -66,9 +81,9 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		public void serialize(SFODataCustomNavigationCreate value, JsonGenerator generator, SerializerProvider provider)
 				throws IOException {
 			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
+			generator.writeFieldName(METADATA_JSON_PROPERTY);
 			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadata().getUri());
+			generator.writeStringField(URI_JSON_PROPERTY, value.getMetadata().getUri());
 			generator.writeEndObject();
 			generator.writeEndObject();
 		}
@@ -78,396 +93,53 @@ public class SuccessFactorsTypeCustomizations extends SimpleModule {
 		}
 	}
 
-	private static class PositionUpsertSerializer extends StdSerializer<SFODataPositionUpsert> {
-
+	private static class UpsertEntitySerializer<T> extends StdSerializer<T> {
 		private static final long serialVersionUID = 1L;
 
-		@SuppressWarnings("deprecation")
 		@Override
-		public void serialize(SFODataPositionUpsert value, JsonGenerator generator, SerializerProvider provider)
+		public void serialize(T entity, JsonGenerator generator, SerializerProvider provider)
 				throws IOException {
-			JavaType javaType = provider.constructType(SFODataPositionUpsert.class);
+			JavaType javaType = provider.constructType(entity.getClass());
 			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
+			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanOrAddOnSerializer(provider,
+					javaType, beanDesc, true);
 			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
+			generator.writeFieldName(METADATA_JSON_PROPERTY);
 			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
+			generator.writeStringField(URI_JSON_PROPERTY, getMetadataUriFromEntity(entity));
 			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
+			resetMetadataURIValue(entity);
+			serializer.unwrappingSerializer(null).serialize(entity, generator, provider);
 			generator.writeEndObject();
 		}
 
-		public PositionUpsertSerializer() {
-			super(SFODataPositionUpsert.class);
+		public UpsertEntitySerializer(Class<T> t) {
+			super(t);
 		}
 	}
 
-	private static class FOJobCodeUpsertSerializer extends StdSerializer<SFODataFOJobCodeUpsert> {
-
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataFOJobCodeUpsert value, JsonGenerator generator, SerializerProvider provider)
-				throws IOException {
-			JavaType javaType = provider.constructType(SFODataFOJobCodeUpsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
+	private static void resetMetadataURIValue(Object object) {
+		try {
+			BeanUtils.setProperty(object, METADATA_PROPERTY, null);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			Ivy.log().error(e.getMessage());
 		}
 
-		public FOJobCodeUpsertSerializer() {
-			super(SFODataFOJobCodeUpsert.class);
-		}
 	}
 
-	private static class UserUpsertSerializer extends StdSerializer<SFODataUserUpsert> {
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataUserUpsert value, JsonGenerator generator, SerializerProvider provider)
-				throws IOException {
-			JavaType javaType = provider.constructType(SFODataUserUpsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
+	private static String getMetadataUriFromEntity(Object object) {
+		try {
+			return BeanUtils.getSimpleProperty(object, METADATA_PROPERTY);
+		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+			Ivy.log().error(e.getMessage());
 		}
-
-		public UserUpsertSerializer() {
-			super(SFODataUserUpsert.class);
-		}
+		return null;
 	}
 
-	private static class EmailUpsertSerializer extends StdSerializer<SFODataPerEmailUpsert> {
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataPerEmailUpsert value, JsonGenerator generator, SerializerProvider provider)
-				throws IOException {
-			JavaType javaType = provider.constructType(SFODataPerEmailUpsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
-		}
-
-		public EmailUpsertSerializer() {
-			super(SFODataPerEmailUpsert.class);
-		}
-	}
-
-	private static class EmergencyContactsUpsertSerializer extends StdSerializer<SFODataPerEmergencyContactsUpsert> {
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataPerEmergencyContactsUpsert value, JsonGenerator generator,
-				SerializerProvider provider) throws IOException {
-			JavaType javaType = provider.constructType(SFODataPerEmergencyContactsUpsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
-		}
-
-		public EmergencyContactsUpsertSerializer() {
-			super(SFODataPerEmergencyContactsUpsert.class);
-		}
-	}
-
-	private static class EmploymentUpsertSerializer extends StdSerializer<SFODataEmpEmploymentUpsert> {
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataEmpEmploymentUpsert value, JsonGenerator generator, SerializerProvider provider)
-				throws IOException {
-			JavaType javaType = provider.constructType(SFODataEmpEmploymentUpsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
-		}
-
-		public EmploymentUpsertSerializer() {
-			super(SFODataEmpEmploymentUpsert.class);
-		}
-	}
-
-	private static class JobUpsertSerializer extends StdSerializer<SFODataEmpJobUpsert> {
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataEmpJobUpsert value, JsonGenerator generator, SerializerProvider provider)
-				throws IOException {
-			JavaType javaType = provider.constructType(SFODataEmpJobUpsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
-		}
-
-		public JobUpsertSerializer() {
-			super(SFODataEmpJobUpsert.class);
-		}
-	}
-
-	private static class NationalIdUpsertSerializer extends StdSerializer<SFODataPerNationalIdUpsert> {
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataPerNationalIdUpsert value, JsonGenerator generator, SerializerProvider provider)
-				throws IOException {
-			JavaType javaType = provider.constructType(SFODataPerNationalIdUpsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
-		}
-
-		public NationalIdUpsertSerializer() {
-			super(SFODataPerNationalIdUpsert.class);
-		}
-	}
-
-	private static class PaymentInformationDetailV3UpsertSerializer
-			extends StdSerializer<SFODataPaymentInformationDetailV3Upsert> {
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataPaymentInformationDetailV3Upsert value, JsonGenerator generator,
-				SerializerProvider provider) throws IOException {
-			JavaType javaType = provider.constructType(SFODataPaymentInformationDetailV3Upsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
-		}
-
-		public PaymentInformationDetailV3UpsertSerializer() {
-			super(SFODataPaymentInformationDetailV3Upsert.class);
-		}
-	}
-
-	private static class PersonalUpsertSerializer extends StdSerializer<SFODataPerPersonalUpsert> {
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataPerPersonalUpsert value, JsonGenerator generator,
-				SerializerProvider provider) throws IOException {
-			JavaType javaType = provider.constructType(SFODataPerPersonalUpsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
-		}
-
-		public PersonalUpsertSerializer() {
-			super(SFODataPerPersonalUpsert.class);
-		}
-	}
-
-	private static class PersonUpsertSerializer extends StdSerializer<SFODataPerPersonUpsert> {
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataPerPersonUpsert value, JsonGenerator generator, SerializerProvider provider)
-				throws IOException {
-			JavaType javaType = provider.constructType(SFODataPerPersonUpsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
-		}
-
-		public PersonUpsertSerializer() {
-			super(SFODataPerPersonUpsert.class);
-		}
-	}
-
-	private static class PhoneUpsertSerializer extends StdSerializer<SFODataPerPhoneUpsert> {
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataPerPhoneUpsert value, JsonGenerator generator, SerializerProvider provider)
-				throws IOException {
-			JavaType javaType = provider.constructType(SFODataPerPhoneUpsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
-		}
-
-		public PhoneUpsertSerializer() {
-			super(SFODataPerPhoneUpsert.class);
-		}
-	}
-
-	private static class PhotoUpsertSerializer extends StdSerializer<SFODataPhotoUpsert> {
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataPhotoUpsert value, JsonGenerator generator, SerializerProvider provider)
-				throws IOException {
-			JavaType javaType = provider.constructType(SFODataPhotoUpsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
-		}
-
-		public PhotoUpsertSerializer() {
-			super(SFODataPhotoUpsert.class);
-		}
-	}
-
-	private static class AddressUpsertSerializer extends StdSerializer<SFODataPerAddressDEFLTUpsert> {
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataPerAddressDEFLTUpsert value, JsonGenerator generator, SerializerProvider provider)
-				throws IOException {
-			JavaType javaType = provider.constructType(SFODataPerAddressDEFLTUpsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
-		}
-
-		public AddressUpsertSerializer() {
-			super(SFODataPerAddressDEFLTUpsert.class);
-		}
-	}
-
-	private static class PaymentInformationV3Serializer extends StdSerializer<SFODataPaymentInformationV3Upsert> {
-		private static final long serialVersionUID = 1L;
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void serialize(SFODataPaymentInformationV3Upsert value, JsonGenerator generator,
-				SerializerProvider provider) throws IOException {
-			JavaType javaType = provider.constructType(SFODataPaymentInformationV3Upsert.class);
-			BeanDescription beanDesc = provider.getConfig().introspect(javaType);
-			JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(provider, javaType,
-					beanDesc);
-			generator.writeStartObject();
-			generator.writeFieldName("__metadata");
-			generator.writeStartObject();
-			generator.writeStringField("uri", value.getMetadataUri());
-			generator.writeEndObject();
-			value.setMetadataUri(null);
-			serializer.unwrappingSerializer(null).serialize(value, generator, provider);
-			generator.writeEndObject();
-		}
-
-		public PaymentInformationV3Serializer() {
-			super(SFODataPaymentInformationV3Upsert.class);
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private void setUpCustomSerializer(List<Class<? extends Object>> list) {
+		for (Class objectClass : list) {
+			addSerializer(objectClass, new UpsertEntitySerializer(objectClass));
 		}
 	}
 }
