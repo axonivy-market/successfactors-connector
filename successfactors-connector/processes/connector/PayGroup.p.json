@@ -39,10 +39,12 @@
         },
         "result" : {
           "params" : [
-            { "name" : "payGroups", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataFOPayGroup>" }
+            { "name" : "payGroups", "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataFOPayGroup>" },
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
           ],
           "map" : {
-            "result.payGroups" : "in.payGroups"
+            "result.payGroups" : "in.#payGroups",
+            "result.error" : "in.#error"
           }
         }
       },
