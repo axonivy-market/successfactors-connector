@@ -27,7 +27,7 @@ import ch.ivyteam.ivy.scripting.objects.List;
  * <a href="https://developer.axonivy.com/doc/10.0/concepts/testing/process-testing.html">Process Testing docs</a>
  * </p>
  */
-@IvyProcessTest
+@IvyProcessTest(enableWebServer = true)
 public class LocationProcessTest extends AbstractSuccessFactorsTest<SFODataFOLocation> {
 
 	private static final BpmElement getLocationTestee = BpmProcess.path("connector/Location").elementName("getLocations");
