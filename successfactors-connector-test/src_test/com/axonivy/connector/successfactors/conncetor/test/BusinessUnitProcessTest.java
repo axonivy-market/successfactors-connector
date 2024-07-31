@@ -19,7 +19,7 @@ import ch.ivyteam.ivy.bpm.exec.client.IvyProcessTest;
  * <a href="https://developer.axonivy.com/doc/10.0/concepts/testing/process-testing.html">Process Testing docs</a>
  * </p>
  */
-@IvyProcessTest
+@IvyProcessTest(enableWebServer = true)
 public class BusinessUnitProcessTest extends AbstractFoObjectTest<SFODataFOBusinessUnit> {
   
 	private static final BpmElement getBusinessTestee = BpmProcess.path("connector/BusinessUnit").elementName("getBusinessUnits");

@@ -19,7 +19,7 @@ import ch.ivyteam.ivy.bpm.exec.client.IvyProcessTest;
  * <a href="https://developer.axonivy.com/doc/10.0/concepts/testing/process-testing.html">Process Testing docs</a>
  * </p>
  */
-@IvyProcessTest
+@IvyProcessTest(enableWebServer = true)
 public class CostCenterProcessTest  extends AbstractFoObjectTest<SFODataFOCostCenter> {
 
 	private static final BpmElement getCostCenterTestee = BpmProcess.path("connector/CostCenter").elementName("getCostCenters");
