@@ -1,8 +1,5 @@
 EmpEmploymentData #class
 connector #namespace
 error ch.ivyteam.ivy.bpm.error.BpmError #field
-error PERSISTENT #fieldModifier
 param connector.OdataParams #field
-param PERSISTENT #fieldModifier
 result List<com.axonivy.connector.successfactors.connector.rest.SFODataEmpEmployment> #field
-result PERSISTENT #fieldModifier
