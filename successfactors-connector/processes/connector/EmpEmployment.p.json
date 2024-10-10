@@ -80,10 +80,18 @@
       "boundaries" : [ {
           "id" : "f5",
           "type" : "ErrorBoundaryEvent",
-          "visual" : {
-            "at" : { "x" : 312, "y" : 104 }
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "error"
+              }
+            }
           },
-          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 464, "y" : 104 } ] }
+          "visual" : {
+            "at" : { "x" : 312, "y" : 106 }
+          },
+          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 464, "y" : 106 } ] }
         } ],
       "connect" : { "id" : "f4", "to" : "f1" }
     } ]
