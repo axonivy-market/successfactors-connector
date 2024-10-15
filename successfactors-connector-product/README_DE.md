@@ -10,7 +10,7 @@ Dieser Konnektor vereinfacht die Integration von Successfactors in Deine Prozess
 
 ## Demo
 
-1. Starte den Testprozess. Er gibt Dir Testdaten im Log zurück.
+Starte den Testprozess. Er gibt Dir Testdaten im Log zurück.
 
 ## Setup
 
@@ -18,7 +18,7 @@ Bevor jegliche Interaktionen zwischen der Axon Ivy Engine und den Successfactors
 
 1. Besorge Dir einen Successfactors-Account mit `host-name`, `user-name` und `password`.
 
-1. Überschreibe die Variablen für `host-name`, `user-name` und `password` im Demo-Projekt, wie im folgenden Beispiel gezeigt:
+2. Überschreibe die Variablen für `host-name`, `user-name` und `password` im Demo-Projekt, wie im folgenden Beispiel gezeigt:
 
 ```
 Variablen:
