@@ -1,5 +1,7 @@
 # Successfactors Connector
 
+SuccessFactors is a cloud-based Human Capital Management (HCM) software solution offered by SAP. It helps companies manage their employee processes, including talent management, employee development, performance evaluation, onboarding, compensation management, and succession planning. SuccessFactors provides a comprehensive HR platform focused on improving employee performance and retention and is known for its scalable, flexible, and globally deployable HR software solution.
+
 This connector simplifies the integration of Successfactors into your processes by:
 
 - leveraging REST web service technologies,
