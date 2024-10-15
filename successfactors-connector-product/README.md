@@ -1,11 +1,10 @@
 # Successfactors Connector
-Axon Ivy’s Successfactors connector helps you accelerate your process automation initiatives by integrating Successfactors with your process application in the shortest possible time.
 
-This connector:
+This connector simplifies the integration of Successfactors into your processes by:
 
--	Is based on REST webservice technologies.
--	Gives you access to sample Successfactors functionality
--	reduces the integration effort to a minimum: Use the demo implementation, there you will find examples for the calls
+- leveraging REST web service technologies,
+- providing access to sample Successfactors functionalities,
+- and minimizing the integration effort through a demo implementation with example calls.
 
 ## Demo
 
