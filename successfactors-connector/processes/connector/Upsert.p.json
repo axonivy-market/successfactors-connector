@@ -1,5 +1,4 @@
 {
-  "format" : "10.0.0",
   "id" : "18A16CBA00AA0A81",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -10,7 +9,7 @@
       "type" : "CallSubStart",
       "name" : "upsert",
       "config" : {
-        "callSignature" : "upsert",
+        "signature" : "upsert",
         "input" : {
           "params" : [
             { "name" : "requestBody", "type" : "Object" }
@@ -31,7 +30,9 @@
       "visual" : {
         "at" : { "x" : 192, "y" : 96 }
       },
-      "connect" : { "id" : "f13", "to" : "f9" }
+      "connect" : [
+        { "id" : "f13", "to" : "f9" }
+      ]
     }, {
       "id" : "f8",
       "type" : "CallSubEnd",
@@ -43,20 +44,30 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "bodyRaw" : "<%=in.requestBody%>",
-        "path" : "/upsert",
-        "bodyObjectMapping" : {
-          "param" : "in.requestBody"
-        },
-        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
-        "clientErrorCode" : "ivy:error:rest:client",
         "method" : "POST",
-        "statusErrorCode" : ">> Ignore status",
-        "responseMapping" : {
-          "out.upsertResult" : "result.value"
+        "target" : {
+          "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+          "path" : "/upsert"
         },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfUpsertResult",
-        "bodyInputType" : "ENTITY"
+        "body" : {
+          "type" : "ENTITY",
+          "raw" : "<%=in.requestBody%>",
+          "entity" : {
+            "map" : {
+              "param" : "in.requestBody"
+            }
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfUpsertResult",
+            "map" : {
+              "out.upsertResult" : "result.value"
+            }
+          },
+          "clientError" : "ivy:error:rest:client",
+          "statusError" : ">> Ignore status"
+        }
       },
       "visual" : {
         "at" : { "x" : 320, "y" : 96 }
@@ -75,8 +86,13 @@
           "visual" : {
             "at" : { "x" : 352, "y" : 136 }
           },
-          "connect" : { "id" : "f1", "to" : "f8", "via" : [ { "x" : 448, "y" : 136 } ] }
+          "connect" : [
+            { "id" : "f1", "to" : "f8", "via" : [ { "x" : 448, "y" : 136 } ] }
+          ]
         } ],
-      "connect" : { "id" : "f12", "to" : "f8" }
-    } ]
+      "connect" : [
+        { "id" : "f12", "to" : "f8" }
+      ]
+    } ],
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json"
 }

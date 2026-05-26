@@ -1,5 +1,0 @@
-PersonnelSubAreaData #class
-connector #namespace
-personnelSubAreas List<com.axonivy.connector.successfactors.connector.rest.SFODataCustGOPersonnelSubarea> #field
-error String #field
-param connector.OdataParams #field

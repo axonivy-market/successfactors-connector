@@ -1,5 +1,4 @@
 {
-  "format" : "10.0.0",
   "id" : "186DF2F118E7FDFD",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -10,7 +9,7 @@
       "type" : "CallSubStart",
       "name" : "getPaymentMethod",
       "config" : {
-        "callSignature" : "getPaymentMethod",
+        "signature" : "getPaymentMethod",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -46,7 +45,9 @@
       "visual" : {
         "at" : { "x" : 144, "y" : 112 }
       },
-      "connect" : { "id" : "f4", "to" : "f3" }
+      "connect" : [
+        { "id" : "f4", "to" : "f3" }
+      ]
     }, {
       "id" : "f1",
       "type" : "CallSubEnd",
@@ -58,22 +59,28 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/PaymentMethodV3",
-        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
-        "clientErrorCode" : "ivy:error:rest:client",
-        "queryParams" : {
-          "$top" : "in.param.#top is initialized ? in.param.#top : null",
-          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
-          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
-          "$count" : "in.param.#count is initialized ? in.param.#count : null",
-          "$orderby" : "in.param.#orderby is initialized ? in.param.#orderby : null",
-          "$select" : "in.param.#select is initialized ? in.param.#select : null"
+        "target" : {
+          "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+          "path" : "/PaymentMethodV3",
+          "queryParams" : {
+            "$top" : "in.param.#top is initialized ? in.param.#top : null",
+            "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+            "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+            "$count" : "in.param.#count is initialized ? in.param.#count : null",
+            "$orderby" : "in.param.#orderby is initialized ? in.param.#orderby : null",
+            "$select" : "in.param.#select is initialized ? in.param.#select : null"
+          }
         },
-        "statusErrorCode" : "ivy:error:rest:client",
-        "responseMapping" : {
-          "out.result" : "result.value"
-        },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfPaymentMethodV3"
+        "response" : {
+          "entity" : {
+            "type" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfPaymentMethodV3",
+            "map" : {
+              "out.result" : "result.value"
+            }
+          },
+          "clientError" : "ivy:error:rest:client",
+          "statusError" : "ivy:error:rest:client"
+        }
       },
       "visual" : {
         "at" : { "x" : 272, "y" : 112 }
@@ -92,8 +99,13 @@
           "visual" : {
             "at" : { "x" : 304, "y" : 152 }
           },
-          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 400, "y" : 152 } ] }
+          "connect" : [
+            { "id" : "f6", "to" : "f1", "via" : [ { "x" : 400, "y" : 152 } ] }
+          ]
         } ],
-      "connect" : { "id" : "f2", "to" : "f1" }
-    } ]
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
+    } ],
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json"
 }

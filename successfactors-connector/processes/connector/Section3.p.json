@@ -1,5 +1,4 @@
 {
-  "format" : "10.0.0",
   "id" : "18BCCC14D7243ECF",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -16,7 +15,7 @@
       "type" : "CallSubStart",
       "name" : "getSections",
       "config" : {
-        "callSignature" : "getSections",
+        "signature" : "getSections",
         "input" : {
           "params" : [
             { "name" : "filter", "type" : "String" },
@@ -49,29 +48,37 @@
       "visual" : {
         "at" : { "x" : 552, "y" : 304 }
       },
-      "connect" : { "id" : "f8", "to" : "f5" }
+      "connect" : [
+        { "id" : "f8", "to" : "f5" }
+      ]
     }, {
       "id" : "f5",
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/cust_Section_3",
-        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
-        "clientErrorCode" : "ivy:error:rest:client",
-        "queryParams" : {
-          "$top" : "in.param.#top is initialized ? in.param.#top : null",
-          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
-          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
-          "$count" : "in.param.#count is initialized ? in.param.#count : null",
-          "$orderby" : "in.param.#orderBy",
-          "$select" : "in.param.#select",
-          "$expand" : "in.param.#expand"
+        "target" : {
+          "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+          "path" : "/cust_Section_3",
+          "queryParams" : {
+            "$top" : "in.param.#top is initialized ? in.param.#top : null",
+            "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+            "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+            "$count" : "in.param.#count is initialized ? in.param.#count : null",
+            "$orderby" : "in.param.#orderBy",
+            "$select" : "in.param.#select",
+            "$expand" : "in.param.#expand"
+          }
         },
-        "statusErrorCode" : "ivy:error:rest:client",
-        "responseMapping" : {
-          "out.sections" : "result.value"
-        },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustSection3"
+        "response" : {
+          "entity" : {
+            "type" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustSection3",
+            "map" : {
+              "out.sections" : "result.value"
+            }
+          },
+          "clientError" : "ivy:error:rest:client",
+          "statusError" : "ivy:error:rest:client"
+        }
       },
       "visual" : {
         "at" : { "x" : 712, "y" : 304 }
@@ -90,8 +97,13 @@
           "visual" : {
             "at" : { "x" : 736, "y" : 338 }
           },
-          "connect" : { "id" : "f9", "to" : "f3", "via" : [ { "x" : 848, "y" : 338 } ] }
+          "connect" : [
+            { "id" : "f9", "to" : "f3", "via" : [ { "x" : 848, "y" : 338 } ] }
+          ]
         } ],
-      "connect" : { "id" : "f7", "to" : "f3" }
-    } ]
+      "connect" : [
+        { "id" : "f7", "to" : "f3" }
+      ]
+    } ],
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json"
 }

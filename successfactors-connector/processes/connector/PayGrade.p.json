@@ -1,5 +1,4 @@
 {
-  "format" : "10.0.0",
   "id" : "187B2163EB9A9661",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -10,7 +9,7 @@
       "type" : "CallSubStart",
       "name" : "getPayGrades",
       "config" : {
-        "callSignature" : "getPayGrades",
+        "signature" : "getPayGrades",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -40,13 +39,17 @@
             "result.error" : "in.#error",
             "result.payGrades" : "in.#payGrades"
           }
-        },
-        "tags" : "connector"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
       },
-      "connect" : { "id" : "f9", "to" : "f3" }
+      "tags" : [
+        "connector"
+      ],
+      "connect" : [
+        { "id" : "f9", "to" : "f3" }
+      ]
     }, {
       "id" : "f1",
       "type" : "CallSubEnd",
@@ -58,26 +61,32 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/FOPayGrade",
-        "headers" : {
-          "Accept" : "application/json;charset=UTF-8"
+        "target" : {
+          "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+          "path" : "/FOPayGrade",
+          "queryParams" : {
+            "$top" : "in.param.#top is initialized ? in.param.#top : null",
+            "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+            "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+            "$count" : "in.param.#count is initialized ? in.param.#count : null",
+            "$orderby" : "in.param.#orderBy",
+            "$select" : "in.param.#select",
+            "$expand" : "in.param.#expand"
+          },
+          "headers" : {
+            "Accept" : "application/json;charset=UTF-8"
+          }
         },
-        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
-        "clientErrorCode" : "ivy:error:rest:client",
-        "queryParams" : {
-          "$top" : "in.param.#top is initialized ? in.param.#top : null",
-          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
-          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
-          "$count" : "in.param.#count is initialized ? in.param.#count : null",
-          "$orderby" : "in.param.#orderBy",
-          "$select" : "in.param.#select",
-          "$expand" : "in.param.#expand"
-        },
-        "statusErrorCode" : "ivy:error:rest:client",
-        "responseMapping" : {
-          "out.payGrades" : "result.value"
-        },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfFOPayGrade"
+        "response" : {
+          "entity" : {
+            "type" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfFOPayGrade",
+            "map" : {
+              "out.payGrades" : "result.value"
+            }
+          },
+          "clientError" : "ivy:error:rest:client",
+          "statusError" : "ivy:error:rest:client"
+        }
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 }
@@ -96,8 +105,13 @@
           "visual" : {
             "at" : { "x" : 256, "y" : 106 }
           },
-          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+          "connect" : [
+            { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+          ]
         } ],
-      "connect" : { "id" : "f2", "to" : "f1" }
-    } ]
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
+    } ],
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json"
 }

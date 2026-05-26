@@ -1,5 +1,4 @@
 {
-  "format" : "10.0.0",
   "id" : "1849EC801526AD7D",
   "config" : {
     "data" : "com.axonivy.connector.successfactors.connector.demo.Data"
@@ -9,13 +8,14 @@
       "type" : "RequestStart",
       "name" : "loadAndLogDepartments.ivp",
       "config" : {
-        "callSignature" : "loadAndLogDepartments",
-        "outLink" : "loadAndLogDepartments.ivp"
+        "signature" : "loadAndLogDepartments"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 160 }
       },
-      "connect" : { "id" : "f4", "to" : "f3" }
+      "connect" : [
+        { "id" : "f4", "to" : "f3" }
+      ]
     }, {
       "id" : "f1",
       "type" : "TaskEnd",
@@ -28,15 +28,6 @@
       "name" : "connector/Department",
       "config" : {
         "call" : {
-          "params" : [
-            { "name" : "top", "type" : "Integer" },
-            { "name" : "skip", "type" : "Integer" },
-            { "name" : "filter", "type" : "String" },
-            { "name" : "count", "type" : "Boolean" },
-            { "name" : "orderby", "type" : "List<String>" },
-            { "name" : "select", "type" : "List<String>" },
-            { "name" : "expand", "type" : "List<String>" }
-          ],
           "map" : {
             "param.top" : "10",
             "param.select" : "[\"externalCode\",\"statusNav/localized\",\"statusNav/value\"]",
@@ -55,7 +46,9 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 160 }
       },
-      "connect" : { "id" : "f6", "to" : "f5" }
+      "connect" : [
+        { "id" : "f6", "to" : "f5" }
+      ]
     }, {
       "id" : "f5",
       "type" : "Script",
@@ -74,19 +67,22 @@
       "visual" : {
         "at" : { "x" : 384, "y" : 160 }
       },
-      "connect" : { "id" : "f2", "to" : "f1" }
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
     }, {
       "id" : "f7",
       "type" : "RequestStart",
       "name" : "loadAndLogBusinessUnits.ivp",
       "config" : {
-        "callSignature" : "loadAndLogBusinessUnits",
-        "outLink" : "loadAndLogBusinessUnits.ivp"
+        "signature" : "loadAndLogBusinessUnits"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 256 }
       },
-      "connect" : { "id" : "f12", "to" : "f9" }
+      "connect" : [
+        { "id" : "f12", "to" : "f9" }
+      ]
     }, {
       "id" : "f8",
       "type" : "TaskEnd",
@@ -106,15 +102,6 @@
           }
         },
         "call" : {
-          "params" : [
-            { "name" : "top", "type" : "Integer" },
-            { "name" : "skip", "type" : "Integer" },
-            { "name" : "filter", "type" : "String" },
-            { "name" : "count", "type" : "Boolean" },
-            { "name" : "orderby", "type" : "List<String>" },
-            { "name" : "select", "type" : "List<String>" },
-            { "name" : "expand", "type" : "List<String>" }
-          ],
           "map" : {
             "param.top" : "10",
             "param.select" : "[\"externalCode\",\"name\"]"
@@ -124,7 +111,9 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 256 }
       },
-      "connect" : { "id" : "f13", "to" : "f10" }
+      "connect" : [
+        { "id" : "f13", "to" : "f10" }
+      ]
     }, {
       "id" : "f10",
       "type" : "Script",
@@ -143,19 +132,22 @@
       "visual" : {
         "at" : { "x" : 384, "y" : 256 }
       },
-      "connect" : { "id" : "f11", "to" : "f8" }
+      "connect" : [
+        { "id" : "f11", "to" : "f8" }
+      ]
     }, {
       "id" : "f14",
       "type" : "RequestStart",
       "name" : "loadAndLogDivisions.ivp",
       "config" : {
-        "callSignature" : "loadAndLogDivisions",
-        "outLink" : "loadAndLogDivisions.ivp"
+        "signature" : "loadAndLogDivisions"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 352 }
       },
-      "connect" : { "id" : "f20", "to" : "f16" }
+      "connect" : [
+        { "id" : "f20", "to" : "f16" }
+      ]
     }, {
       "id" : "f15",
       "type" : "TaskEnd",
@@ -175,15 +167,6 @@
           }
         },
         "call" : {
-          "params" : [
-            { "name" : "top", "type" : "Integer" },
-            { "name" : "skip", "type" : "Integer" },
-            { "name" : "filter", "type" : "String" },
-            { "name" : "count", "type" : "Boolean" },
-            { "name" : "orderby", "type" : "List<String>" },
-            { "name" : "select", "type" : "List<String>" },
-            { "name" : "expand", "type" : "List<String>" }
-          ],
           "map" : {
             "param.top" : "10",
             "param.select" : "[\"externalCode\",\"name\"]"
@@ -193,7 +176,9 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 352 }
       },
-      "connect" : { "id" : "f19", "to" : "f17" }
+      "connect" : [
+        { "id" : "f19", "to" : "f17" }
+      ]
     }, {
       "id" : "f17",
       "type" : "Script",
@@ -212,19 +197,22 @@
       "visual" : {
         "at" : { "x" : 384, "y" : 352 }
       },
-      "connect" : { "id" : "f18", "to" : "f15" }
+      "connect" : [
+        { "id" : "f18", "to" : "f15" }
+      ]
     }, {
       "id" : "f21",
       "type" : "RequestStart",
       "name" : "loadAndLogLocations.ivp",
       "config" : {
-        "callSignature" : "loadAndLogLocations",
-        "outLink" : "loadAndLogLocations.ivp"
+        "signature" : "loadAndLogLocations"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 448 }
       },
-      "connect" : { "id" : "f25", "to" : "f23" }
+      "connect" : [
+        { "id" : "f25", "to" : "f23" }
+      ]
     }, {
       "id" : "f22",
       "type" : "TaskEnd",
@@ -244,15 +232,6 @@
           }
         },
         "call" : {
-          "params" : [
-            { "name" : "top", "type" : "Integer" },
-            { "name" : "skip", "type" : "Integer" },
-            { "name" : "filter", "type" : "String" },
-            { "name" : "count", "type" : "Boolean" },
-            { "name" : "orderby", "type" : "List<String>" },
-            { "name" : "select", "type" : "List<String>" },
-            { "name" : "expand", "type" : "List<String>" }
-          ],
           "map" : {
             "param.top" : "10",
             "param.select" : "[\"externalCode\",\"name\"]"
@@ -262,7 +241,9 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 448 }
       },
-      "connect" : { "id" : "f26", "to" : "f24" }
+      "connect" : [
+        { "id" : "f26", "to" : "f24" }
+      ]
     }, {
       "id" : "f24",
       "type" : "Script",
@@ -281,19 +262,22 @@
       "visual" : {
         "at" : { "x" : 384, "y" : 448 }
       },
-      "connect" : { "id" : "f27", "to" : "f22" }
+      "connect" : [
+        { "id" : "f27", "to" : "f22" }
+      ]
     }, {
       "id" : "f28",
       "type" : "RequestStart",
       "name" : "loadAndLogCostCenters.ivp",
       "config" : {
-        "callSignature" : "loadAndLogCostCenters",
-        "outLink" : "loadAndLogCostCenters.ivp"
+        "signature" : "loadAndLogCostCenters"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 544 }
       },
-      "connect" : { "id" : "f32", "to" : "f30" }
+      "connect" : [
+        { "id" : "f32", "to" : "f30" }
+      ]
     }, {
       "id" : "f29",
       "type" : "TaskEnd",
@@ -313,15 +297,6 @@
           }
         },
         "call" : {
-          "params" : [
-            { "name" : "top", "type" : "Integer" },
-            { "name" : "skip", "type" : "Integer" },
-            { "name" : "filter", "type" : "String" },
-            { "name" : "count", "type" : "Boolean" },
-            { "name" : "orderby", "type" : "List<String>" },
-            { "name" : "select", "type" : "List<String>" },
-            { "name" : "expand", "type" : "List<String>" }
-          ],
           "map" : {
             "param.top" : "10",
             "param.select" : "[\"externalCode\",\"name\"]"
@@ -331,7 +306,9 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 544 }
       },
-      "connect" : { "id" : "f34", "to" : "f31" }
+      "connect" : [
+        { "id" : "f34", "to" : "f31" }
+      ]
     }, {
       "id" : "f31",
       "type" : "Script",
@@ -350,19 +327,22 @@
       "visual" : {
         "at" : { "x" : 384, "y" : 544 }
       },
-      "connect" : { "id" : "f33", "to" : "f29" }
+      "connect" : [
+        { "id" : "f33", "to" : "f29" }
+      ]
     }, {
       "id" : "f35",
       "type" : "RequestStart",
       "name" : "findAndLogJob.ivp",
       "config" : {
-        "callSignature" : "findAndLogJob",
-        "outLink" : "findAndLogJob.ivp"
+        "signature" : "findAndLogJob"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 640 }
       },
-      "connect" : { "id" : "f41", "to" : "f37" }
+      "connect" : [
+        { "id" : "f41", "to" : "f37" }
+      ]
     }, {
       "id" : "f36",
       "type" : "TaskEnd",
@@ -382,15 +362,6 @@
           }
         },
         "call" : {
-          "params" : [
-            { "name" : "top", "type" : "Integer" },
-            { "name" : "skip", "type" : "Integer" },
-            { "name" : "filter", "type" : "String" },
-            { "name" : "count", "type" : "Boolean" },
-            { "name" : "orderby", "type" : "List<String>" },
-            { "name" : "select", "type" : "List<String>" },
-            { "name" : "expand", "type" : "List<String>" }
-          ],
           "map" : {
             "param.top" : "10",
             "param.filter" : "\"userId eq 11001598\""
@@ -400,7 +371,9 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 640 }
       },
-      "connect" : { "id" : "f40", "to" : "f38" }
+      "connect" : [
+        { "id" : "f40", "to" : "f38" }
+      ]
     }, {
       "id" : "f38",
       "type" : "Script",
@@ -420,19 +393,22 @@
       "visual" : {
         "at" : { "x" : 384, "y" : 640 }
       },
-      "connect" : { "id" : "f39", "to" : "f36" }
+      "connect" : [
+        { "id" : "f39", "to" : "f36" }
+      ]
     }, {
       "id" : "f42",
       "type" : "RequestStart",
       "name" : "findAndLogPersons.ivp",
       "config" : {
-        "callSignature" : "findAndLogPersons",
-        "outLink" : "findAndLogPersons.ivp"
+        "signature" : "findAndLogPersons"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 736 }
       },
-      "connect" : { "id" : "f47", "to" : "f44" }
+      "connect" : [
+        { "id" : "f47", "to" : "f44" }
+      ]
     }, {
       "id" : "f43",
       "type" : "TaskEnd",
@@ -452,15 +428,6 @@
           }
         },
         "call" : {
-          "params" : [
-            { "name" : "top", "type" : "Integer" },
-            { "name" : "skip", "type" : "Integer" },
-            { "name" : "filter", "type" : "String" },
-            { "name" : "count", "type" : "Boolean" },
-            { "name" : "orderby", "type" : "List<String>" },
-            { "name" : "select", "type" : "List<String>" },
-            { "name" : "expand", "type" : "List<String>" }
-          ],
           "map" : {
             "param.top" : "10",
             "param.filter" : "\"personalInfoNav/formalName like '%25Hanss%25'\"",
@@ -472,7 +439,9 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 736 }
       },
-      "connect" : { "id" : "f48", "to" : "f45" }
+      "connect" : [
+        { "id" : "f48", "to" : "f45" }
+      ]
     }, {
       "id" : "f45",
       "type" : "Script",
@@ -491,19 +460,22 @@
       "visual" : {
         "at" : { "x" : 384, "y" : 736 }
       },
-      "connect" : { "id" : "f46", "to" : "f43" }
+      "connect" : [
+        { "id" : "f46", "to" : "f43" }
+      ]
     }, {
       "id" : "f49",
       "type" : "RequestStart",
       "name" : "loadAndLogCompanies.ivp",
       "config" : {
-        "callSignature" : "loadAndLogCompanies",
-        "outLink" : "loadAndLogCompanies.ivp"
+        "signature" : "loadAndLogCompanies"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 72 }
       },
-      "connect" : { "id" : "f55", "to" : "f51" }
+      "connect" : [
+        { "id" : "f55", "to" : "f51" }
+      ]
     }, {
       "id" : "f50",
       "type" : "TaskEnd",
@@ -516,15 +488,6 @@
       "name" : "connector/Company",
       "config" : {
         "call" : {
-          "params" : [
-            { "name" : "top", "type" : "Integer" },
-            { "name" : "skip", "type" : "Integer" },
-            { "name" : "filter", "type" : "String" },
-            { "name" : "count", "type" : "Boolean" },
-            { "name" : "orderby", "type" : "List<String>" },
-            { "name" : "select", "type" : "List<String>" },
-            { "name" : "expand", "type" : "List<String>" }
-          ],
           "map" : {
             "param.top" : "10",
             "param.select" : "[\"externalCode\",\"statusNav/localized\",\"statusNav/value\"]",
@@ -543,7 +506,9 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 72 }
       },
-      "connect" : { "id" : "f53", "to" : "f52" }
+      "connect" : [
+        { "id" : "f53", "to" : "f52" }
+      ]
     }, {
       "id" : "f52",
       "type" : "Script",
@@ -562,19 +527,22 @@
       "visual" : {
         "at" : { "x" : 384, "y" : 72 }
       },
-      "connect" : { "id" : "f54", "to" : "f50" }
+      "connect" : [
+        { "id" : "f54", "to" : "f50" }
+      ]
     }, {
       "id" : "f56",
       "type" : "RequestStart",
       "name" : "findAndLogHyperionData.ivp",
       "config" : {
-        "callSignature" : "findAndLogHyperionData",
-        "outLink" : "findAndLogHyperionData.ivp"
+        "signature" : "findAndLogHyperionData"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 832 }
       },
-      "connect" : { "id" : "f61", "to" : "f58" }
+      "connect" : [
+        { "id" : "f61", "to" : "f58" }
+      ]
     }, {
       "id" : "f57",
       "type" : "TaskEnd",
@@ -587,15 +555,6 @@
       "name" : "connector/CustomHyperion",
       "config" : {
         "call" : {
-          "params" : [
-            { "name" : "top", "type" : "Integer" },
-            { "name" : "skip", "type" : "Integer" },
-            { "name" : "filter", "type" : "String" },
-            { "name" : "count", "type" : "Boolean" },
-            { "name" : "orderby", "type" : "List<String>" },
-            { "name" : "select", "type" : "List<String>" },
-            { "name" : "expand", "type" : "List<String>" }
-          ],
           "map" : {
             "param.top" : "10",
             "param.filter" : "\"cust_HYPERION_externalCode eq 2010852\"",
@@ -615,7 +574,9 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 832 }
       },
-      "connect" : { "id" : "f60", "to" : "f59" }
+      "connect" : [
+        { "id" : "f60", "to" : "f59" }
+      ]
     }, {
       "id" : "f59",
       "type" : "Script",
@@ -634,6 +595,9 @@
       "visual" : {
         "at" : { "x" : 384, "y" : 832 }
       },
-      "connect" : { "id" : "f62", "to" : "f57" }
-    } ]
+      "connect" : [
+        { "id" : "f62", "to" : "f57" }
+      ]
+    } ],
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json"
 }

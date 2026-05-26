@@ -1,0 +1,36 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
+  "simpleName" : "OdataParams",
+  "namespace" : "connector",
+  "fields" : [ {
+    "name" : "top",
+    "type" : "Integer",
+    "modifiers" : [ ]
+  }, {
+    "name" : "skip",
+    "type" : "Integer",
+    "modifiers" : [ ]
+  }, {
+    "name" : "filter",
+    "modifiers" : [ ]
+  }, {
+    "name" : "count",
+    "type" : "Boolean",
+    "modifiers" : [ ]
+  }, {
+    "name" : "orderBy",
+    "type" : "List<String>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "select",
+    "type" : "List<String>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "expand",
+    "type" : "List<String>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "id",
+    "modifiers" : [ ]
+  } ]
+}

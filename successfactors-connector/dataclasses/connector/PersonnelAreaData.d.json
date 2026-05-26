@@ -1,0 +1,17 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
+  "simpleName" : "PersonnelAreaData",
+  "namespace" : "connector",
+  "fields" : [ {
+    "name" : "personnelAreas",
+    "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataCustGOPersonnelArea>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "error",
+    "modifiers" : [ ]
+  }, {
+    "name" : "param",
+    "type" : "connector.OdataParams",
+    "modifiers" : [ ]
+  } ]
+}

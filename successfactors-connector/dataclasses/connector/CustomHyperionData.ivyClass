@@ -1,5 +1,0 @@
-CustomHyperionData #class
-connector #namespace
-customRoleTypes List<com.axonivy.connector.successfactors.connector.rest.SFODataCustRoletypes> #field
-error ch.ivyteam.ivy.bpm.error.BpmError #field
-param connector.OdataParams #field

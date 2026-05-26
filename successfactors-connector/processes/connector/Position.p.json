@@ -1,5 +1,4 @@
 {
-  "format" : "10.0.0",
   "id" : "1874AFA12A7346D4",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -10,7 +9,7 @@
       "type" : "CallSubStart",
       "name" : "getPosition",
       "config" : {
-        "callSignature" : "getPosition",
+        "signature" : "getPosition",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -47,7 +46,9 @@
       "visual" : {
         "at" : { "x" : 832, "y" : 144 }
       },
-      "connect" : { "id" : "f4", "to" : "f3" }
+      "connect" : [
+        { "id" : "f4", "to" : "f3" }
+      ]
     }, {
       "id" : "f1",
       "type" : "CallSubEnd",
@@ -59,26 +60,32 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/Position",
-        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
-        "clientErrorCode" : "ivy:error:rest:client",
-        "queryParams" : {
-          "$select" : "in.param.#select is initialized ? in.param.#select : null",
-          "$expand" : "in.param.#expand is initialized ? in.param.#expand : null",
-          "$top" : "in.param.#top is initialized ? in.param.#top : null",
-          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
-          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
-          "$count" : "in.param.#count is initialized ? in.param.#count : null",
-          "$orderby" : "in.param.#orderBy is initialized ? in.param.#orderBy : null"
+        "target" : {
+          "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+          "path" : "/Position",
+          "templateParams" : {
+            "id" : ""
+          },
+          "queryParams" : {
+            "$select" : "in.param.#select is initialized ? in.param.#select : null",
+            "$expand" : "in.param.#expand is initialized ? in.param.#expand : null",
+            "$top" : "in.param.#top is initialized ? in.param.#top : null",
+            "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+            "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+            "$count" : "in.param.#count is initialized ? in.param.#count : null",
+            "$orderby" : "in.param.#orderBy is initialized ? in.param.#orderBy : null"
+          }
         },
-        "statusErrorCode" : "ivy:error:rest:client",
-        "responseMapping" : {
-          "out.result" : "result.value"
-        },
-        "templateParams" : {
-          "id" : ""
-        },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfPosition"
+        "response" : {
+          "entity" : {
+            "type" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfPosition",
+            "map" : {
+              "out.result" : "result.value"
+            }
+          },
+          "clientError" : "ivy:error:rest:client",
+          "statusError" : "ivy:error:rest:client"
+        }
       },
       "visual" : {
         "at" : { "x" : 960, "y" : 144 }
@@ -97,8 +104,13 @@
           "visual" : {
             "at" : { "x" : 992, "y" : 186 }
           },
-          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 1088, "y" : 186 } ] }
+          "connect" : [
+            { "id" : "f6", "to" : "f1", "via" : [ { "x" : 1088, "y" : 186 } ] }
+          ]
         } ],
-      "connect" : { "id" : "f2", "to" : "f1" }
-    } ]
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
+    } ],
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json"
 }

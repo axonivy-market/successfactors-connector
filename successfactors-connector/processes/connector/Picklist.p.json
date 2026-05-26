@@ -1,5 +1,4 @@
 {
-  "format" : "10.0.0",
   "id" : "186C5AA7CDBE365F",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -10,7 +9,7 @@
       "type" : "CallSubStart",
       "name" : "getPicklist",
       "config" : {
-        "callSignature" : "getPicklist",
+        "signature" : "getPicklist",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -42,13 +41,17 @@
             "result.picklist" : "in.#result",
             "result.error" : "in.#error"
           }
-        },
-        "tags" : "connector"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
       },
-      "connect" : { "id" : "f9", "to" : "f3" }
+      "tags" : [
+        "connector"
+      ],
+      "connect" : [
+        { "id" : "f9", "to" : "f3" }
+      ]
     }, {
       "id" : "f1",
       "type" : "CallSubEnd",
@@ -60,26 +63,32 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/Picklist('{picklistId}')",
-        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
-        "clientErrorCode" : "ivy:error:rest:client",
-        "queryParams" : {
-          "$top" : "in.param.#top is initialized ? in.param.#top : null",
-          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
-          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
-          "$count" : "in.param.#count is initialized ? in.param.#count : null",
-          "$orderby" : "in.param.#orderBy",
-          "$select" : "in.param.#select",
-          "$expand" : "in.param.#expand"
+        "target" : {
+          "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+          "path" : "/Picklist('{picklistId}')",
+          "templateParams" : {
+            "picklistId" : "in.param.#id is initialized ? in.param.#id : null"
+          },
+          "queryParams" : {
+            "$top" : "in.param.#top is initialized ? in.param.#top : null",
+            "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+            "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+            "$count" : "in.param.#count is initialized ? in.param.#count : null",
+            "$orderby" : "in.param.#orderBy",
+            "$select" : "in.param.#select",
+            "$expand" : "in.param.#expand"
+          }
         },
-        "statusErrorCode" : "ivy:error:rest:client",
-        "responseMapping" : {
-          "out.result" : "result"
-        },
-        "templateParams" : {
-          "picklistId" : "in.param.#id is initialized ? in.param.#id : null"
-        },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.SFODataPicklist"
+        "response" : {
+          "entity" : {
+            "type" : "com.axonivy.connector.successfactors.connector.rest.SFODataPicklist",
+            "map" : {
+              "out.result" : "result"
+            }
+          },
+          "clientError" : "ivy:error:rest:client",
+          "statusError" : "ivy:error:rest:client"
+        }
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 }
@@ -98,8 +107,13 @@
           "visual" : {
             "at" : { "x" : 256, "y" : 106 }
           },
-          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+          "connect" : [
+            { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+          ]
         } ],
-      "connect" : { "id" : "f2", "to" : "f1" }
-    } ]
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
+    } ],
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json"
 }

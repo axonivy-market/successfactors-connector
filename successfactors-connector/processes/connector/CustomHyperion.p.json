@@ -1,5 +1,4 @@
 {
-  "format" : "10.0.0",
   "id" : "186021CAD87EA070",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -10,7 +9,7 @@
       "type" : "CallSubStart",
       "name" : "getHyperionRecords",
       "config" : {
-        "callSignature" : "getHyperionRecords",
+        "signature" : "getHyperionRecords",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -40,13 +39,17 @@
             "result.customRoleTypes" : "in.#customRoleTypes",
             "result.error" : "in.#error"
           }
-        },
-        "tags" : "connector"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
       },
-      "connect" : { "id" : "f9", "to" : "f3" }
+      "tags" : [
+        "connector"
+      ],
+      "connect" : [
+        { "id" : "f9", "to" : "f3" }
+      ]
     }, {
       "id" : "f1",
       "type" : "CallSubEnd",
@@ -58,23 +61,29 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/cust_roletypes",
-        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
-        "clientErrorCode" : "ivy:error:rest:client",
-        "queryParams" : {
-          "$select" : "",
-          "$expand" : "in.param.#expand is initialized ? in.param.#expand : null",
-          "$top" : "in.param.#top is initialized ? in.param.#top : null",
-          "$skip" : "",
-          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
-          "$count" : "",
-          "$orderby" : ""
+        "target" : {
+          "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+          "path" : "/cust_roletypes",
+          "queryParams" : {
+            "$select" : "",
+            "$expand" : "in.param.#expand is initialized ? in.param.#expand : null",
+            "$top" : "in.param.#top is initialized ? in.param.#top : null",
+            "$skip" : "",
+            "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+            "$count" : "",
+            "$orderby" : ""
+          }
         },
-        "statusErrorCode" : "ivy:error:rest:client",
-        "responseMapping" : {
-          "out.customRoleTypes" : "result.value"
-        },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustRoletypes"
+        "response" : {
+          "entity" : {
+            "type" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustRoletypes",
+            "map" : {
+              "out.customRoleTypes" : "result.value"
+            }
+          },
+          "clientError" : "ivy:error:rest:client",
+          "statusError" : "ivy:error:rest:client"
+        }
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 }
@@ -93,8 +102,13 @@
           "visual" : {
             "at" : { "x" : 256, "y" : 106 }
           },
-          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+          "connect" : [
+            { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+          ]
         } ],
-      "connect" : { "id" : "f2", "to" : "f1" }
-    } ]
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
+    } ],
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json"
 }

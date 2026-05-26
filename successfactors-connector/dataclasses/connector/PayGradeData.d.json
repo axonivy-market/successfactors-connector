@@ -1,0 +1,18 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
+  "simpleName" : "PayGradeData",
+  "namespace" : "connector",
+  "fields" : [ {
+    "name" : "payGrades",
+    "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataFOPayGrade>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "error",
+    "type" : "ch.ivyteam.ivy.bpm.error.BpmError",
+    "modifiers" : [ ]
+  }, {
+    "name" : "param",
+    "type" : "connector.OdataParams",
+    "modifiers" : [ ]
+  } ]
+}

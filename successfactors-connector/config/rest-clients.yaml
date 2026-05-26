@@ -1,12 +1,13 @@
+# yaml-language-server: $schema=https://json-schema.axonivy.com/14.0-dev/config/rest-clients-1.json
 RestClients:
   #Service for namespace SFODataSet
   #This service is located at [https://localhost/service-root/](https://localhost/service-root/)
   SuccessFactors:
-    UUID: 4c029770-6b05-4cf7-9b23-b2434bb500d6
+    Name: SuccessFactors
     Url: https://{host}/odata/v2
     Features:
-    - com.axonivy.connector.successfactors.connector.rest.odata.OdataJsonFeature
-    - ch.ivyteam.ivy.rest.client.authentication.HttpBasicAuthenticationFeature
+      - com.axonivy.connector.successfactors.connector.rest.odata.OdataJsonFeature
+      - ch.ivyteam.ivy.rest.client.authentication.HttpBasicAuthenticationFeature
     Properties:
       username: ${ivy.var.successfactors-connector.username}
       password: ${ivy.var.successfactors-connector.password}
@@ -14,3 +15,4 @@ RestClients:
     OpenAPI:
       SpecUrl: file:///D:/Ricoh/connector/successfactors-connector/successfactors-connector/lib/Octopus-IPeople-OpenApi.json
       Namespace: com.axonivy.connector.successfactors.connector.rest
+    LegacyUUID: 4c029770-6b05-4cf7-9b23-b2434bb500d6

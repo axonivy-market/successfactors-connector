@@ -1,5 +1,4 @@
 {
-  "format" : "10.0.0",
   "id" : "188BD429AB5C2F0F",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -10,7 +9,7 @@
       "type" : "CallSubStart",
       "name" : "getEMEAHRdata",
       "config" : {
-        "callSignature" : "getEMEAHRdata",
+        "signature" : "getEMEAHRdata",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -40,13 +39,17 @@
             "result.emeaHRDatas" : "in.#emeaHRDatas",
             "result.error" : "in.#error"
           }
-        },
-        "tags" : "connector"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
       },
-      "connect" : { "id" : "f9", "to" : "f3" }
+      "tags" : [
+        "connector"
+      ],
+      "connect" : [
+        { "id" : "f9", "to" : "f3" }
+      ]
     }, {
       "id" : "f1",
       "type" : "CallSubEnd",
@@ -58,29 +61,37 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/cust_EMEAHRdata",
-        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
-        "clientErrorCode" : "ivy:error:rest:client",
         "method" : "GET",
-        "queryParams" : {
-          "$select" : "in.param.#select",
-          "$expand" : "in.param.#expand",
-          "$top" : "in.param.#top is initialized ? in.param.#top : null",
-          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
-          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
-          "$count" : "in.param.#count is initialized ? in.param.#count : null",
-          "$orderby" : "in.param.#orderBy"
+        "target" : {
+          "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+          "path" : "/cust_EMEAHRdata",
+          "templateParams" : {
+            "externalCode" : "",
+            "effectiveStartDate" : ""
+          },
+          "queryParams" : {
+            "$select" : "in.param.#select",
+            "$expand" : "in.param.#expand",
+            "$top" : "in.param.#top is initialized ? in.param.#top : null",
+            "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+            "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+            "$count" : "in.param.#count is initialized ? in.param.#count : null",
+            "$orderby" : "in.param.#orderBy"
+          }
         },
-        "statusErrorCode" : "ivy:error:rest:client",
-        "responseMapping" : {
-          "out.emeaHRDatas" : "result.value"
+        "body" : {
+          "type" : "ENTITY"
         },
-        "templateParams" : {
-          "externalCode" : "",
-          "effectiveStartDate" : ""
-        },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustEMEAHRdata",
-        "bodyInputType" : "ENTITY"
+        "response" : {
+          "entity" : {
+            "type" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfCustEMEAHRdata",
+            "map" : {
+              "out.emeaHRDatas" : "result.value"
+            }
+          },
+          "clientError" : "ivy:error:rest:client",
+          "statusError" : "ivy:error:rest:client"
+        }
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 }
@@ -99,8 +110,13 @@
           "visual" : {
             "at" : { "x" : 256, "y" : 106 }
           },
-          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+          "connect" : [
+            { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+          ]
         } ],
-      "connect" : { "id" : "f2", "to" : "f1" }
-    } ]
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
+    } ],
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json"
 }

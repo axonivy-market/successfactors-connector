@@ -1,0 +1,45 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
+  "simpleName" : "Data",
+  "namespace" : "com.axonivy.connector.successfactors.connector.demo",
+  "fields" : [ {
+    "name" : "departments",
+    "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataFODepartment>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "businessUnits",
+    "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataFOBusinessUnit>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "divisions",
+    "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataFODivision>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "locations",
+    "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataFOLocation>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "costCenters",
+    "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataFOCostCenter>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "jobs",
+    "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataEmpJob>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "persons",
+    "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataPerPerson>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "test",
+    "modifiers" : [ ]
+  }, {
+    "name" : "companies",
+    "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataFOCompany>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "hyperionData",
+    "type" : "List<com.axonivy.connector.successfactors.connector.rest.SFODataCustRoletypes>",
+    "modifiers" : [ ]
+  } ]
+}

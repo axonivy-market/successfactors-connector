@@ -1,5 +1,4 @@
 {
-  "format" : "10.0.0",
   "id" : "184A8C8A1C170D14",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -10,7 +9,7 @@
       "type" : "CallSubStart",
       "name" : "getJobs",
       "config" : {
-        "callSignature" : "getJobs",
+        "signature" : "getJobs",
         "input" : {
           "params" : [
             { "name" : "top", "type" : "Integer" },
@@ -40,13 +39,17 @@
             "result.jobs" : "in.#jobs",
             "result.error" : "in.#error"
           }
-        },
-        "tags" : "connector"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
       },
-      "connect" : { "id" : "f9", "to" : "f3" }
+      "tags" : [
+        "connector"
+      ],
+      "connect" : [
+        { "id" : "f9", "to" : "f3" }
+      ]
     }, {
       "id" : "f1",
       "type" : "CallSubEnd",
@@ -58,23 +61,29 @@
       "type" : "RestClientCall",
       "name" : "call rest",
       "config" : {
-        "path" : "/EmpJob",
-        "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
-        "clientErrorCode" : "ivy:error:rest:client",
-        "queryParams" : {
-          "$top" : "in.param.#top is initialized ? in.param.#top : null",
-          "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
-          "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
-          "$count" : "in.param.#count is initialized ? in.param.#count : null",
-          "$orderby" : "in.param.#orderBy",
-          "$select" : "in.param.#select",
-          "$expand" : "in.param.#expand"
+        "target" : {
+          "clientId" : "4c029770-6b05-4cf7-9b23-b2434bb500d6",
+          "path" : "/EmpJob",
+          "queryParams" : {
+            "$top" : "in.param.#top is initialized ? in.param.#top : null",
+            "$skip" : "in.param.#skip is initialized ? in.param.#skip : null",
+            "$filter" : "in.param.#filter is initialized ? in.param.#filter : null",
+            "$count" : "in.param.#count is initialized ? in.param.#count : null",
+            "$orderby" : "in.param.#orderBy",
+            "$select" : "in.param.#select",
+            "$expand" : "in.param.#expand"
+          }
         },
-        "statusErrorCode" : "ivy:error:rest:client",
-        "responseMapping" : {
-          "out.jobs" : "result.value"
-        },
-        "resultType" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfEmpJob"
+        "response" : {
+          "entity" : {
+            "type" : "com.axonivy.connector.successfactors.connector.rest.CollectionOfEmpJob",
+            "map" : {
+              "out.jobs" : "result.value"
+            }
+          },
+          "clientError" : "ivy:error:rest:client",
+          "statusError" : "ivy:error:rest:client"
+        }
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 }
@@ -93,8 +102,13 @@
           "visual" : {
             "at" : { "x" : 256, "y" : 106 }
           },
-          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+          "connect" : [
+            { "id" : "f6", "to" : "f1", "via" : [ { "x" : 352, "y" : 106 } ] }
+          ]
         } ],
-      "connect" : { "id" : "f2", "to" : "f1" }
-    } ]
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
+    } ],
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json"
 }
